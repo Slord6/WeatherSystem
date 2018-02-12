@@ -205,6 +205,11 @@ namespace WeatherSystem
 
             using (streamWriter)
             {
+                streamWriter.WriteLine("/// <summary>");
+                streamWriter.WriteLine("/// DO NOT EDIT");
+                streamWriter.WriteLine("/// This enum is automatically generated from WeatherSys->WeatherTypes in the editor");
+                streamWriter.WriteLine("/// </summary>");
+
                 streamWriter.WriteLine("public enum " + enumName);
                 streamWriter.WriteLine("{");
                 for (int i = 0; i < enumEntries.Length; i++)
