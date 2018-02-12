@@ -5,4 +5,8 @@ using UnityEngine;
 
 public static class Generators
 {
+    public static float PerlinNoise(int x, int y)
+    {
+        throw new System.NotImplementedException();
+    }
 }

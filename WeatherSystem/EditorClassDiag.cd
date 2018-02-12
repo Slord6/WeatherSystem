@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KeywordReplace">
+    <Position X="4.75" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\KeywordReplace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherManagerEditor">
+    <Position X="4.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Editor\CustomInspectors\WeatherManagerEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherTypesWindow">
+    <Position X="1.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAEAgAAAAAAAAABKAACGAAJAEAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Editor\Windows\WeatherTypesWindow.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="UnityEditor.AssetModificationProcessor" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEditor.EditorWindow" Collapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEditor.Editor" Collapsed="true">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

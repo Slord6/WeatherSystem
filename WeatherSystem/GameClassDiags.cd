@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="Dynamically created enums in editor&#xD;&#xA;">
+    <Position X="5.323" Y="1.615" Height="0.656" Width="1.356" />
+  </Comment>
+  <Class Name="WeatherSystem.ManualAttribute" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Attributes\ManualAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ProceduralAttribute" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Attributes\ProceduralAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherEvent">
+    <Position X="4" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAgAACAAAACAAAAEAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherManager">
+    <Position X="3.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAiAAgAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="weatherEvents" />
+      <Field Name="weatherSets" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WeatherSystem.WeatherSet">
+    <Position X="1.25" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Generators">
+    <Position X="6.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Generators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Attribute" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.ScriptableObject" Collapsed="true">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="3.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="WeatherTypes">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\WeatherSystem\DynamicEnums\WeatherTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
