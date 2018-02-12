@@ -3,18 +3,18 @@ using System.Collections;
 
 namespace WeatherSystem
 {
-	public class WeatherEvent : MonoBehaviour
+    [CreateAssetMenu(menuName = "Weather System/Weather Event")]
+    public class WeatherEvent : ScriptableObject
 	{
-		// Use this for initialization
-		void Start ()
-		{
-		
-		}
-		
-		// Update is called once per frame
-		void Update ()
-		{
-		
-		}
-	}
+        [Header("Audio")]
+        [SerializeField]
+        private AudioClip backgroundSound;
+        [SerializeField]
+        private AudioClip[] instanceSounds;
+        [Header("Visuals")]
+        [SerializeField]
+        private ParticleSystem particleSystem;
+        [SerializeField]
+        private Shader shader;
+    }
 }
