@@ -8,7 +8,7 @@ namespace WeatherSystem
 	public class WeatherManager : MonoBehaviour
 	{
         [HideInInspector]
-        public bool procedural = false;
+        public WeatherMode procedural = WeatherMode.Procedural;
 
         //Fields with the attribute "Manual" are only drawn when
         //procedural is false

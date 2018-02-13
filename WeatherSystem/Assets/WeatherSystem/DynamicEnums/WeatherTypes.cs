@@ -7,4 +7,5 @@ public enum WeatherTypes
 	Sun,
 	Rain,
 	Sleet,
+	Snow,
 }
