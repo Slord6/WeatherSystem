@@ -24,7 +24,7 @@ namespace WeatherSystem
             window.enumEntries = window.storedEntries;
         }
 
-        [MenuItem("WeatherSys/Weather Types")]
+        [MenuItem("WeatherSystem/Weather Types")]
         public static void ShowWindow()
         {
             //EditorWindow.GetWindow(typeof(WeatherTypesWindow));
@@ -43,8 +43,10 @@ namespace WeatherSystem
             //List all weather types at the end
             if (enumEntries != null && enumEntries.Length > 0)
             {
-                string allEnums = enumEntries.Aggregate((current, next) => current + ", " + next);
-                GUILayout.Label("All: " + allEnums);
+                string enumsString = enumEntries.Aggregate((current, next) => current + ", " + next);
+                GUILayout.Label("Current: " + enumsString);
+                enumsString = storedEntries.Aggregate((current, next) => current + ", " + next);
+                GUILayout.Label("Stored: " + enumsString);
             }
             else
             {
@@ -174,10 +176,7 @@ namespace WeatherSystem
             FileInfo fileInfo = new FileInfo(m_ScriptFilePath);
             string m_ScriptFolder = fileInfo.Directory.ToString();
             m_ScriptFolder.Replace('\\', '/');
-
-            Debug.Log("File path : " + m_ScriptFolder);
-
-
+            
             DirectoryInfo parentDir = Directory.GetParent(m_ScriptFolder);
             while (parentDir.FullName.Contains("Editor"))
             {
@@ -207,7 +206,7 @@ namespace WeatherSystem
             {
                 streamWriter.WriteLine("/// <summary>");
                 streamWriter.WriteLine("/// DO NOT EDIT");
-                streamWriter.WriteLine("/// This enum is automatically generated from WeatherSys->WeatherTypes in the editor");
+                streamWriter.WriteLine("/// This enum is automatically generated from WeatherSystem->WeatherTypes in the editor");
                 streamWriter.WriteLine("/// </summary>");
 
                 streamWriter.WriteLine("public enum " + enumName);

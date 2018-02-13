@@ -1,6 +1,6 @@
 /// <summary>
 /// DO NOT EDIT
-/// This enum is automatically generated from WeatherSys->WeatherTypes in the editor
+/// This enum is automatically generated from WeatherSystem->WeatherTypes in the editor
 /// </summary>
 public enum WeatherTypes
 {
