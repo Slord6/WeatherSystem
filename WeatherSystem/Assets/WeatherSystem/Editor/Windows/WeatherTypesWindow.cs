@@ -43,9 +43,25 @@ namespace WeatherSystem
             //List all weather types at the end
             if (enumEntries != null && enumEntries.Length > 0)
             {
-                string enumsString = enumEntries.Aggregate((current, next) => current + ", " + next);
+                string enumsString = "";
+                if (enumEntries.Length > 0)
+                {
+                    enumsString = enumEntries.Aggregate((current, next) => current + ", " + next);
+                }
+                else
+                {
+                    enumsString = "None";
+                }
                 GUILayout.Label("Current: " + enumsString);
-                enumsString = storedEntries.Aggregate((current, next) => current + ", " + next);
+
+                if (storedEntries.Length > 0)
+                {
+                    enumsString = storedEntries.Aggregate((current, next) => current + ", " + next);
+                }
+                else
+                {
+                    enumsString = "None";
+                }
                 GUILayout.Label("Stored: " + enumsString);
             }
             else
@@ -184,7 +200,7 @@ namespace WeatherSystem
             }
             
             string enumName = "WeatherTypes";
-            string filePathAndName = parentDir.FullName + @"\DynamicEnums\";
+            string filePathAndName = parentDir.FullName + @"\Scripts\DynamicEnums\";
             StreamWriter streamWriter;
             if (!Directory.Exists(filePathAndName))
             {
@@ -200,7 +216,6 @@ namespace WeatherSystem
             {
                 streamWriter = new StreamWriter(filePathAndName);
             }
-            Debug.Log("Path = " + filePathAndName);
 
             using (streamWriter)
             {

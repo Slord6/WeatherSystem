@@ -4,8 +4,7 @@
 /// </summary>
 public enum WeatherTypes
 {
-	Sun,
+	Clear,
 	Rain,
-	Sleet,
 	Snow,
 }
