@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEditor;
 using System.IO;
 
-namespace WeatherSystem
+namespace WeatherSystem.Inspectors
 {
     public class WeatherTypesWindow : EditorWindow
     {
@@ -109,6 +109,10 @@ namespace WeatherSystem
             {
                 return "Element cannot contain whitespace";
             }
+            if(enumString == "None")
+            {
+                return "None is a default value";
+            }
 
             return null;
         }
@@ -134,7 +138,7 @@ namespace WeatherSystem
 
                             if (enumEntries[i] == enumEntries[j])
                             {
-                                errorMessage = "Duplicate entries are not allowed";
+                                errorMessage = "Duplicate entries are not allowed (" + i + ", " + j + ")";
                                 wasValidLastCheck = false;
                                 return;
                             }
@@ -226,6 +230,7 @@ namespace WeatherSystem
 
                 streamWriter.WriteLine("public enum " + enumName);
                 streamWriter.WriteLine("{");
+                streamWriter.WriteLine("\t" + "None" + ",");
                 for (int i = 0; i < enumEntries.Length; i++)
                 {
                     streamWriter.WriteLine("\t" + enumEntries[i] + ",");

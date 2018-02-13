@@ -21,8 +21,9 @@ namespace WeatherSystem
         [SerializeField]
         [Procedural]
         private List<WeatherEvent> weatherEvents;
-        //[Procedural]
-        //private DoubleDictionary<>
+        [SerializeField]
+        [Procedural]
+        private ProceduralWeatherLookup proceduralWeatherLookup;
 
 		// Use this for initialization
 		protected virtual void Start ()

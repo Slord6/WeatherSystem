@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System;
 
-namespace WeatherSystem
+namespace WeatherSystem.Inspectors
 {
     [CustomEditor(typeof(WeatherManager))]
 	public class WeatherManagerEditor : Editor
@@ -116,7 +116,9 @@ namespace WeatherSystem
                 SerializedProperty property = serializedObject.FindProperty(fieldInfo.Name);
                 if(property == null)
                 {
-                    Debug.LogError("DrawFields passed an invalid field and cannot draw, skipping '" + fieldInfo.Name + "'");
+                    Debug.LogError("DrawFields passed an invalid field and cannot draw, skipping '" + fieldInfo.Name + "'."
+                         + " Has the field got the attribute '[SerializeField]'?");
+                    continue;
                 }
                 UnityEditor.EditorGUILayout.PropertyField(property, true);
             }

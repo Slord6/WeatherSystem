@@ -205,13 +205,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4311e0f16a9a8654b829008575d2d653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  procedural: 1
+  procedural: 0
   weatherSets:
   - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
   weatherEvents:
   - {fileID: 11400000, guid: c619b2d2d93825e41ba96afb1b807778, type: 2}
   - {fileID: 11400000, guid: 8e01e2421ff268f469fad2f91885ea73, type: 2}
   - {fileID: 11400000, guid: ff151b243f0b26a448090641d0ca9c69, type: 2}
+  proceduralWeatherLookup: {fileID: 11400000, guid: 5702ea0bf0ed50148953715d008f4224,
+    type: 2}
 --- !u!4 &568159566
 Transform:
   m_ObjectHideFlags: 0
