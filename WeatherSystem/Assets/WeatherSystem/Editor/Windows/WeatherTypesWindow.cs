@@ -3,50 +3,52 @@ using System.Linq;
 using System.Collections;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 
 namespace WeatherSystem.Inspectors
 {
     public class WeatherTypesWindow : EditorWindow
     {
-        [SerializeField]
-        public string[] enumEntries; //The working copy
-        [SerializeField]
-        public string[] storedEntries; //The entries saved to disk
+        private static WeatherTypeEditorData data;
         private bool wasValidLastCheck = true;
         private string errorMessage = "?";
-
-        private static WeatherTypesWindow window;
-
+        
         static void Init()
         {
-            window = (EditorWindow.GetWindow<WeatherTypesWindow>());
-            window.storedEntries = System.Enum.GetNames(typeof(WeatherTypes));
-            window.enumEntries = window.storedEntries;
+            string[] storedEntries = System.Enum.GetNames(typeof(WeatherTypes));
+            //Remove the default "None"
+            List<string> temp = storedEntries.ToList();
+            temp.Remove("None");
+            data = ScriptableObject.CreateInstance<WeatherTypeEditorData>();
+            data.enumEntries = temp.ToArray();
+            data.storedEntries = temp.ToArray();
         }
 
         [MenuItem("WeatherSystem/Weather Types")]
         public static void ShowWindow()
         {
-            //EditorWindow.GetWindow(typeof(WeatherTypesWindow));
             Init();
-            window.Show();
+            EditorWindow.GetWindow<WeatherTypesWindow>();
         }
 
         void OnGUI()
         {
             // The actual window code goes here
-            //errorMessage = "";
             GUILayout.Label("Types of Weather:", EditorStyles.boldLabel);
-            SerializedObject serializedObject = new SerializedObject(this);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("enumEntries"), true);
 
+            SerializedObject serializedObject = new SerializedObject(data);
+            
+            SerializedProperty currentEntries = serializedObject.FindProperty("enumEntries");
+            //Display the enums
+            EditorGUILayout.PropertyField(currentEntries, true);
+            
             //List all weather types at the end
-            if (enumEntries != null && enumEntries.Length > 0)
+            if (data.enumEntries != null && data.enumEntries.Length > 0)
             {
                 string enumsString = "";
-                if (enumEntries.Length > 0)
+                if (data.enumEntries.Length > 0)
                 {
-                    enumsString = enumEntries.Aggregate((current, next) => current + ", " + next);
+                    enumsString = "None, " + data.enumEntries.Aggregate((current, next) => current + ", " + next);
                 }
                 else
                 {
@@ -54,9 +56,9 @@ namespace WeatherSystem.Inspectors
                 }
                 GUILayout.Label("Current: " + enumsString);
 
-                if (storedEntries.Length > 0)
+                if (data.storedEntries.Length > 0)
                 {
-                    enumsString = storedEntries.Aggregate((current, next) => current + ", " + next);
+                    enumsString = "None, " + data.storedEntries.Aggregate((current, next) => current + ", " + next);
                 }
                 else
                 {
@@ -68,8 +70,7 @@ namespace WeatherSystem.Inspectors
             {
                 GUILayout.Label("No weather types defined");
             }
-
-
+            
             GUIStyle redStyle = new GUIStyle();
             redStyle.normal.textColor = Color.red;
             if (SaveRequired())
@@ -94,8 +95,6 @@ namespace WeatherSystem.Inspectors
                 GUILayout.Label("Save up to date", greenStyle);
             }
 
-
-
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -119,13 +118,15 @@ namespace WeatherSystem.Inspectors
 
         void OnValidate()
         {
+            //serializedObject.ApplyModifiedProperties(); //required here?
+
             //Ensure no duplicates in enum list
-            for(int i = 0; i < enumEntries.Length; i++)
+            for (int i = 0; i < data.enumEntries.Length; i++)
             {
-                for (int j = 0; j < enumEntries.Length; j++)
+                for (int j = 0; j < data.enumEntries.Length; j++)
                 {
-                    string errorI = GetEnumError(enumEntries[i]);
-                    string errorJ = GetEnumError(enumEntries[j]);
+                    string errorI = GetEnumError(data.enumEntries[i]);
+                    string errorJ = GetEnumError(data.enumEntries[j]);
                     if (errorI == null && errorJ == null)
                     {
                         //Don't compare elements to themselves
@@ -136,7 +137,7 @@ namespace WeatherSystem.Inspectors
                         else
                         {
 
-                            if (enumEntries[i] == enumEntries[j])
+                            if (data.enumEntries[i] == data.enumEntries[j])
                             {
                                 errorMessage = "Duplicate entries are not allowed (" + i + ", " + j + ")";
                                 wasValidLastCheck = false;
@@ -165,21 +166,21 @@ namespace WeatherSystem.Inspectors
 
         private bool SaveRequired()
         {
-            if(enumEntries == null || storedEntries == null)
+            if(data.enumEntries == null || data.storedEntries == null)
             {
                 Debug.LogWarning("Cannot check if save is required as instance variables are null (WeatherTypesWindow)");
                 return false;
             }
 
-            if (enumEntries.Length != storedEntries.Length)
+            if (data.enumEntries.Length != data.storedEntries.Length)
             {
                 return true;
             }
             else
             {
-                for (int i = 0; i < enumEntries.Length; i++)
+                for (int i = 0; i < data.enumEntries.Length; i++)
                 {
-                    if (enumEntries[i] != storedEntries[i])
+                    if (data.enumEntries[i] != data.storedEntries[i])
                     {
                         return true;
                     }
@@ -231,13 +232,13 @@ namespace WeatherSystem.Inspectors
                 streamWriter.WriteLine("public enum " + enumName);
                 streamWriter.WriteLine("{");
                 streamWriter.WriteLine("\t" + "None" + ",");
-                for (int i = 0; i < enumEntries.Length; i++)
+                for (int i = 0; i < data.enumEntries.Length; i++)
                 {
-                    streamWriter.WriteLine("\t" + enumEntries[i] + ",");
+                    streamWriter.WriteLine("\t" + data.enumEntries[i] + ",");
                 }
                 streamWriter.WriteLine("}");
             }
-            storedEntries = enumEntries;
+            data.storedEntries = data.enumEntries;
             AssetDatabase.Refresh();
         }
     }

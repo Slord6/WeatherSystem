@@ -5,10 +5,10 @@
 public enum WeatherTypes
 {
 	None,
-	Rain,
 	Clear,
+	Rain,
 	Snow,
-	Storm,
 	Overcast,
+	Storm,
 	Fog,
 }
