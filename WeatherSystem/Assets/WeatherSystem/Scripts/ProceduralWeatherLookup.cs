@@ -6,13 +6,14 @@ namespace WeatherSystem
 {
     /// <summary>
     /// Acts as a wrapper to a double dictionary of type WeatherVariables,WeatherVariables,WeatherTypes
-    /// This lets us have a nice inspector and a scriptable object, so we can have multiple setups
+    /// This lets us have a nice inspector and a scriptable object, so we can have multiple setups stored as assets
     /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Procedural Weather Lookup")]
     [SerializeField]
 	public class ProceduralWeatherLookup : ScriptableObject, ISerializationCallbackReceiver
     {
         //Not serialized
+        [System.NonSerialized]
         private DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes> internalLookup = 
             new DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes>()
             {
@@ -26,7 +27,7 @@ namespace WeatherSystem
                 { HumidityVariables.HumidityLow, TemperatureVariables.TemperatureMid, WeatherTypes.None },
                 { HumidityVariables.HumidityLow, TemperatureVariables.TemperatureLow, WeatherTypes.None }
             };
-
+        
         public DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes> LookupTable
         {
             get
@@ -50,7 +51,7 @@ namespace WeatherSystem
             primaryKeys.Clear();
             secondaryKeys.Clear();
             values.Clear();
-
+            
             foreach (KeyKeyValuePair<HumidityVariables, TemperatureVariables, WeatherTypes> pair in internalLookup)
             {
                 primaryKeys.Add(pair.PrimaryKey);
@@ -58,8 +59,7 @@ namespace WeatherSystem
                 values.Add(pair.Value);
             }
         }
-
-
+        
         public void OnAfterDeserialize()
         {
             //Unity has just written new data into the serialized fields.
@@ -69,7 +69,9 @@ namespace WeatherSystem
             {
                 internalLookup.Add(primaryKeys[i], secondaryKeys[i], values[i]);
             }
+            //primaryKeys.Clear();
+            //secondaryKeys.Clear();
+            //values.Clear();
         }
-    
     }
 }

@@ -13,7 +13,6 @@ namespace WeatherSystem.Inspectors
 	{
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
             ProceduralWeatherLookup weatherLookup = (ProceduralWeatherLookup)target;
 
             List<HumidityVariables> humidityVariables = GetEnumValues<HumidityVariables>();
@@ -57,10 +56,11 @@ namespace WeatherSystem.Inspectors
             {
                 GUIStyle redStyle = new GUIStyle();
                 redStyle.normal.textColor = Color.red;
-                GUILayout.Label("Some elements are set to 'none'.\r\nThis might result in strange-looking weather", redStyle);
+                GUILayout.Label("Some elements are set to 'none'." +
+                                "\r\nThis might result in strange weather", redStyle);
             }
-
-            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(target);
+            serializedObject.Update();
         }
 
         private void HorizontalBar()
