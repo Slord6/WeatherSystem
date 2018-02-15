@@ -10,5 +10,5 @@ public enum WeatherTypes
 	Snow,
 	Overcast,
 	Storm,
-	Fog,
+	Hail,
 }

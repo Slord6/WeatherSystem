@@ -36,6 +36,14 @@ namespace WeatherSystem.Inspectors
             // The actual window code goes here
             GUILayout.Label("Types of Weather:", EditorStyles.boldLabel);
 
+            //After a save (and after unity recompiles the code), the reference to data is sometimes lost
+            //So if we lose it...
+            if(data == null)
+            {
+                //...we'll re-initalise
+                Init();
+            }
+
             SerializedObject serializedObject = new SerializedObject(data);
             
             SerializedProperty currentEntries = serializedObject.FindProperty("enumEntries");
@@ -118,7 +126,14 @@ namespace WeatherSystem.Inspectors
 
         void OnValidate()
         {
-            //serializedObject.ApplyModifiedProperties(); //required here?
+            //After a save (and after unity recompiles the code), the reference to data is sometimes lost
+            //if there's nothing to check...
+            if (data == null)
+            {
+                //...then just return
+                return;
+            }
+
 
             //Ensure no duplicates in enum list
             for (int i = 0; i < data.enumEntries.Length; i++)
