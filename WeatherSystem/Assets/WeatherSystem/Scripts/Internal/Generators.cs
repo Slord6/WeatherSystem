@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// The noise generators for the weather system
+    /// </summary>
     public static class Generators
     {
         private static float seed = 123.45f;
@@ -12,6 +15,10 @@ namespace WeatherSystem.Internal
         private static float humidityOffset = -1000f;
         private static float directionalOffset = 12050.0f;
 
+        /// <summary>
+        /// The current perlin noise seed for the generators
+        /// Should not be changed mid-game to avoid strange jumps in active weather
+        /// </summary>
         public static float Seed
         {
             get

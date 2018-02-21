@@ -5,6 +5,12 @@ using WeatherSystem.Internal;
 
 namespace WeatherSystem
 {
+    /// <summary>
+    /// The central manager for weather
+    /// Operates in two modes; procedural and manual.
+    /// Procedural mode uses perlin noise values to transit9on between WeatherSets and WeatherEvents with gradual changes over time driven by procedural 'wind'. [Partial implementation]
+    /// Manual mode gradually transitions between WeatherSets, and WeatherEvents as described by a provided WeatherCycle [Not implemented]
+    /// </summary>
 	public class WeatherManager : MonoBehaviour
 	{
         [HideInInspector] //This is so the custom editor can draw correctly

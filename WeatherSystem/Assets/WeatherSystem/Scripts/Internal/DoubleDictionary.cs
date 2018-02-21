@@ -4,6 +4,12 @@ using System.Collections;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// A generic dictionary requiring two keys to lookup values
+    /// </summary>
+    /// <typeparam name="TKey">The primary key type</typeparam>
+    /// <typeparam name="TKeySecondary">The secondary key type</typeparam>
+    /// <typeparam name="TValue">The value type</typeparam>
     [Serializable]
     public class DoubleDictionary<TKey, TKeySecondary, TValue> : IEnumerable<KeyKeyValuePair<TKey, TKeySecondary, TValue>>
     {
@@ -11,6 +17,9 @@ namespace WeatherSystem.Internal
 
         private int count;
 
+        /// <summary>
+        /// The number of elements stored in the DoubleDictionary
+        /// </summary>
         public int Count
         {
             get
@@ -19,6 +28,9 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// The number of primary keys stored in the DoubleDictionary
+        /// </summary>
         public int PrimaryKeyCount
         {
             get
@@ -27,6 +39,11 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// The number of secondary keys stored for a given primary key
+        /// </summary>
+        /// <param name="primaryKey">The primary key to count the secondary keys for</param>
+        /// <returns>The count of keys if the primary key is in the dictionary, otherwise returns null</returns>
         public int? SecondaryKeyCount(TKey primaryKey)
         {
             if (primaryDictionary.ContainsKey(primaryKey))
@@ -39,11 +56,20 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Instantiate an empty DoubleDictionary
+        /// </summary>
         public DoubleDictionary()
         {
             primaryDictionary = new Dictionary<TKey, Dictionary<TKeySecondary, TValue>>();
         }
 
+        /// <summary>
+        /// Access the value stored with the given keys
+        /// </summary>
+        /// <param name="primaryKey">The primary key</param>
+        /// <param name="secondaryKey">The secondary key</param>
+        /// <returns>The value stored with the given key pair</returns>
         public TValue this[TKey primaryKey, TKeySecondary secondaryKey]
         {
             get
@@ -56,11 +82,22 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Checks if the dictionary contains the given primary key
+        /// </summary>
+        /// <param name="primaryKey">The primary key to check</param>
+        /// <returns>True if the DoubleDictionary has a primary key matching the given key, false otherwise</returns>
         public bool ContainsKey(TKey primaryKey)
         {
             return primaryDictionary.ContainsKey(primaryKey);
         }
 
+        /// <summary>
+        /// Checks if the dictionary has a value stored with the given key pair
+        /// </summary>
+        /// <param name="primaryKey">The primary key of the pair to check</param>
+        /// <param name="secondaryKey">The secondary key of the pair to check</param>
+        /// <returns>True if there is a value stored with the given keys, false otherwise</returns>
         public bool ContainsKey(TKey primaryKey, TKeySecondary secondaryKey)
         {
             if (ContainsKey(primaryKey))
@@ -73,6 +110,12 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Add a value with the given keys
+        /// </summary>
+        /// <param name="key">The primary key</param>
+        /// <param name="secondaryKey">The secondary key</param>
+        /// <param name="value">The value to store</param>
         public void Add(TKey key, TKeySecondary secondaryKey, TValue value)
         {
             Dictionary<TKeySecondary, TValue> secondaryDictionary;
@@ -88,9 +131,15 @@ namespace WeatherSystem.Internal
                 primaryDictionary.Add(key, secondaryDictionary);
             }
             count++;
-
         }
 
+        /// <summary>
+        /// Try to get a value with the given keys
+        /// </summary>
+        /// <param name="key">The primary key</param>
+        /// <param name="secondaryKey">The secondary key</param>
+        /// <param name="value">The found value, if one is found. otherwise value is null</param>
+        /// <returns>True if a value was found, false otherwise</returns>
         public bool TryGetValue(TKey key, TKeySecondary secondaryKey, out TValue value)
         {
             Dictionary<TKeySecondary, TValue> secondaryDictionary;
@@ -119,6 +168,9 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Removes any primary keys that internally hold an empty secondary key dictionary
+        /// </summary>
         public void CleanEmpty()
         {
             List<TKey> keysToClear = new List<TKey>();
@@ -136,6 +188,10 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Gets the iteration enumerator for each key,key,value set
+        /// </summary>
+        /// <returns>The current enumeration</returns>
         public IEnumerator<KeyKeyValuePair<TKey, TKeySecondary, TValue>> GetEnumerator()
         {
             //iterate over the primary keys
@@ -150,6 +206,10 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Get the iteration enumerator
+        /// </summary>
+        /// <returns>The iteration enumerator</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

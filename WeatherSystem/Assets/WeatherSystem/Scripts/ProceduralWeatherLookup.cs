@@ -5,6 +5,7 @@ using WeatherSystem.Internal;
 namespace WeatherSystem
 {
     /// <summary>
+    /// A 'table' of lookup values describing the weather given a humidty and temperature variable
     /// Acts as a wrapper to a double dictionary of type WeatherVariables,WeatherVariables,WeatherTypes
     /// This lets us have a nice inspector and a scriptable object, so we can have multiple setups stored as assets
     /// </summary>
@@ -28,6 +29,9 @@ namespace WeatherSystem
                 { HumidityVariables.HumidityLow, TemperatureVariables.TemperatureLow, WeatherTypes.None }
             };
         
+        /// <summary>
+        /// The internal DoubleDictionary that this object wraps
+        /// </summary>
         public DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes> LookupTable
         {
             get
@@ -44,6 +48,9 @@ namespace WeatherSystem
         [SerializeField]
         private List<WeatherTypes> values = new List<WeatherTypes>();
         
+        /// <summary>
+        /// Callback called prior to serialization to allow the object to transfer the internal dictionary values to lists as Unity's serialization doesn't support generic (double)dictionary objects
+        /// </summary>
         public void OnBeforeSerialize()
         {
             //unity is about to read the serializedNodes field's contents. lets make sure
@@ -60,6 +67,9 @@ namespace WeatherSystem
             }
         }
         
+        /// <summary>
+        /// Callback called after deserialization of the object occurs. The now deserialized lists of dictionary values are transferred back into the disctionary
+        /// </summary>
         public void OnAfterDeserialize()
         {
             //Unity has just written new data into the serialized fields.

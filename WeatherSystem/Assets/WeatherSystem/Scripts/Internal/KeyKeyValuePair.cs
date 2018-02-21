@@ -5,12 +5,21 @@ using System;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// An instance of the keys and value for a DoubleDictionary item
+    /// </summary>
+    /// <typeparam name="TPrimaryKey">The primary key</typeparam>
+    /// <typeparam name="TSecondayKey">The secondary key</typeparam>
+    /// <typeparam name="TValue">The lookup value</typeparam>
 	public class KeyKeyValuePair<TPrimaryKey,TSecondayKey,TValue>
     {
         private TPrimaryKey primaryKey;
         private TSecondayKey secondaryKey;
         private TValue value;
 
+        /// <summary>
+        /// The primary key of this instance
+        /// </summary>
         public TPrimaryKey PrimaryKey
         {
             get
@@ -19,6 +28,9 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// The secondary key of this instance
+        /// </summary>
         public TSecondayKey SecondaryKey
         {
             get
@@ -27,6 +39,9 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// The value of this instance
+        /// </summary>
         public TValue Value
         {
             get
@@ -35,6 +50,12 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Create a new key,key,value instance with given values
+        /// </summary>
+        /// <param name="primaryKey">The primary key of this instance</param>
+        /// <param name="secondaryKey">The secondary key of this instance</param>
+        /// <param name="value">The value of this instance</param>
         public KeyKeyValuePair(TPrimaryKey primaryKey, TSecondayKey secondaryKey, TValue value)
         {
             this.primaryKey = primaryKey;
@@ -42,6 +63,10 @@ namespace WeatherSystem.Internal
             this.value = value;
         }
 
+        /// <summary>
+        /// The string representation of this KeyKeyValueValue pair
+        /// </summary>
+        /// <returns>The string representation</returns>
         public override string ToString()
         {
             return primaryKey.ToString() + "," + secondaryKey.ToString() + ": " + value.ToString();
