@@ -63,7 +63,7 @@ public class NoiseMapVisualiser : MonoBehaviour
         newTexture.Apply();
     }
 
-    protected Texture2D MarkCenter(Vector2 center, Texture2D texture, Color color)
+    protected virtual Texture2D MarkCenter(Vector2 center, Texture2D texture, Color color)
     {
         Color[] colors = new Color[] { color, color, color, color, color, color, color, color, color };
         texture.SetPixels((int)center.x - 1, (int)center.y - 1, 3, 3, colors);
