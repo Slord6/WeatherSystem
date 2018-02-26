@@ -12,7 +12,7 @@ namespace WeatherSystem
         [Header("Identifier")]
         [SerializeField]
         private WeatherTypes weatherType;
-
+        
         [Header("Audio")]
         [SerializeField]
         private AudioClip backgroundSound;
@@ -24,5 +24,41 @@ namespace WeatherSystem
         private ParticleSystem particleSystem;
         [SerializeField]
         private Shader shader;
+
+        [SerializeField]
+        [Range(0,1)]
+        private float intensity = 1.0f;
+
+        public WeatherTypes WeatherType
+        {
+            get
+            {
+                return weatherType;
+            }
+        }
+
+        /// <summary>
+        /// The intensity of this weather event at this instance
+        /// </summary>
+        public float Intensity
+        {
+            get
+            {
+                return intensity;
+            }
+            set
+            {
+                intensity = value;
+                if (intensity > 1)
+                {
+                    intensity = 1;
+                }
+                else if(intensity < 0)
+                {
+                    intensity = 0;
+                }
+                Debug.Log(WeatherType + " : " + intensity);
+            }
+        }
     }
 }

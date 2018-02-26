@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WeatherSystem
 {
@@ -14,6 +15,21 @@ namespace WeatherSystem
         [SerializeField]
         private WeatherEvent[] weatherEvents;
 
+        public WeatherEvent[] WeatherEvents
+        {
+            get
+            {
+                return weatherEvents;
+            }
+        }
+
+        public List<WeatherEvent> WeatherEventsList
+        {
+            get
+            {
+                return weatherEvents.ToList();
+            }
+        }
 		
 	}
 }

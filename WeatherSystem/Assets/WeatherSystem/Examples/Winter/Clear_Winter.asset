@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad73eac520cc547b2d05ee7f103d7f, type: 3}
   m_Name: Clear_Winter
   m_EditorClassIdentifier: 
-  backgroundSounds: {fileID: 0}
+  weatherType: 1
+  backgroundSound: {fileID: 0}
   instanceSounds: []
   particleSystem: {fileID: 0}
   shader: {fileID: 0}
+  intensity: 0
