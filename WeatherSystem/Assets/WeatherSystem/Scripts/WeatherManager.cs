@@ -66,6 +66,8 @@ namespace WeatherSystem
         protected virtual void Start ()
 		{
             weatherLastFrame = GetWeather();
+            //Temporary
+            activeWeatherSet = weatherSets[0];
         }
 
         private WeatherTypes GetWeather()
@@ -149,6 +151,7 @@ namespace WeatherSystem
                 evaluationValue += Time.deltaTime;
                 yield return null;
             }
+            transitionCoroutine = null;
         }
 	}
 }
