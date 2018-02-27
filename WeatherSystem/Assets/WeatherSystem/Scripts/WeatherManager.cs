@@ -49,15 +49,17 @@ namespace WeatherSystem
         [SerializeField]
         [Procedural]
         private float windStrength = 1.0f;
+
+        [SerializeField]
+        [Procedural]
+        private float proceduralScale = 25.0f;
         #endregion
-        
 
         #region Wind values
         private float trackedX = 0.0f;
         private float trackedY = 0.0f;
         #endregion
-
-        private float scale = 25.0f;
+        
         private Coroutine transitionCoroutine;
         private WeatherTypes weatherLastFrame = WeatherTypes.None;
         private WeatherSet activeWeatherSet;
@@ -70,15 +72,33 @@ namespace WeatherSystem
             activeWeatherSet = weatherSets[0];
         }
 
-        private WeatherTypes GetWeather()
+        /// <summary>
+        /// Get the weather using the default tracked transform for position and time since level load as time
+        /// </summary>
+        /// <returns>The weather at the position</returns>
+        public WeatherTypes GetWeather()
         {
-            Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.position.x, weatherQueryLocation.position.z, worldSize.x, worldSize.y, scale, Time.timeSinceLevelLoad * 0.1f);
+            Vector2 position = new Vector2(weatherQueryLocation.position.x, weatherQueryLocation.position.z); // x and z becase player moves laterally in the x/z plane
+            return GetWeather(position, Time.timeSinceLevelLoad);
+        }
+
+        /// <summary>
+        /// Get the weather for a particular time and place
+        /// </summary>
+        /// <param name="weatherQueryLocation">The position at which to get the weather</param>
+        /// <param name="time">The time at which the weather should be queryied</param>
+        /// <returns>The WeatherTypes for that position at that time</returns>
+        public WeatherTypes GetWeather(Vector2 weatherQueryLocation, float time)
+        {
+            float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
+
+            Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.x, weatherQueryLocation.y, worldSize.x, worldSize.y, proceduralScale, time * timeScale);
             wind *= windStrength;
             trackedX += wind.x;
             trackedY += wind.y;
 
-            TemperatureVariables temperature = WeatherSystem.Internal.Generators.GetTemperatureValue(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.z + trackedY, worldSize.x, worldSize.y, scale, 0.00f).ToTemperatureValue();
-            HumidityVariables humidity = WeatherSystem.Internal.Generators.GetHumidityValue(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.z + trackedY, worldSize.x, worldSize.y, scale, 0.00f).ToHumidityValue();
+            TemperatureVariables temperature = Generators.GetTemperatureValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToTemperatureValue();
+            HumidityVariables humidity =Generators.GetHumidityValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToHumidityValue();
 
             WeatherTypes currentWeather;
             if (proceduralWeatherLookup.LookupTable.TryGetValue(humidity, temperature, out currentWeather))
@@ -96,18 +116,24 @@ namespace WeatherSystem
         void Update()
         {
             if (transitionCoroutine == null)
-            {
+            {   
                 WeatherTypes currentWeather = GetWeather();
-                if (currentWeather != weatherLastFrame)
+                if (currentWeather != weatherLastFrame) //If the weather changed this frame
                 {
                     WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
                     WeatherEvent newWeatherEvent = WeatherEventFromWeatherType(currentWeather);
-                    if (currentWeatherEvent == null || newWeatherEvent == null)
+                    if (currentWeatherEvent == null)
                     {
-                        Debug.LogError("No weather event set for " + currentWeather + " or " + weatherLastFrame);
+                        Debug.LogError("No weather event set for " + weatherLastFrame);
+                        return;
+                    }
+                    if(newWeatherEvent == null)
+                    {
+                        Debug.LogError("No weather event set for " + currentWeather);
                         return;
                     }
                     transitionCoroutine = StartCoroutine(Transition(currentWeatherEvent, newWeatherEvent));
+                    weatherLastFrame = currentWeather;
                 }
             }
 
@@ -151,6 +177,7 @@ namespace WeatherSystem
                 evaluationValue += Time.deltaTime;
                 yield return null;
             }
+            Debug.Log("New weather: " + nextWeatherEvent.WeatherType.ToString());
             transitionCoroutine = null;
         }
 	}

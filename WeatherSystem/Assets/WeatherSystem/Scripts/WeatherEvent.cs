@@ -57,7 +57,6 @@ namespace WeatherSystem
                 {
                     intensity = 0;
                 }
-                Debug.Log(WeatherType + " : " + intensity);
             }
         }
     }
