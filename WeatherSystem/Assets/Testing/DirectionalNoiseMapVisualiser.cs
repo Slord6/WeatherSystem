@@ -16,6 +16,8 @@ public class DirectionalNoiseMapVisualiser : NoiseMapVisualiser
     protected UnityEngine.UI.Text outputText;
     [SerializeField]
     protected GameObject samplePointMarker;
+    [SerializeField]
+    protected bool saveAsImage = false;
 
     // Use this for initialization
     protected override void Start()
@@ -27,6 +29,15 @@ public class DirectionalNoiseMapVisualiser : NoiseMapVisualiser
     protected override void Update()
     {
         base.Update();
+
+        if(saveAsImage)
+        {
+            Texture2D texture = (Texture2D)renderer.material.mainTexture;
+            string saveLoc = Application.dataPath + "/textureCap.png";
+            System.IO.File.WriteAllBytes(saveLoc, texture.EncodeToPNG());
+            Debug.Log("Saved to " + saveLoc);
+            saveAsImage = false;
+        }
     }
 
     protected override void RefreshTexture()
