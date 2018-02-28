@@ -28,7 +28,11 @@ public class Distributor : MonoBehaviour {
         for (int i = 0; i < objectCount; i++)
         {
             GameObject newObject = GameObject.Instantiate(distributionObject, RandomVectorInRange(), Quaternion.identity);
-            yield return null;
+            newObject.transform.parent = this.transform;
+            if (i % 10 == 0)
+            {
+                yield return null;
+            }
         }
     }
 
