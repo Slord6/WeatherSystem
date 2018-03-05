@@ -18,7 +18,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  childProperties: []
   backgroundSound: {fileID: 0}
   instanceSounds: []
   particleSystem: {fileID: 0}

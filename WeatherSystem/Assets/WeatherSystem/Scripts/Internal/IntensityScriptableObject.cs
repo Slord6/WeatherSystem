@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using WeatherSystem.Internal;
 
-namespace WeatherSystem
+namespace WeatherSystem.Internal
 {
 	public class IntensityScriptableObject : ScriptableObject, IIntensityDriven
 	{

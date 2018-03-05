@@ -19,12 +19,18 @@ namespace WeatherSystem
         [SerializeField]
         private Transform weatherQueryLocation;
         
+        [SerializeField]
+        private List<WeatherSet> weatherSets;
+        
+        [SerializeField]
+        private AnimationCurve transitionCurve;
+
         #region Manual mode fields
         //Fields with the attribute "Manual" are only drawn when
         //WeatherMode is 'Manual'
         [SerializeField]
         [Manual]
-        private List<WeatherSet> weatherEvents;
+        private WeatherProperties weatherProperties;
         #endregion
 
         #region Procedural mode fields
@@ -32,15 +38,7 @@ namespace WeatherSystem
         //WeatherMoide is 'Procedural'
         [SerializeField]
         [Procedural]
-        private List<WeatherSet> weatherSets;
-
-        [SerializeField]
-        [Procedural]
         private ProceduralWeatherLookup proceduralWeatherLookup;
-
-        [SerializeField]
-        [Procedural]
-        private AnimationCurve transitionCurve;
 
         [SerializeField]
         [Procedural]
@@ -48,11 +46,11 @@ namespace WeatherSystem
 
         [SerializeField]
         [Procedural]
-        private float windStrength = 1.0f;
+        private float windStrength = 0.001f;
 
         [SerializeField]
         [Procedural]
-        private float proceduralScale = 25.0f;
+        private float proceduralScale = 0.1f;
         #endregion
 
         #region Wind values
@@ -68,7 +66,7 @@ namespace WeatherSystem
         protected virtual void Start ()
 		{
             weatherLastFrame = GetWeather();
-            //Temporary
+            //Temporary - DEBUGGING
             activeWeatherSet = weatherSets[0];
         }
 
@@ -78,17 +76,26 @@ namespace WeatherSystem
         /// <returns>The weather at the position</returns>
         public WeatherTypes GetWeather()
         {
-            Vector2 position = new Vector2(weatherQueryLocation.position.x, weatherQueryLocation.position.z); // x and z becase player moves laterally in the x/z plane
-            return GetWeather(position, Time.timeSinceLevelLoad);
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    Vector2 position = new Vector2(weatherQueryLocation.position.x, weatherQueryLocation.position.z); // x and z becase player moves laterally in the x/z plane
+                    return GetWeatherProcedural(position, Time.timeSinceLevelLoad);
+                case WeatherMode.Manual:
+                    throw new System.NotImplementedException("No manual weather implementation for GetWeather");
+                default:
+                    Debug.LogError("Unknwon WeatherMode - " + procedural.ToString());
+                    return WeatherTypes.None;
+            }
         }
 
         /// <summary>
         /// Get the weather for a particular time and place
         /// </summary>
         /// <param name="weatherQueryLocation">The position at which to get the weather</param>
-        /// <param name="time">The time at which the weather should be queryied</param>
+        /// <param name="time">The time at which the weather should be queried</param>
         /// <returns>The WeatherTypes for that position at that time</returns>
-        public WeatherTypes GetWeather(Vector2 weatherQueryLocation, float time)
+        public WeatherTypes GetWeatherProcedural(Vector2 weatherQueryLocation, float time)
         {
             float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
 
@@ -115,8 +122,24 @@ namespace WeatherSystem
         // Update is called once per frame
         void Update()
         {
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    ProceduralUpdate();
+                    break;
+                case WeatherMode.Manual:
+                    ManualUpdate();
+                    break;
+                default:
+                    Debug.LogWarning("Unknown weather mode, " + procedural.ToString());
+                    break;
+            }
+        }
+
+        private void ProceduralUpdate()
+        {
             if (transitionCoroutine == null)
-            {   
+            {
                 WeatherTypes currentWeather = GetWeather();
                 if (currentWeather != weatherLastFrame) //If the weather changed this frame
                 {
@@ -127,7 +150,7 @@ namespace WeatherSystem
                         Debug.LogError("No weather event set for " + weatherLastFrame);
                         return;
                     }
-                    if(newWeatherEvent == null)
+                    if (newWeatherEvent == null)
                     {
                         Debug.LogError("No weather event set for " + currentWeather);
                         return;
@@ -136,7 +159,14 @@ namespace WeatherSystem
                     weatherLastFrame = currentWeather;
                 }
             }
+        }
 
+        private void ManualUpdate()
+        {
+            if(activeWeatherSet == null && weatherSets != null && weatherSets.Count > 0)
+            {
+                activeWeatherSet = weatherSets[0];
+            }
         }
 
         private WeatherEvent WeatherEventFromWeatherType(WeatherTypes weather)
@@ -161,18 +191,15 @@ namespace WeatherSystem
         {
             float time = transitionCurve.keys[transitionCurve.length - 1].time; //time of the last keyframe is the length of the entire curve
 
+            WeatherPropertyData startData = currentWeatherEvent.GetPropertyDataAtIntensity(1);
+            WeatherPropertyData endData = nextWeatherEvent.GetPropertyDataAtIntensity(1);
+
             float evaluationValue = 0.0f;
             while(evaluationValue <= time)
             {
-                //Calculate a value between zero and 1 based on the length of the curve and the
-                //(value between 0 and the max time of the curve)
-                float normalisedEvaulationValue = evaluationValue / time;
-                float curveOutput = transitionCurve.Evaluate(normalisedEvaulationValue);
+                WeatherPropertyData currentData = startData.LerpTo(endData, evaluationValue);
 
-                //Increase intensity of new weather whilst
-                //proportionally decreasing the instensity of the other
-                nextWeatherEvent.Intensity = curveOutput;
-                currentWeatherEvent.Intensity = 1 - curveOutput;
+                weatherProperties.ApplyPropertyData(currentData);
 
                 evaluationValue += Time.deltaTime;
                 yield return null;

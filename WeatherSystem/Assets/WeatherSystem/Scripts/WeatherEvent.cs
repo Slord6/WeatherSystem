@@ -15,7 +15,25 @@ namespace WeatherSystem
         private WeatherTypes weatherType;
 
         [SerializeField]
-        private WeatherProperty[] properties;
+        private WeatherProperty customProperties;
+
+        [Header("Property intensity settings")]
+        [SerializeField]
+        private AnimationCurve windIntensityCurve;
+        [SerializeField]
+        private AnimationCurve precipitationIntensityCurve;
+        [SerializeField]
+        private AnimationCurve debrisIntensityCurve;
+        [SerializeField]
+        private AnimationCurve lightingIntensityCurve;
+        [SerializeField]
+        private Color lightColor;
+        [SerializeField]
+        private AnimationCurve cloudIntensityCurve;
+        [SerializeField]
+        private AnimationCurve backgroundSoundCurve;
+        [SerializeField]
+        private AnimationCurve instanceSoundCurve;
 
         public WeatherTypes WeatherType
         {
@@ -25,24 +43,21 @@ namespace WeatherSystem
             }
         }
 
-        public new float Intensity
+        public WeatherPropertyData GetPropertyDataAtIntensity(float intensity)
         {
-            get
-            {
-                return base.Intensity;
-            }
-            set
-            {
-                base.Intensity = value;
+            WeatherPropertyData data = new WeatherPropertyData();
+            data.customProperties = customProperties;
 
-                if (properties != null && properties.Length > 0)
-                {
-                    for (int i = 0; i < properties.Length; i++)
-                    {
-                        properties[i].Intensity = value;
-                    }
-                }
-            }
+            data.windIntensity = windIntensityCurve.Evaluate(intensity);
+            data.precipitationIntensity = precipitationIntensityCurve.Evaluate(intensity);
+            data.debrisIntensity = debrisIntensityCurve.Evaluate(intensity);
+            data.lightIntensity = lightingIntensityCurve.Evaluate(intensity);
+            data.cloudIntensity = cloudIntensityCurve.Evaluate(intensity);
+            data.lightColor = lightColor;
+            data.backgroundSoundIntensity = backgroundSoundCurve.Evaluate(intensity);
+            data.instanceSoundIntensity = instanceSoundCurve.Evaluate(intensity);
+
+            return data;
         }
     }
 }

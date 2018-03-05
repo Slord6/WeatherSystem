@@ -25,7 +25,7 @@ public class WeatherStation : MonoBehaviour {
 	void Update ()
     {
         Vector2 position = new Vector2(transform.position.x, transform.position.z);
-        WeatherTypes weather = weatherManager.GetWeather(position, Time.timeSinceLevelLoad);
+        WeatherTypes weather = weatherManager.GetWeatherProcedural(position, Time.timeSinceLevelLoad);
         outputText.text = weather.ToString();
         selfRenderer.material.color = weather.ToColor();
 	}

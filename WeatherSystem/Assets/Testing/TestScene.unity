@@ -269,16 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   procedural: 0
   weatherQueryLocation: {fileID: 1073911571}
-  weatherEvents:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   weatherSets:
   - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
-  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
-    type: 2}
   transitionCurve:
     serializedVersion: 2
     m_Curve:
@@ -297,6 +289,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  weatherProperties: {fileID: 0}
+  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
+    type: 2}
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.001
   proceduralScale: 0.1
@@ -423,12 +418,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   procedural: 1
   weatherQueryLocation: {fileID: 1073911571}
-  weatherEvents:
-  - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
   weatherSets:
   - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
-  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
-    type: 2}
   transitionCurve:
     serializedVersion: 2
     m_Curve:
@@ -447,6 +438,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  weatherProperties: {fileID: 11400000, guid: eb0712701a576af488b5b66f8223ee92, type: 2}
+  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
+    type: 2}
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.001
   proceduralScale: 0.1

@@ -1,30 +1,95 @@
 using UnityEngine;
 using System.Collections;
+using WeatherSystem.Internal;
 
 namespace WeatherSystem
 {
     [CreateAssetMenu(menuName = "Weather System/Weather Properties/Weather Property")]
-    public class WeatherProperty : IntensityScriptableObject
+    public class WeatherProperty : ScriptableObject
 	{
-        [SerializeField]
-        [Tooltip("Given an intensity value, what (normalised) value should be applied to the values on this property")]
-        private AnimationCurve intensityCurve;
-
         [Header("Audio")]
         [SerializeField]
         private AudioClip backgroundSound;
         [SerializeField]
         private AudioClip[] instanceSounds;
+        [SerializeField]
+        [Range(0, 1.0f)]
+        private float instanceSoundChance = 0.5f;
+        [SerializeField]
+        private AudioSource backgroundSoundsAudioSource;
+        [SerializeField]
+        private AudioSource instanceSoundsAudioSource;
 
         [Header("Visuals")]
         [SerializeField]
-        private ParticleSystem particleSystem;
+        private ParticleSystem precipitationParticleSystem;
         [SerializeField]
-        private Shader shader;
+        private Shader precipitationShader; //Shader needs to be some inherited version with an intensity value to set
         [SerializeField]
         private Light worldLight;
         [SerializeField]
         private Color lightColor;
-        
+
+        public WeatherPropertyData LastAssignedPropertyData { get; set; }
+
+        public virtual void ApplyPropertyData(WeatherPropertyData data)
+        {
+            LastAssignedPropertyData = data;
+
+            //Apply to the default systems
+            SetBackgroundSounds(data.backgroundSoundIntensity);
+
+            SetInstanceSounds(data.instanceSoundIntensity);
+
+            SetPrecipitation(data.precipitationIntensity);
+
+            SetLight(data.lightIntensity, data.lightColor);
+            //Then access custom data and apply to that
+        }
+
+        protected virtual void SetBackgroundSounds(float intensity)
+        {
+            if (backgroundSoundsAudioSource != null)
+            {
+                backgroundSoundsAudioSource.volume = intensity;
+            }
+        }
+
+        protected virtual void SetInstanceSounds(float intensity)
+        {
+            if (instanceSounds != null && instanceSounds != null)
+            {
+                float instanceSoundChance = Random.Range(0, intensity);
+                if (instanceSoundChance < this.instanceSoundChance)
+                {
+                    int index = Random.Range(0, instanceSounds.Length);
+                    instanceSoundsAudioSource.loop = false;
+                    instanceSoundsAudioSource.clip = instanceSounds[index];
+                    instanceSoundsAudioSource.Play();
+                }
+            }
+        }
+
+        protected virtual void SetPrecipitation(float intensity)
+        {
+            if(precipitationParticleSystem != null)
+            {
+                ParticleSystem.EmissionModule emission = precipitationParticleSystem.emission;
+                emission.rateOverTime = intensity * 100;
+            }
+            if(precipitationShader != null)
+            {
+                //SET INTENSITY
+            }
+        }
+
+        protected virtual void SetLight(float intensity, Color lightColor)
+        {
+            if(worldLight != null)
+            {
+                worldLight.intensity = intensity;
+                worldLight.color = lightColor;
+            }
+        }
     }
 }
