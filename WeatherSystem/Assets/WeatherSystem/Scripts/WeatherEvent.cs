@@ -9,28 +9,39 @@ namespace WeatherSystem
     /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Event")]
     public class WeatherEvent : IntensityScriptableObject
-	{
+    {
         [Header("Identifier")]
         [SerializeField]
         private WeatherTypes weatherType;
-        
-        [Header("Audio")]
-        [SerializeField]
-        private AudioClip backgroundSound;
-        [SerializeField]
-        private AudioClip[] instanceSounds;
 
-        [Header("Visuals")]
         [SerializeField]
-        private ParticleSystem particleSystem;
-        [SerializeField]
-        private Shader shader;
+        private WeatherProperty[] properties;
 
         public WeatherTypes WeatherType
         {
             get
             {
                 return weatherType;
+            }
+        }
+
+        public new float Intensity
+        {
+            get
+            {
+                return base.Intensity;
+            }
+            set
+            {
+                base.Intensity = value;
+
+                if (properties != null && properties.Length > 0)
+                {
+                    for (int i = 0; i < properties.Length; i++)
+                    {
+                        properties[i].Intensity = value;
+                    }
+                }
             }
         }
     }

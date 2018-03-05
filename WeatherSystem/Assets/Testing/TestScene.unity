@@ -173,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &148854634
 GameObject:
@@ -250,12 +250,12 @@ GameObject:
   - component: {fileID: 568159566}
   - component: {fileID: 568159565}
   m_Layer: 0
-  m_Name: Weather
+  m_Name: Weather - Procedural
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &568159565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +394,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &752720469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 752720471}
+  - component: {fileID: 752720470}
+  m_Layer: 0
+  m_Name: Weather - Manual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &752720470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752720469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4311e0f16a9a8654b829008575d2d653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  procedural: 1
+  weatherQueryLocation: {fileID: 1073911571}
+  weatherEvents:
+  - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
+  weatherSets:
+  - {fileID: 11400000, guid: 4ee9c280daea38347a4b46a672c6ad2e, type: 2}
+  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
+    type: 2}
+  transitionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2.9937468
+      value: 2.959569
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  worldSize: {x: 1000, y: 1000}
+  windStrength: 0.001
+  proceduralScale: 0.1
+--- !u!4 &752720471
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752720469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &948398145
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1073911567
 GameObject:
@@ -523,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2044000712
 Prefab:
@@ -562,7 +631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4242070452893024, guid: ea9aee17b08146b4485c52167ed80e58, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1135654839641598, guid: ea9aee17b08146b4485c52167ed80e58, type: 2}
       propertyPath: m_IsActive

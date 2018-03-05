@@ -3,30 +3,28 @@ using System.Collections;
 
 namespace WeatherSystem
 {
-    [CreateAssetMenu(menuName = "Weather System/Weather Property")]
+    [CreateAssetMenu(menuName = "Weather System/Weather Properties/Weather Property")]
     public class WeatherProperty : IntensityScriptableObject
 	{
         [SerializeField]
-        private WeatherProperty[] childProperties;
+        [Tooltip("Given an intensity value, what (normalised) value should be applied to the values on this property")]
+        private AnimationCurve intensityCurve;
 
-        public new float Intensity
-        {
-            get
-            {
-                return base.Intensity;
-            }
-            set
-            {
-                base.Intensity = value;
-                if(childProperties != null && childProperties.Length > 0)
-                {
-                    for (int i = 0; i < childProperties.Length; i++)
-                    {
-                        childProperties[i].Intensity = value;
-                    }
-                }
-            }
-        }
+        [Header("Audio")]
+        [SerializeField]
+        private AudioClip backgroundSound;
+        [SerializeField]
+        private AudioClip[] instanceSounds;
 
+        [Header("Visuals")]
+        [SerializeField]
+        private ParticleSystem particleSystem;
+        [SerializeField]
+        private Shader shader;
+        [SerializeField]
+        private Light worldLight;
+        [SerializeField]
+        private Color lightColor;
+        
     }
 }

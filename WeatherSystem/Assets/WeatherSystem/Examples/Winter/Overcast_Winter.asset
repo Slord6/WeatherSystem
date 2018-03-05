@@ -11,9 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad73eac520cc547b2d05ee7f103d7f, type: 3}
   m_Name: Overcast_Winter
   m_EditorClassIdentifier: 
+  intensity: 0.488
   weatherType: 4
-  backgroundSound: {fileID: 0}
-  instanceSounds: []
-  particleSystem: {fileID: 0}
-  shader: {fileID: 0}
-  intensity: 0.45830357
+  properties: []
