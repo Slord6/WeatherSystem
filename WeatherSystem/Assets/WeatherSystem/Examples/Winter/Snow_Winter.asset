@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad73eac520cc547b2d05ee7f103d7f, type: 3}
   m_Name: Snow_Winter
   m_EditorClassIdentifier: 
-  weatherType: 3
-  backgroundSound: {fileID: 0}
-  instanceSounds: []
-  particleSystem: {fileID: 0}
-  shader: {fileID: 0}
   intensity: 0
+  weatherType: 3
+  properties:
+  - {fileID: 11400000, guid: 40f0659b0b6877f4f9d67e733beb7b52, type: 2}
+  - {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
+  - {fileID: 11400000, guid: 01164b365c15cc94381da2de690ee85b, type: 2}
+  - {fileID: 11400000, guid: 319da1dfe7043d54ab77bafa046912d4, type: 2}

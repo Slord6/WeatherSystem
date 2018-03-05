@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53afb484e57070545be09fa3b3093b26, type: 3}
   m_Name: WinterWeather
   m_EditorClassIdentifier: 
+  intensity: 0
   weatherEvents:
   - {fileID: 11400000, guid: ff151b243f0b26a448090641d0ca9c69, type: 2}
   - {fileID: 11400000, guid: 8e01e2421ff268f469fad2f91885ea73, type: 2}
   - {fileID: 11400000, guid: c619b2d2d93825e41ba96afb1b807778, type: 2}
   - {fileID: 11400000, guid: 14439a871e3da334c815bd34f1960f56, type: 2}
   - {fileID: 11400000, guid: 0ab7a341e801f65449a70eb2be14f59f, type: 2}
+  - {fileID: 11400000, guid: 8be663e259a394049a0f83158430a505, type: 2}
