@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using WeatherSystem.Internal;
 
 namespace WeatherSystem
 {
@@ -7,7 +8,7 @@ namespace WeatherSystem
     /// Scriptable object holding objects related to a specific weather pattern
     /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Event")]
-    public class WeatherEvent : ScriptableObject
+    public class WeatherEvent : IntensityScriptableObject
 	{
         [Header("Identifier")]
         [SerializeField]
@@ -25,38 +26,11 @@ namespace WeatherSystem
         [SerializeField]
         private Shader shader;
 
-        [SerializeField]
-        [Range(0,1)]
-        private float intensity = 1.0f;
-
         public WeatherTypes WeatherType
         {
             get
             {
                 return weatherType;
-            }
-        }
-
-        /// <summary>
-        /// The intensity of this weather event at this instance
-        /// </summary>
-        public float Intensity
-        {
-            get
-            {
-                return intensity;
-            }
-            set
-            {
-                intensity = value;
-                if (intensity > 1)
-                {
-                    intensity = 1;
-                }
-                else if(intensity < 0)
-                {
-                    intensity = 0;
-                }
             }
         }
     }

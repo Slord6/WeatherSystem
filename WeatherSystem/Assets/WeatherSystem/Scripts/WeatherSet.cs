@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using WeatherSystem.Internal;
+using System;
 
 namespace WeatherSystem
 {
@@ -9,12 +11,12 @@ namespace WeatherSystem
     /// A scriptable object for managing WeatherEvents
     /// </summary>
     [CreateAssetMenu(menuName ="Weather System/Weather Set")]
-	public class WeatherSet : ScriptableObject
+	public class WeatherSet : IntensityScriptableObject
     {
 
         [SerializeField]
         private WeatherEvent[] weatherEvents;
-
+        
         public WeatherEvent[] WeatherEvents
         {
             get
