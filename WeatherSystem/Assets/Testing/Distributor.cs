@@ -5,17 +5,17 @@ using UnityEngine;
 public class Distributor : MonoBehaviour {
 
     [SerializeField]
-    private float range;
+    protected float range;
     [SerializeField]
-    private GameObject distributionObject;
+    protected GameObject distributionObject;
     [SerializeField]
-    private int objectCount;
+    protected int objectCount;
     [SerializeField]
-    private bool lockX = false;
+    protected bool lockX = false;
     [SerializeField]
-    private bool lockY = false;
+    protected bool lockY = false;
     [SerializeField]
-    private bool lockZ = false;
+    protected bool lockZ = false;
 
     // Use this for initialization
     void Start ()
@@ -23,7 +23,7 @@ public class Distributor : MonoBehaviour {
         StartCoroutine(Distribute());
 	}
 
-    IEnumerator Distribute()
+    protected virtual IEnumerator Distribute()
     {
         for (int i = 0; i < objectCount; i++)
         {
@@ -36,7 +36,7 @@ public class Distributor : MonoBehaviour {
         }
     }
 
-    private Vector3 RandomVectorInRange()
+    protected virtual Vector3 RandomVectorInRange()
     {
         Vector3 vector = new Vector3();
         if (!lockX)
