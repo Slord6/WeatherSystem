@@ -46,6 +46,7 @@ namespace WeatherSystem
         public WeatherPropertyData GetPropertyDataAtIntensity(float intensity)
         {
             WeatherPropertyData data = new WeatherPropertyData();
+            data.rawIntensity = intensity;
             data.customProperties = customProperties;
 
             data.windIntensity = windIntensityCurve.Evaluate(intensity);

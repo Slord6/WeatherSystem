@@ -5,6 +5,8 @@ namespace WeatherSystem.Internal
 {
 	public class WeatherPropertyData
     {
+        public float rawIntensity;
+
         public float windIntensity;
         public float precipitationIntensity;
         public float debrisIntensity;
@@ -24,6 +26,7 @@ namespace WeatherSystem.Internal
         {
             WeatherPropertyData newData = new WeatherPropertyData();
 
+            newData.rawIntensity = Mathf.Lerp(this.rawIntensity, otherData.rawIntensity, t);
             newData.windIntensity = Mathf.Lerp(this.windIntensity, otherData.windIntensity, t);
             newData.precipitationIntensity = Mathf.Lerp(this.precipitationIntensity, otherData.precipitationIntensity, t);
             newData.debrisIntensity = Mathf.Lerp(this.debrisIntensity, otherData.debrisIntensity, t);

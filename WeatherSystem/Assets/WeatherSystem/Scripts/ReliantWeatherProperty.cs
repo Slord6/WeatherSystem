@@ -21,6 +21,8 @@ namespace WeatherSystem
             {
                 RelianceWeighting currentRelianceWeighting = intensityParentWeightings[i];
                 WeatherPropertyData currentParentData = currentRelianceWeighting.intensityParent.LastAssignedPropertyData;
+
+                calulatedData.rawIntensity += currentRelianceWeighting.weightingCurve.Evaluate(currentParentData.rawIntensity);
                 calulatedData.backgroundSoundIntensity += currentRelianceWeighting.weightingCurve.Evaluate(currentParentData.backgroundSoundIntensity);
                 calulatedData.cloudIntensity += currentRelianceWeighting.weightingCurve.Evaluate(currentParentData.cloudIntensity);
                 calulatedData.debrisIntensity += currentRelianceWeighting.weightingCurve.Evaluate(currentParentData.debrisIntensity);
@@ -33,6 +35,7 @@ namespace WeatherSystem
 
             //Then average to get normalised values
             int length = intensityParentWeightings.Length;
+            calulatedData.rawIntensity /= length;
             calulatedData.backgroundSoundIntensity /= length;
             calulatedData.cloudIntensity /= length;
             calulatedData.debrisIntensity /= length;

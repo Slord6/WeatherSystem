@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using WeatherSystem.Internal;
+using System.Collections.Generic;
 
 namespace WeatherSystem
 {
@@ -30,6 +31,13 @@ namespace WeatherSystem
         [SerializeField]
         private Color lightColor;
 
+        [Header("Custom Value")]
+        [Tooltip("Objects with components that inherit from IIntensityDriven, which will be passed a raw intensity value")]
+        [SerializeField]
+        private GameObject[] affectedObjects;
+
+        private List<IIntensityDriven> intensityElements = null;
+        
         public WeatherPropertyData LastAssignedPropertyData { get; set; }
 
         public virtual void ApplyPropertyData(WeatherPropertyData data)
@@ -44,6 +52,9 @@ namespace WeatherSystem
             SetPrecipitation(data.precipitationIntensity);
 
             SetLight(data.lightIntensity, data.lightColor);
+
+            SetCustomObjects(data.rawIntensity);
+
             //Then access custom data and apply to that
         }
 
@@ -59,10 +70,10 @@ namespace WeatherSystem
         {
             if (instanceSounds != null && instanceSounds != null)
             {
-                float instanceSoundChance = Random.Range(0, intensity);
+                float instanceSoundChance = UnityEngine.Random.Range(0, intensity);
                 if (instanceSoundChance < this.instanceSoundChance)
                 {
-                    int index = Random.Range(0, instanceSounds.Length);
+                    int index = UnityEngine.Random.Range(0, instanceSounds.Length);
                     instanceSoundsAudioSource.loop = false;
                     instanceSoundsAudioSource.clip = instanceSounds[index];
                     instanceSoundsAudioSource.Play();
@@ -89,6 +100,23 @@ namespace WeatherSystem
             {
                 worldLight.intensity = intensity;
                 worldLight.color = lightColor;
+            }
+        }
+        
+        private void SetCustomObjects(float rawIntensity)
+        {
+            if(intensityElements == null)
+            {
+                intensityElements = new List<IIntensityDriven>();
+                foreach(GameObject affectedObject in affectedObjects)
+                {
+                    intensityElements.AddRange(affectedObject.GetComponents<IIntensityDriven>());
+                }
+            }
+
+            foreach(IIntensityDriven intensityComponent in intensityElements)
+            {
+                intensityComponent.Intensity = rawIntensity;
             }
         }
     }
