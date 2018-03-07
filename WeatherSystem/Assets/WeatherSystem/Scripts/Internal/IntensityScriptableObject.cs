@@ -13,7 +13,7 @@ namespace WeatherSystem.Internal
         /// <summary>
         /// The intensity of this weather event at this instance
         /// </summary>
-        public float Intensity
+        public virtual float Intensity
         {
             get
             {

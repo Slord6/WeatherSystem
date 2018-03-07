@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DirectionalNoiseMapVisualiser" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACAAAAACAAAAQEEAAAABgEAIAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Testing\DirectionalNoiseMapVisualiser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Distributor" Collapsed="true">
+    <Position X="5.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEABAIACACIAAAAAAAAAgAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\Testing\Distributor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DistributorTerrain" Collapsed="true">
+    <Position X="5.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAACACAAAAAAAAACACAAAACAAAAAAAAAAAwAA=</HashCode>
+      <FileName>Assets\Testing\DistributorTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FogDensity" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgBAAAQAAgAAAAAAAAgAAAIAABFAAAAAAgkAAAAAAA=</HashCode>
+      <FileName>Assets\Testing\FogDensity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NoiseDirectionVisualiser" Collapsed="true">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Testing\NoiseDirectionVisualiser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NoiseMapVisualiser" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAKAAAAACAAAEAAACAAAEAAAAAAAAADAAgAA=</HashCode>
+      <FileName>Assets\Testing\NoiseMapVisualiser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherStation" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAEAAAAAACAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Testing\WeatherStation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherToColour" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Testing\WeatherToColour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolumetricLight" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>mAAFgwFIQOACAQACAAAAAgAgAgEAACBICAAAAACACAA=</HashCode>
+      <FileName>Assets\Volumetric_Lights\Scripts\VolumetricLight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolumetricLightRenderer" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgACAAABAuDAACECxEAQAAOgCwAAEMEIAEAKAACEE=</HashCode>
+      <FileName>Assets\Volumetric_Lights\Scripts\VolumetricLightRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ManualAttribute" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Attributes\ManualAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ProceduralAttribute" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Attributes\ProceduralAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.HumidityExtensions" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\HumidityVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ProceduralWeatherLookup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAEAAAAAAAAAAAAQAAABAACAAAAAAEAAAAIA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\ProceduralWeatherLookup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.RelianceWeighting" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\RelianceWeighting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ReliantWeatherProperty" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\ReliantWeatherProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.TemperatureExtensions" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\TemperatureVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherEvent" Collapsed="true">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAgAAoAIAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="customProperties" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherManager" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAACACAAkgAAAAEEACAAABBAgEAAAAKEAACAgAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherProperties" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAgAAEAAAEAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherProperties.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="weatherProperties" />
+      <Field Name="reliantWeatherProperties" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherProperty" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAEAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherProperty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherSet" Collapsed="true">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherSet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="weatherEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenBehaviour" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIBAAACAAAAAAAAoAAAAiAEAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenBehaviour.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="propertyParent" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenFog" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAgAEAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenFog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenParticles" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenParticles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.DoubleDictionary&lt;TKey, TKeySecondary, TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAAAEABAADAAABAwAAAAAAAAEAAAAAQAAEAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\DoubleDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.Internal.Generators" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAgAQAIAAEAAAAAAAAAAAACCAAAAAABAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\Generators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.IntensityScriptableObject" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IntensityScriptableObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.Internal.KeyKeyValuePair&lt;TPrimaryKey, TSecondayKey, TValue&gt;" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAACAAAACgAAAAgQA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\KeyKeyValuePair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="WeatherSystem.Internal.IActivatable" Collapsed="true">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IActivatable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WeatherSystem.Internal.IIntensityDriven" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IIntensityDriven.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="WeatherTypes" Collapsed="true">
+    <Position X="13.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABIAAAAACAAAAAAAAAAAAAAAEAAAAAAAFAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\DynamicEnums\WeatherTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherSystem.HumidityVariables" Collapsed="true">
+    <Position X="8.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAACAAAAAAAAIAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\HumidityVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherSystem.TemperatureVariables" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAQ=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\TemperatureVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherSystem.WeatherMode" Collapsed="true">
+    <Position X="11.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

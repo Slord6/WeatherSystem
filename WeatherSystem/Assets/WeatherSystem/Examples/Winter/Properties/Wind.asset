@@ -11,17 +11,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7143e60d5533ef840b6e634c83d4f547, type: 3}
   m_Name: Wind
   m_EditorClassIdentifier: 
-  intensity: 1
-  intensityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  childProperties: []
-  backgroundSound: {fileID: 0}
-  instanceSounds: []
-  particleSystem: {fileID: 0}
-  shader: {fileID: 0}
-  worldLight: {fileID: 0}
-  lightColor: {r: 0, g: 0, b: 0, a: 0}

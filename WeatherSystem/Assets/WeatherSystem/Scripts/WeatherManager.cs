@@ -65,9 +65,13 @@ namespace WeatherSystem
         // Use this for initialization
         protected virtual void Start ()
 		{
-            weatherLastFrame = GetWeather();
             //Temporary - DEBUGGING
             activeWeatherSet = weatherSets[0];
+
+
+            weatherLastFrame = GetWeather();
+            WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
+            currentWeatherEvent.OnActivate();
         }
 
         /// <summary>
@@ -191,19 +195,25 @@ namespace WeatherSystem
         {
             float time = transitionCurve.keys[transitionCurve.length - 1].time; //time of the last keyframe is the length of the entire curve
 
-            WeatherPropertyData startData = currentWeatherEvent.GetPropertyDataAtIntensity(1);
-            WeatherPropertyData endData = nextWeatherEvent.GetPropertyDataAtIntensity(1);
+            float startIntensity = currentWeatherEvent.Intensity;
 
+            nextWeatherEvent.OnActivate();
             float evaluationValue = 0.0f;
             while(evaluationValue <= time)
             {
-                WeatherPropertyData currentData = startData.LerpTo(endData, evaluationValue);
+                float stepVal = transitionCurve.Evaluate(evaluationValue);
 
-                weatherProperties.ApplyPropertyData(currentData);
+                currentWeatherEvent.Intensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
+                nextWeatherEvent.Intensity = 1.0f - currentWeatherEvent.Intensity;
 
-                evaluationValue += Time.deltaTime;
                 yield return null;
+                evaluationValue += Time.deltaTime;
             }
+            currentWeatherEvent.OnDeactivate();
+
+            //re-call OnActivate for the new weather in case there were crossover WeatherProperties down the chain
+            nextWeatherEvent.OnActivate();
+
             Debug.Log("New weather: " + nextWeatherEvent.WeatherType.ToString());
             transitionCoroutine = null;
         }

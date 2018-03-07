@@ -1,39 +1,26 @@
 using UnityEngine;
 using System.Collections;
 using WeatherSystem.Internal;
+using System;
 
 namespace WeatherSystem
 {
     /// <summary>
-    /// Scriptable object holding objects related to a specific weather pattern
+    /// Scriptable object holding WeatherProperties related to a specific weather pattern
     /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Event")]
-    public class WeatherEvent : IntensityScriptableObject
+    public class WeatherEvent : IntensityScriptableObject, IActivatable
     {
         [Header("Identifier")]
         [SerializeField]
         private WeatherTypes weatherType;
 
         [SerializeField]
-        private WeatherProperty customProperties;
-
-        [Header("Property intensity settings")]
+        private WeatherProperties customProperties; //this name cannot be changed, required for editor
+        
         [SerializeField]
-        private AnimationCurve windIntensityCurve;
-        [SerializeField]
-        private AnimationCurve precipitationIntensityCurve;
-        [SerializeField]
-        private AnimationCurve debrisIntensityCurve;
-        [SerializeField]
-        private AnimationCurve lightingIntensityCurve;
-        [SerializeField]
-        private Color lightColor;
-        [SerializeField]
-        private AnimationCurve cloudIntensityCurve;
-        [SerializeField]
-        private AnimationCurve backgroundSoundCurve;
-        [SerializeField]
-        private AnimationCurve instanceSoundCurve;
+        [HideInInspector]
+        private AnimationCurve[] curves;
 
         public WeatherTypes WeatherType
         {
@@ -43,22 +30,34 @@ namespace WeatherSystem
             }
         }
 
-        public WeatherPropertyData GetPropertyDataAtIntensity(float intensity)
+        public override float Intensity
         {
-            WeatherPropertyData data = new WeatherPropertyData();
-            data.rawIntensity = intensity;
-            data.customProperties = customProperties;
+            get
+            {
+                return base.Intensity;
+            }
 
-            data.windIntensity = windIntensityCurve.Evaluate(intensity);
-            data.precipitationIntensity = precipitationIntensityCurve.Evaluate(intensity);
-            data.debrisIntensity = debrisIntensityCurve.Evaluate(intensity);
-            data.lightIntensity = lightingIntensityCurve.Evaluate(intensity);
-            data.cloudIntensity = cloudIntensityCurve.Evaluate(intensity);
-            data.lightColor = lightColor;
-            data.backgroundSoundIntensity = backgroundSoundCurve.Evaluate(intensity);
-            data.instanceSoundIntensity = instanceSoundCurve.Evaluate(intensity);
+            set
+            {
+                base.Intensity = value;
+                if (customProperties != null)
+                {
+                    customProperties.ApplyIntensity(Intensity, curves);
+                }else
+                {
+                    Debug.LogWarning("No properties set for WeatherEvent - " + name);
+                }
+            }
+        }
 
-            return data;
+        public void OnActivate()
+        {
+            customProperties.OnActivate();
+        }
+
+        public void OnDeactivate()
+        {
+            customProperties.OnDeactivate();
         }
     }
 }
