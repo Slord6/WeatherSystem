@@ -13,7 +13,7 @@ namespace WeatherSystem
         
         public virtual void OnActivate()
         {
-            if (drivenComponents == null || drivenComponents.Contains(null))
+            if (drivenComponents == null || drivenComponents.Contains(null) || drivenComponents.Count == 0)
             {
                 drivenComponents = new List<IntensityDrivenBehaviour>();
                 IntensityDrivenBehaviour[] activeIntensityBehaviours = FindObjectsOfType<IntensityDrivenBehaviour>();

@@ -31,6 +31,10 @@ namespace WeatherSystem
         [SerializeField]
         [Manual]
         private WeatherProperties weatherProperties;
+
+        //[SerializeField]
+        //[Manual]
+        private bool proceduralIntensity;
         #endregion
 
         #region Procedural mode fields
@@ -51,6 +55,11 @@ namespace WeatherSystem
         [SerializeField]
         [Procedural]
         private float proceduralScale = 0.1f;
+
+        [SerializeField]
+        [Procedural]
+        [Range(0.1f, 300f)]
+        private float weatherEventTransitionTime = 3.0f;
         #endregion
 
         #region Wind values
@@ -61,6 +70,9 @@ namespace WeatherSystem
         private Coroutine transitionCoroutine;
         private WeatherTypes weatherLastFrame = WeatherTypes.None;
         private WeatherSet activeWeatherSet;
+
+        [SerializeField]
+        private AnimationCurve intensityPlot = new AnimationCurve();
 
         // Use this for initialization
         protected virtual void Start ()
@@ -109,7 +121,7 @@ namespace WeatherSystem
             trackedY += wind.y;
 
             TemperatureVariables temperature = Generators.GetTemperatureValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToTemperatureValue();
-            HumidityVariables humidity =Generators.GetHumidityValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToHumidityValue();
+            HumidityVariables humidity = Generators.GetHumidityValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToHumidityValue();
 
             WeatherTypes currentWeather;
             if (proceduralWeatherLookup.LookupTable.TryGetValue(humidity, temperature, out currentWeather))
@@ -142,12 +154,12 @@ namespace WeatherSystem
 
         private void ProceduralUpdate()
         {
-            if (transitionCoroutine == null)
+            if (transitionCoroutine == null) //when no weather transition occuring
             {
                 WeatherTypes currentWeather = GetWeather();
+                WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
                 if (currentWeather != weatherLastFrame) //If the weather changed this frame
                 {
-                    WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
                     WeatherEvent newWeatherEvent = WeatherEventFromWeatherType(currentWeather);
                     if (currentWeatherEvent == null)
                     {
@@ -159,8 +171,13 @@ namespace WeatherSystem
                         Debug.LogError("No weather event set for " + currentWeather);
                         return;
                     }
-                    transitionCoroutine = StartCoroutine(Transition(currentWeatherEvent, newWeatherEvent));
+                    transitionCoroutine = StartCoroutine(Transition(currentWeatherEvent, newWeatherEvent, weatherEventTransitionTime));
                     weatherLastFrame = currentWeather;
+                }
+                else //No weather changed, update intensity
+                {
+                    currentWeatherEvent.Intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                    intensityPlot.AddKey(new Keyframe(Time.timeSinceLevelLoad, currentWeatherEvent.Intensity));
                 }
             }
         }
@@ -191,7 +208,7 @@ namespace WeatherSystem
         /// <param name="currentWeatherEvent">The current weather event to transition from</param>
         /// <param name="nextWeatherEvent">The weather event to transition to</param>
         /// <param name="time">The time the transition should take</param>
-        private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent)
+        private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime)
         {
             float time = transitionCurve.keys[transitionCurve.length - 1].time; //time of the last keyframe is the length of the entire curve
 

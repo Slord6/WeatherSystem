@@ -9,8 +9,6 @@ namespace WeatherSystem.IntensityComponents
     {
         [SerializeField]
         private WeatherProperty propertyParent;
-        [SerializeField]
-        private AnimationCurve intensityCurve;
 
         private float intensity;
 
@@ -44,14 +42,6 @@ namespace WeatherSystem.IntensityComponents
             get
             {
                 return propertyParent;
-            }
-        }
-
-        public AnimationCurve IntensityCurve
-        {
-            get
-            {
-                return intensityCurve;
             }
         }
 

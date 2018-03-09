@@ -11,7 +11,7 @@ namespace WeatherSystem
         [Header("Reliant intensity settings")]
         [SerializeField]
         private RelianceWeighting[] intensityParentWeightings;
-
+        
         /// <summary>
         /// Calculates an intensity from the parents intensity, weighted by curves,
         /// then applies that intensity value to all IntensityComponentCurves

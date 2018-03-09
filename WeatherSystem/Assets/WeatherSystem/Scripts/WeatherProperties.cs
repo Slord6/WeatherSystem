@@ -42,7 +42,7 @@ namespace WeatherSystem
             {
                 if(intensityCurves.Length != weatherProperties.Length + reliantWeatherProperties.Length)
                 {
-                    Debug.LogError("Curve length mis-match, open this weather event (" + name + ") in the editor to refresh the curves");
+                    Debug.LogError("Curve length mis-match (" + intensityCurves.Length + " vs " + (weatherProperties.Length + reliantWeatherProperties.Length).ToString() + "), open in the editor to refresh the curves");
                 }
 
                 for (int i = 0; i < weatherProperties.Length; i++)
@@ -58,9 +58,15 @@ namespace WeatherSystem
             }
         }
 
+        //late apply intensity
+
         public void OnActivate()
         {
             foreach (WeatherProperty property in weatherProperties)
+            {
+                property.OnActivate();
+            }
+            foreach(ReliantWeatherProperty property in reliantWeatherProperties)
             {
                 property.OnActivate();
             }

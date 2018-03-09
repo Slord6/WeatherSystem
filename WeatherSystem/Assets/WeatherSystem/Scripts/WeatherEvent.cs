@@ -36,14 +36,14 @@ namespace WeatherSystem
             {
                 return base.Intensity;
             }
-
             set
             {
                 base.Intensity = value;
                 if (customProperties != null)
                 {
                     customProperties.ApplyIntensity(Intensity, curves);
-                }else
+                }
+                else
                 {
                     Debug.LogWarning("No properties set for WeatherEvent - " + name);
                 }

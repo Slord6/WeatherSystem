@@ -14,6 +14,7 @@ namespace WeatherSystem.Internal
         private static float temperatureOffset = 1000f;
         private static float humidityOffset = -1000f;
         private static float directionalOffset = 12050.0f;
+        private static float intensityOffset = 8760.0f;
 
         /// <summary>
         /// The current perlin noise seed for the generators
@@ -103,6 +104,11 @@ namespace WeatherSystem.Internal
             direction.y = GetPerlinNoise(x, y, maxX, maxY, scale, offset - directionalOffset);
             direction.y -= GetPerlinNoise(x, y, maxX, maxY, scale, offset + directionalOffset * 0.3f);
             return direction.normalized;
+        }
+
+        public static float GetIntensityNoise(float x, float y, float maxX, float maxY, float scale, float offset)
+        {
+            return GetPerlinNoise(x, y, maxX, maxY, scale, offset + intensityOffset);
         }
     }
 }
