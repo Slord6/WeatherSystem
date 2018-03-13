@@ -10,23 +10,35 @@ namespace WeatherSystem.IntensityComponents
         private new ParticleSystem particleSystem;
         [SerializeField]
         private bool manageChildParticleSystems;
+        [SerializeField]
+        private AnimationCurve precipitationRateCurve;
+
+        private ParticleSystem.EmissionModule emmisionModule;
+        private ParticleSystem.MainModule mainModule;
+        
+
+        private void Awake()
+        {
+            emmisionModule = particleSystem.emission;
+            mainModule = particleSystem.main;
+        }
 
         public override void OnActivate()
         {
-            ParticleSystem.EmissionModule emmision = particleSystem.emission;
-            emmision.enabled = true;
+            emmisionModule.enabled = true;
         }
 
         public override void OnDeactivate()
         {
-            ParticleSystem.EmissionModule emmision = particleSystem.emission;
-            emmision.enabled = false;
+            emmisionModule.enabled = false;
         }
 
         protected override void UpdateWithIntensity(float intensity)
         {
-            ParticleSystem.EmissionModule emmision = particleSystem.emission;
-            emmision.rateOverTime = 100 * intensity;
+            float value = precipitationRateCurve.Evaluate(intensity);
+            
+            emmisionModule.rateOverTime = value;
+            mainModule.gravityModifier = intensity * 10.0f;
         }
     }
 }

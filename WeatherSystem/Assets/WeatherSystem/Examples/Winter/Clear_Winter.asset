@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ad73eac520cc547b2d05ee7f103d7f, type: 3}
   m_Name: Clear_Winter
   m_EditorClassIdentifier: 
-  intensity: 0.5161823
+  intensity: 1
   weatherType: 1
   customProperties: {fileID: 11400000, guid: eb0712701a576af488b5b66f8223ee92, type: 2}
   curves:
@@ -38,12 +38,12 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 1
-      inSlope: 1
+      value: 0
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
@@ -86,15 +86,15 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
+      time: 0.0008621216
+      value: 0.2000122
+      inSlope: -0.5947392
+      outSlope: -0.5947392
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 1
-      inSlope: 1
+      value: 0
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2

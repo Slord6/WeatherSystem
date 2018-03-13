@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -719,15 +719,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 44.1
+      value: 1468.74
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.9
+      value: 573.42
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 7.01
+      value: 1023.81
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -827,6 +827,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   weatherProperties: {fileID: 0}
+  manualEventsSequence: []
   proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
     type: 2}
   worldSize: {x: 1000, y: 1000}
@@ -993,6 +994,70 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   weatherProperties: {fileID: 11400000, guid: eb0712701a576af488b5b66f8223ee92, type: 2}
+  manualEventsSequence:
+  - weatherEvent: {fileID: 11400000, guid: c619b2d2d93825e41ba96afb1b807778, type: 2}
+    time: 5
+    transitionTime: 20
+    intensityOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - weatherEvent: {fileID: 11400000, guid: 0ab7a341e801f65449a70eb2be14f59f, type: 2}
+    time: 5
+    transitionTime: 20
+    intensityOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - weatherEvent: {fileID: 11400000, guid: 8be663e259a394049a0f83158430a505, type: 2}
+    time: 5
+    transitionTime: 20
+    intensityOverTime:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
     type: 2}
   worldSize: {x: 1000, y: 1000}
@@ -1310,7 +1375,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1350612859}
-  - component: {fileID: 1350612861}
+  - component: {fileID: 1350612860}
   m_Layer: 0
   m_Name: VisibilityController
   m_TagString: Untagged
@@ -1331,7 +1396,7 @@ Transform:
   m_Father: {fileID: 1208871442}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1350612861
+--- !u!114 &1350612860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1339,12 +1404,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1350612858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0386d6e442a0a924aa958f443976425f, type: 3}
+  m_Script: {fileID: 11500000, guid: 403a25cbb63119d49bef407b1554fae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 01164b365c15cc94381da2de690ee85b, type: 2}
-  materialValueName: _Metallic
-  renderer: {fileID: 1947998688}
+  light: {fileID: 148854637}
 --- !u!1 &1355255569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,6 +2001,12 @@ MonoBehaviour:
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
   particleSystem: {fileID: 94275610}
   manageChildParticleSystems: 0
+  precipitationRateCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &2009952726
 Transform:
   m_ObjectHideFlags: 0

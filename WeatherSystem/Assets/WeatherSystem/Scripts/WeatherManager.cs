@@ -14,7 +14,7 @@ namespace WeatherSystem
 	public class WeatherManager : MonoBehaviour
 	{
         [HideInInspector] //This is so the custom editor can draw correctly
-        public WeatherMode procedural = WeatherMode.Procedural;
+        public WeatherMode procedural = WeatherMode.Procedural; //name needs changing to be more descriptive, editor may need updating also
 
         [SerializeField]
         private Transform weatherQueryLocation;
@@ -31,6 +31,10 @@ namespace WeatherSystem
         [SerializeField]
         [Manual]
         private WeatherProperties weatherProperties;
+
+        [SerializeField]
+        [Manual]
+        private List<EventSequenceItem> manualEventsSequence;
 
         //[SerializeField]
         //[Manual]
@@ -59,6 +63,7 @@ namespace WeatherSystem
         [SerializeField]
         [Procedural]
         [Range(0.1f, 300f)]
+        [Tooltip("Setting this to too high a value may result in strange/constant weather transitions")]
         private float weatherEventTransitionTime = 3.0f;
         #endregion
 
@@ -70,6 +75,9 @@ namespace WeatherSystem
         private Coroutine transitionCoroutine;
         private WeatherTypes weatherLastFrame = WeatherTypes.None;
         private WeatherSet activeWeatherSet;
+
+        private float timeSinceSequenceChange = 0.0f;
+        private int eventSequenceIndex = 0;
 
         [SerializeField]
         private AnimationCurve intensityPlot = new AnimationCurve();
@@ -87,7 +95,7 @@ namespace WeatherSystem
         }
 
         /// <summary>
-        /// Get the weather using the default tracked transform for position and time since level load as time
+        /// Get the weather using the default tracked transform for position and, in procedural mode, time since level load as time
         /// </summary>
         /// <returns>The weather at the position</returns>
         public WeatherTypes GetWeather()
@@ -98,9 +106,9 @@ namespace WeatherSystem
                     Vector2 position = new Vector2(weatherQueryLocation.position.x, weatherQueryLocation.position.z); // x and z becase player moves laterally in the x/z plane
                     return GetWeatherProcedural(position, Time.timeSinceLevelLoad);
                 case WeatherMode.Manual:
-                    throw new System.NotImplementedException("No manual weather implementation for GetWeather");
+                    return manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType;
                 default:
-                    Debug.LogError("Unknwon WeatherMode - " + procedural.ToString());
+                    Debug.LogError("Unknown WeatherMode - " + procedural.ToString());
                     return WeatherTypes.None;
             }
         }
@@ -120,8 +128,8 @@ namespace WeatherSystem
             trackedX += wind.x;
             trackedY += wind.y;
 
-            TemperatureVariables temperature = Generators.GetTemperatureValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToTemperatureValue();
-            HumidityVariables humidity = Generators.GetHumidityValue(weatherQueryLocation.x + trackedX, weatherQueryLocation.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f).ToHumidityValue();
+            TemperatureVariables temperature = GetTemperatureValueAt(weatherQueryLocation).ToTemperatureValue();
+            HumidityVariables humidity = GetHumidityValueAt(weatherQueryLocation).ToHumidityValue();
 
             WeatherTypes currentWeather;
             if (proceduralWeatherLookup.LookupTable.TryGetValue(humidity, temperature, out currentWeather))
@@ -132,6 +140,34 @@ namespace WeatherSystem
             {
                 Debug.LogError("Procedural lookup table does not contain info for " + humidity + " and " + temperature);
                 return WeatherTypes.None;
+            }
+        }
+
+        public float GetTemperatureValueAt(Vector2 position)
+        {
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    return Generators.GetTemperatureValue(position.x + trackedX, position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                case WeatherMode.Manual:
+                    return 0.0f; //This will be updated but needs more thought
+                default:
+                    Debug.LogError("Unknown mode - " + procedural);
+                    throw new System.NotImplementedException("Unknown mode - " + procedural);
+            }
+        }
+
+        public float GetHumidityValueAt(Vector2 position)
+        {
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    return Generators.GetHumidityValue(position.x + trackedX, position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                case WeatherMode.Manual:
+                    return 0.0f; //This will be updated but needs more thought
+                default:
+                    Debug.LogError("Unknown mode - " + procedural);
+                    throw new System.NotImplementedException("Unknown mode - " + procedural);
             }
         }
 
@@ -184,9 +220,28 @@ namespace WeatherSystem
 
         private void ManualUpdate()
         {
-            if(activeWeatherSet == null && weatherSets != null && weatherSets.Count > 0)
+            if (transitionCoroutine == null)
             {
-                activeWeatherSet = weatherSets[0];
+                timeSinceSequenceChange += Time.deltaTime;
+                if (timeSinceSequenceChange > manualEventsSequence[eventSequenceIndex].time)
+                {
+                    int nextSequenceIndex = eventSequenceIndex + 1;
+                    if (nextSequenceIndex >= manualEventsSequence.Count)
+                    {
+                        nextSequenceIndex = 0;
+                    }
+
+                    transitionCoroutine = StartCoroutine(Transition(manualEventsSequence[eventSequenceIndex].weatherEvent, manualEventsSequence[nextSequenceIndex].weatherEvent, manualEventsSequence[eventSequenceIndex].transitionTime));
+                    eventSequenceIndex = nextSequenceIndex;
+                    timeSinceSequenceChange = 0.0f;
+                }
+                else
+                {
+                    //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
+                    manualEventsSequence[eventSequenceIndex].weatherEvent.Intensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(((float)timeSinceSequenceChange/ manualEventsSequence[eventSequenceIndex].transitionTime));
+                    //Debugging
+                    intensityPlot.AddKey(Time.timeSinceLevelLoad, manualEventsSequence[eventSequenceIndex].weatherEvent.Intensity);
+                }
             }
         }
 
@@ -210,18 +265,20 @@ namespace WeatherSystem
         /// <param name="time">The time the transition should take</param>
         private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime)
         {
-            float time = transitionCurve.keys[transitionCurve.length - 1].time; //time of the last keyframe is the length of the entire curve
-
             float startIntensity = currentWeatherEvent.Intensity;
 
             nextWeatherEvent.OnActivate();
             float evaluationValue = 0.0f;
-            while(evaluationValue <= time)
+            while(evaluationValue <= transitionTime)
             {
-                float stepVal = transitionCurve.Evaluate(evaluationValue);
+                float stepVal = transitionCurve.Evaluate(evaluationValue/transitionTime);
 
                 currentWeatherEvent.Intensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
                 nextWeatherEvent.Intensity = 1.0f - currentWeatherEvent.Intensity;
+
+                //Debugging
+                intensityPlot.AddKey(Time.timeSinceLevelLoad, currentWeatherEvent.Intensity);
+                intensityPlot.AddKey(Time.timeSinceLevelLoad + 0.001f, nextWeatherEvent.Intensity);
 
                 yield return null;
                 evaluationValue += Time.deltaTime;
