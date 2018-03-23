@@ -8,9 +8,8 @@ using System;
 namespace WeatherSystem.Inspectors
 {
     [CustomEditor(typeof(WeatherManager))]
-	public class WeatherManagerEditor : Editor
+	public class WeatherManagerEditor : WeatherEditor
 	{
-
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
@@ -103,25 +102,6 @@ namespace WeatherSystem.Inspectors
             }
 
             return toggleSelect;
-        }
-
-        /// <summary>
-        /// Using the serilizedObject, extract serialized properties using the given field info and draw to inspector
-        /// </summary>
-        /// <param name="fields">The fields to draw</param>
-        private void DrawFields(List<FieldInfo> fields)
-        {
-            foreach (FieldInfo fieldInfo in fields)
-            {
-                SerializedProperty property = serializedObject.FindProperty(fieldInfo.Name);
-                if(property == null)
-                {
-                    Debug.LogError("DrawFields passed an invalid field and cannot draw, skipping '" + fieldInfo.Name + "'."
-                         + " Has the field got the attribute '[SerializeField]'?");
-                    continue;
-                }
-                UnityEditor.EditorGUILayout.PropertyField(property, true);
-            }
         }
     }
 }
