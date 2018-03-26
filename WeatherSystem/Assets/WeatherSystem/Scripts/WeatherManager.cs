@@ -11,6 +11,7 @@ namespace WeatherSystem
     /// Procedural mode uses perlin noise values to transit9on between WeatherSets and WeatherEvents with gradual changes over time driven by procedural 'wind'. [Partial implementation]
     /// Manual mode gradually transitions between WeatherSets, and WeatherEvents as described by a provided WeatherCycle [Not implemented]
     /// </summary>
+    [RequireComponent(typeof(TimeExtension))]
 	public class WeatherManager : MonoBehaviour
 	{
         [HideInInspector] //This is so the custom editor can draw correctly
@@ -79,12 +80,16 @@ namespace WeatherSystem
         private float timeSinceSequenceChange = 0.0f;
         private int eventSequenceIndex = 0;
 
+        private TimeExtension timeExtension;
+
         [SerializeField]
         private AnimationCurve intensityPlot = new AnimationCurve();
 
         // Use this for initialization
         protected virtual void Start ()
-		{
+        {
+            timeExtension = GetComponent<TimeExtension>();
+
             //Temporary - DEBUGGING
             activeWeatherSet = weatherSets[0];
 
@@ -98,17 +103,35 @@ namespace WeatherSystem
         /// Get the weather using the default tracked transform for position and, in procedural mode, time since level load as time
         /// </summary>
         /// <returns>The weather at the position</returns>
-        public WeatherTypes GetWeather()
+        private WeatherTypes GetWeather()
         {
             switch (procedural)
             {
                 case WeatherMode.Procedural:
                     Vector2 position = new Vector2(weatherQueryLocation.position.x, weatherQueryLocation.position.z); // x and z becase player moves laterally in the x/z plane
-                    return GetWeatherProcedural(position, Time.timeSinceLevelLoad);
+                    return GetWeatherProcedural(position, timeExtension.CheckedTimeSinceLevelLoad);
                 case WeatherMode.Manual:
                     return manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType;
                 default:
                     Debug.LogError("Unknown WeatherMode - " + procedural.ToString());
+                    return WeatherTypes.None;
+            }
+        }
+        
+        /// <summary>
+        /// Get the weather for a particular place and the current instance
+        /// </summary>
+        /// <param name="weatherQueryLocation">The position at which to get the weather</param>
+        public WeatherTypes GetWeather(Vector2 weatherQueryLocation)
+        {
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    return GetWeatherProcedural(weatherQueryLocation, timeExtension.CheckedTimeSinceLevelLoadNoUpdate, false);
+                case WeatherMode.Manual:
+                    return manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType;
+                default:
+                    Debug.LogError("Unknown WeatherMode - " + procedural);
                     return WeatherTypes.None;
             }
         }
@@ -118,15 +141,18 @@ namespace WeatherSystem
         /// </summary>
         /// <param name="weatherQueryLocation">The position at which to get the weather</param>
         /// <param name="time">The time at which the weather should be queried</param>
-        /// <returns>The WeatherTypes for that position at that time</returns>
-        public WeatherTypes GetWeatherProcedural(Vector2 weatherQueryLocation, float time)
+        /// <returns>The WeatherTypes for that position at that time and updates the the tracked X and Y values</returns>
+        private WeatherTypes GetWeatherProcedural(Vector2 weatherQueryLocation, float time, bool updateTrackedValues = true)
         {
-            float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
+            if (updateTrackedValues)
+            {
+                float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
 
-            Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.x, weatherQueryLocation.y, worldSize.x, worldSize.y, proceduralScale, time * timeScale);
-            wind *= windStrength;
-            trackedX += wind.x;
-            trackedY += wind.y;
+                Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.x, weatherQueryLocation.y, worldSize.x, worldSize.y, proceduralScale, time * timeScale);
+                wind *= windStrength;
+                trackedX += wind.x;
+                trackedY += wind.y;
+            }
 
             TemperatureVariables temperature = GetTemperatureValueAt(weatherQueryLocation).ToTemperatureValue();
             HumidityVariables humidity = GetHumidityValueAt(weatherQueryLocation).ToHumidityValue();
@@ -213,7 +239,7 @@ namespace WeatherSystem
                 else //No weather changed, update intensity
                 {
                     currentWeatherEvent.Intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
-                    intensityPlot.AddKey(new Keyframe(Time.timeSinceLevelLoad, currentWeatherEvent.Intensity));
+                    intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.Intensity));
                 }
             }
         }
@@ -277,8 +303,8 @@ namespace WeatherSystem
                 nextWeatherEvent.Intensity = 1.0f - currentWeatherEvent.Intensity;
 
                 //Debugging
-                intensityPlot.AddKey(Time.timeSinceLevelLoad, currentWeatherEvent.Intensity);
-                intensityPlot.AddKey(Time.timeSinceLevelLoad + 0.001f, nextWeatherEvent.Intensity);
+                intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate, currentWeatherEvent.Intensity);
+                intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate + 0.001f, nextWeatherEvent.Intensity);
 
                 yield return null;
                 evaluationValue += Time.deltaTime;

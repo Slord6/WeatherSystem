@@ -828,6 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568159566}
   - component: {fileID: 568159565}
+  - component: {fileID: 568159567}
   m_Layer: 0
   m_Name: Weather - Procedural
   m_TagString: Untagged
@@ -875,7 +876,7 @@ MonoBehaviour:
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.01
   proceduralScale: 1
-  weatherEventTransitionTime: 3
+  weatherEventTransitionTime: 10
   intensityPlot:
     serializedVersion: 2
     m_Curve: []
@@ -895,6 +896,17 @@ Transform:
   m_Father: {fileID: 1787005909}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &568159567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 568159564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b4bf5f5d14098408c106ba46eb3110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &653087783 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4276288471554758, guid: 4ac2e8f7a85bf9843b99b146d1a9c59d,
