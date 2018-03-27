@@ -874,7 +874,7 @@ MonoBehaviour:
   proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
     type: 2}
   worldSize: {x: 1000, y: 1000}
-  windStrength: 0.01
+  windStrength: 0.1
   proceduralScale: 1
   weatherEventTransitionTime: 10
   intensityPlot:
