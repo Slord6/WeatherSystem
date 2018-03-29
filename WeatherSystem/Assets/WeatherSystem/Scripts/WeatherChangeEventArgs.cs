@@ -6,8 +6,8 @@ namespace WeatherSystem
 {
     public class WeatherChangeEventArgs
     {
-        private WeatherEvent enteringWeatherEvent;
-        private WeatherEvent exitingWeatherEvent;
+        public WeatherEvent enteringWeatherEvent;
+        public WeatherEvent exitingWeatherEvent;
 
         public WeatherChangeEventArgs(WeatherEvent enteringWeatherEvent, WeatherEvent exitingWeatherEvent)
         {

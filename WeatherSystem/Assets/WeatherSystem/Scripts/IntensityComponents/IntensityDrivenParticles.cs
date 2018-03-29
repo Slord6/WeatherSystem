@@ -39,7 +39,7 @@ namespace WeatherSystem.IntensityComponents
             {
                 float value = precipitationRateCurve.Evaluate(intensityData.intensity);
 
-                emmisionModule.rateOverTime = value;
+                emmisionModule.rateOverTime = value * 100;
                 mainModule.gravityModifier = intensityData.intensity * 10.0f;
             }
             else
