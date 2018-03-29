@@ -21,13 +21,13 @@ namespace WeatherSystem.IntensityComponents
             audioSource.enabled = false;
         }
 
-        protected override void UpdateWithIntensity(float intensity)
+        protected override void UpdateWithIntensity(IntensityData intensityData)
         {
             float randomNumber = Random.Range(0.0f, instanceChance);
 
             if (randomNumber < instanceChance)
             {
-                audioSource.volume = intensity;
+                audioSource.volume = intensityData.intensity;
                 audioSource.Play();
             }
         }

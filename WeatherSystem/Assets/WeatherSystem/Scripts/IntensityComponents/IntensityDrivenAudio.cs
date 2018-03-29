@@ -20,9 +20,9 @@ namespace WeatherSystem.IntensityComponents
             controlledAudioSource.enabled = false;
         }
 
-        protected override void UpdateWithIntensity(float intensity)
+        protected override void UpdateWithIntensity(IntensityData intensityData)
         {
-            controlledAudioSource.volume = intensity;
+            controlledAudioSource.volume = intensityData.intensity;
         }
     }
 }

@@ -40,11 +40,11 @@ namespace WeatherSystem
         /// Iterates over all IntensityDrivenBehaviours held by this object and updates the intensity of each
         /// </summary>
         /// <param name="intensity">The new intensity to apply</param>
-        public virtual void ApplyIntensity(float intensity)
+        public virtual void ApplyIntensity(IntensityData intensityData)
         {
             foreach(IntensityDrivenBehaviour intensityBehaviour in drivenComponents)
             {
-                intensityBehaviour.Intensity = intensity;
+                intensityBehaviour.IntensityData = intensityData;
             }
         }
     }

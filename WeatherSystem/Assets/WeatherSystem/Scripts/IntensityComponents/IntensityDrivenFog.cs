@@ -21,11 +21,11 @@ namespace WeatherSystem.IntensityComponents
             base.OnActivate();
         }
 
-        protected override void UpdateWithIntensity(float intensity)
+        protected override void UpdateWithIntensity(IntensityData intensityData)
         {
-            RenderSettings.fogDensity = intensity * fogDensityScale;
+            RenderSettings.fogDensity = intensityData.intensity * fogDensityScale;
 
-            RenderSettings.fogStartDistance = intensity * fogStartScale;
+            RenderSettings.fogStartDistance = intensityData.intensity * fogStartScale;
             RenderSettings.fogEndDistance = RenderSettings.fogStartDistance + fogLength;
         }
 

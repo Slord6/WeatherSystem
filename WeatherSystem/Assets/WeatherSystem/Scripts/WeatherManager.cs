@@ -26,6 +26,10 @@ namespace WeatherSystem
         [SerializeField]
         private AnimationCurve transitionCurve;
 
+        [SerializeField]
+        [Tooltip("This is used in procedural mode to lookup weather events based on generated temperature and humidity values. In manual mode it is used in reverse to get temperature and humidity values from a weather event")]
+        private ProceduralWeatherLookup proceduralWeatherLookup;
+
         #region Manual mode fields
         //Fields with the attribute "Manual" are only drawn when
         //WeatherMode is 'Manual'
@@ -36,18 +40,15 @@ namespace WeatherSystem
         [SerializeField]
         [Manual]
         private List<EventSequenceItem> manualEventsSequence;
-
-        //[SerializeField]
-        //[Manual]
+        
         private bool proceduralIntensity;
+        private float timeSinceSequenceChange = 0.0f;
+        private int eventSequenceIndex = 0;
         #endregion
 
         #region Procedural mode fields
         //Fields with the attribute "Procedural" are only drawn when
         //WeatherMoide is 'Procedural'
-        [SerializeField]
-        [Procedural]
-        private ProceduralWeatherLookup proceduralWeatherLookup;
 
         [SerializeField]
         [Procedural]
@@ -83,11 +84,10 @@ namespace WeatherSystem
 
         private Coroutine transitionCoroutine;
         private WeatherTypes weatherLastFrame = WeatherTypes.None;
+        private TemperatureVariables temperatureLastFrame;
+        private HumidityVariables humidityLastFrame;
         private WeatherSet activeWeatherSet;
-
-        private float timeSinceSequenceChange = 0.0f;
-        private int eventSequenceIndex = 0;
-
+        
         private TimeExtension timeExtension;
 
         [SerializeField]
@@ -105,14 +105,6 @@ namespace WeatherSystem
             weatherLastFrame = GetWeather();
             WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
             currentWeatherEvent.OnActivate();
-
-            OnWeatherChangeBeginEvent += SomeMethod;
-            OnWeatherChangeCompleteEvent += SomeMethod;
-        }
-
-        private void SomeMethod(WeatherChangeEventArgs e)
-        {
-            Debug.Log(e);
         }
 
         /// <summary>
@@ -143,13 +135,33 @@ namespace WeatherSystem
             switch (procedural)
             {
                 case WeatherMode.Procedural:
-                    return GetWeatherProcedural(weatherQueryLocation, timeExtension.CheckedTimeSinceLevelLoadNoUpdate, false);
+                    return GetWeatherProcedural(weatherQueryLocation, timeExtension.CheckedTimeSinceLevelLoadNoUpdate, false); //Don't update tracked value as this can be called externally and we only want to updated tracked values once per frame
                 case WeatherMode.Manual:
-                    return manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType;
+                    return GetWeatherManual(false); //as with procedural, don't update tracked values from external calls
                 default:
                     Debug.LogError("Unknown WeatherMode - " + procedural);
                     return WeatherTypes.None;
             }
+        }
+
+        private WeatherTypes GetWeatherManual(bool updateTrackedValues = true)
+        {
+            if (updateTrackedValues)
+            {
+                KeyValuePair<HumidityVariables, TemperatureVariables> humityTemperaturePair;
+                proceduralWeatherLookup.LookupTable.TryReverseLookup(manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType, out humityTemperaturePair);
+                if (humityTemperaturePair.Equals(default(KeyValuePair<HumidityVariables, TemperatureVariables>)))
+                {
+                    Debug.LogError("Cannot reverse lookup weather event (" + manualEventsSequence[eventSequenceIndex].weatherEvent.name + "). Ensure weather lookup property is assigned correctly. temperature and humidity values will be incorrect.");
+                }
+                else
+                {
+                    humidityLastFrame = humityTemperaturePair.Key;
+                    temperatureLastFrame = humityTemperaturePair.Value;
+                }
+            }
+
+            return manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType;
         }
 
         /// <summary>
@@ -160,8 +172,16 @@ namespace WeatherSystem
         /// <returns>The WeatherTypes for that position at that time and updates the the tracked X and Y values</returns>
         private WeatherTypes GetWeatherProcedural(Vector2 weatherQueryLocation, float time, bool updateTrackedValues = true)
         {
+            TemperatureVariables temperature = GetTemperatureValueAt(weatherQueryLocation).ToTemperatureValue();
+            HumidityVariables humidity = GetHumidityValueAt(weatherQueryLocation).ToHumidityValue();
+
+
             if (updateTrackedValues)
             {
+                temperatureLastFrame = temperature;
+                humidityLastFrame = humidity;
+
+
                 float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
 
                 Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.x, weatherQueryLocation.y, worldSize.x, worldSize.y, proceduralScale, time * timeScale);
@@ -169,9 +189,6 @@ namespace WeatherSystem
                 trackedX += wind.x;
                 trackedY += wind.y;
             }
-
-            TemperatureVariables temperature = GetTemperatureValueAt(weatherQueryLocation).ToTemperatureValue();
-            HumidityVariables humidity = GetHumidityValueAt(weatherQueryLocation).ToHumidityValue();
 
             WeatherTypes currentWeather;
             if (proceduralWeatherLookup.LookupTable.TryGetValue(humidity, temperature, out currentWeather))
@@ -254,8 +271,9 @@ namespace WeatherSystem
                 }
                 else //No weather changed, update intensity
                 {
-                    currentWeatherEvent.Intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
-                    intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.Intensity));
+                    float intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                    currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame);
+                    intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.IntensityData.intensity));
                 }
             }
         }
@@ -273,16 +291,20 @@ namespace WeatherSystem
                         nextSequenceIndex = 0;
                     }
 
-                    transitionCoroutine = StartCoroutine(Transition(manualEventsSequence[eventSequenceIndex].weatherEvent, manualEventsSequence[nextSequenceIndex].weatherEvent, manualEventsSequence[eventSequenceIndex].transitionTime));
+                    int oldIndex = eventSequenceIndex;
                     eventSequenceIndex = nextSequenceIndex;
+                    GetWeatherManual(); //Calling this updates the lastFrame values for temp and humidity based off the current weather event
+
+                    transitionCoroutine = StartCoroutine(Transition(manualEventsSequence[oldIndex].weatherEvent, manualEventsSequence[eventSequenceIndex].weatherEvent, manualEventsSequence[oldIndex].transitionTime));
                     timeSinceSequenceChange = 0.0f;
                 }
                 else
                 {
                     //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
-                    manualEventsSequence[eventSequenceIndex].weatherEvent.Intensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(((float)timeSinceSequenceChange/ manualEventsSequence[eventSequenceIndex].transitionTime));
+                    float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(((float)timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].transitionTime));
+                    manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame); 
                     //Debugging
-                    intensityPlot.AddKey(Time.timeSinceLevelLoad, manualEventsSequence[eventSequenceIndex].weatherEvent.Intensity);
+                    intensityPlot.AddKey(Time.timeSinceLevelLoad, manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData.intensity);
                 }
             }
         }
@@ -307,7 +329,7 @@ namespace WeatherSystem
         /// <param name="time">The time the transition should take</param>
         private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime)
         {
-            float startIntensity = currentWeatherEvent.Intensity;
+            float startIntensity = currentWeatherEvent.IntensityData.intensity;
 
             if(OnWeatherChangeBeginEvent != null)
             {
@@ -320,8 +342,8 @@ namespace WeatherSystem
             {
                 float stepVal = transitionCurve.Evaluate(evaluationValue/transitionTime);
 
-                currentWeatherEvent.Intensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
-                nextWeatherEvent.Intensity = 1.0f - currentWeatherEvent.Intensity;
+                currentWeatherEvent.IntensityData = new IntensityData(Mathf.Lerp(startIntensity, 0.0f, stepVal), temperatureLastFrame, humidityLastFrame);
+                nextWeatherEvent.IntensityData = new IntensityData(1.0f - currentWeatherEvent.Intensity, temperatureLastFrame, humidityLastFrame);
 
                 //Debugging
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate, currentWeatherEvent.Intensity);

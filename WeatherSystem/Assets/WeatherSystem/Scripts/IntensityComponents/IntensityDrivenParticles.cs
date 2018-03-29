@@ -4,7 +4,7 @@ using System;
 
 namespace WeatherSystem.IntensityComponents
 {
-	public class IntensityDrivenParticles : IntensityDrivenBehaviour
+	public class IntensityDrivenParticles : TempHumidityIntensityDrivenComponent
 	{
         [SerializeField]
         private new ParticleSystem particleSystem;
@@ -33,12 +33,19 @@ namespace WeatherSystem.IntensityComponents
             emmisionModule.enabled = false;
         }
 
-        protected override void UpdateWithIntensity(float intensity)
+        protected override void UpdateWithIntensity(IntensityData intensityData)
         {
-            float value = precipitationRateCurve.Evaluate(intensity);
-            
-            emmisionModule.rateOverTime = value;
-            mainModule.gravityModifier = intensity * 10.0f;
+            if (ShouldUpdate(new TemperatureHumidityPair(intensityData.temperature, intensityData.humidity)))
+            {
+                float value = precipitationRateCurve.Evaluate(intensityData.intensity);
+
+                emmisionModule.rateOverTime = value;
+                mainModule.gravityModifier = intensityData.intensity * 10.0f;
+            }
+            else
+            {
+                OnDeactivate();
+            }
         }
     }
 }

@@ -111,6 +111,43 @@ namespace WeatherSystem.Internal
         }
 
         /// <summary>
+        /// Checks the DoubleDictionary for a given value
+        /// </summary>
+        /// <param name="value">The value to check for in the DoubleDictionary</param>
+        /// <returns>Returns true if the dictionary holds the given value, false if not</returns>
+        public bool ContainsValue(TValue value)
+        {
+            foreach (KeyValuePair<TKey,Dictionary<TKeySecondary,TValue>> outerKeyValuePair in primaryDictionary)
+            {
+                foreach (KeyValuePair<TKeySecondary,TValue> innerKeyValuePair in outerKeyValuePair.Value)
+                {
+                    if(innerKeyValuePair.Value.Equals(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool TryReverseLookup(TValue value, out KeyValuePair<TKey, TKeySecondary> lookupValues)
+        {
+            foreach (KeyValuePair<TKey, Dictionary<TKeySecondary, TValue>> outerKeyValuePair in primaryDictionary)
+            {
+                foreach (KeyValuePair<TKeySecondary, TValue> innerKeyValuePair in outerKeyValuePair.Value)
+                {
+                    if (innerKeyValuePair.Value.Equals(value))
+                    {
+                        lookupValues = new KeyValuePair<TKey, TKeySecondary>(outerKeyValuePair.Key, innerKeyValuePair.Key);
+                        return true;
+                    }
+                }
+            }
+            lookupValues = default(KeyValuePair<TKey, TKeySecondary>);
+            return false;
+        }
+
+        /// <summary>
         /// Add a value with the given keys
         /// </summary>
         /// <param name="key">The primary key</param>

@@ -24,9 +24,9 @@ namespace WeatherSystem.IntensityComponents
             renderer.material.SetFloat(materialValueName, initialValue);
         }
 
-        protected override void UpdateWithIntensity(float intensity)
+        protected override void UpdateWithIntensity(IntensityData intensityData)
         {
-            renderer.material.SetFloat(materialValueName, intensity);
+            renderer.material.SetFloat(materialValueName, intensityData.intensity);
         }
     }
 }

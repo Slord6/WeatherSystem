@@ -30,18 +30,18 @@ namespace WeatherSystem
             }
         }
 
-        public override float Intensity
+        public override IntensityData IntensityData
         {
             get
             {
-                return base.Intensity;
+                return base.IntensityData;
             }
             set
             {
-                base.Intensity = value;
+                base.IntensityData = value;
                 if (customProperties != null)
                 {
-                    customProperties.ApplyIntensity(Intensity, curves);
+                    customProperties.ApplyIntensity(IntensityData, curves);
                 }
                 else
                 {

@@ -17,25 +17,25 @@ namespace WeatherSystem
         /// Iterates over all held WeatherPropertys and updates them with the new intensity value
         /// Then notifies all reliant weather properties to update
         /// </summary>
-        /// <param name="intensity">The new intensity values</param>
+        /// <param name="intensityData">The new intensity values</param>
         /// <param name="intensityCurves">A set of intensity curves to calculate a new iontensity value for each
         /// WeatherProperty. Must match the total number of Non-Reliant and Reliant WeatherProperties</param>
-        public virtual void ApplyIntensity(float intensity, AnimationCurve[] intensityCurves = null)
+        public virtual void ApplyIntensity(IntensityData intensityData, AnimationCurve[] intensityCurves = null)
         {
             if (intensityCurves == null)
             {
                 //apply changes to non reliant
                 foreach (WeatherProperty weatherProperty in weatherProperties)
                 {
-                    weatherProperty.ApplyIntensity(intensity);
+                    weatherProperty.ApplyIntensity(intensityData);
                 }
 
                 //then notify reliant to update
                 foreach (ReliantWeatherProperty reliantWeatherProperty in reliantWeatherProperties)
                 {
-                    //The passed value doesn't matter here as RealiantWeatherPropertys calculate their own values
-                    //from the parents they rely on... hence the name
-                    reliantWeatherProperty.ApplyIntensity(0.0f);
+                    //The passed intensity value doesn't matter here as RealiantWeatherPropertys calculate their own values
+                    //from the parents they rely on... hence the name, but we'll pass through the other data in case that's needed
+                    reliantWeatherProperty.ApplyIntensity(intensityData);
                 }
             }
             else
@@ -47,13 +47,15 @@ namespace WeatherSystem
 
                 for (int i = 0; i < weatherProperties.Length; i++)
                 {
-                    weatherProperties[i].ApplyIntensity(intensityCurves[i].Evaluate(intensity));
+                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[i].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity);
+                    weatherProperties[i].ApplyIntensity(evaluatedIntensity);
                 }
 
                 for (int i = 0; i < reliantWeatherProperties.Length; i++)
                 {
                     int index = i + weatherProperties.Length;
-                    reliantWeatherProperties[i].ApplyIntensity(intensityCurves[index].Evaluate(intensity));
+                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[index].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity);
+                    reliantWeatherProperties[i].ApplyIntensity(evaluatedIntensity);
                 }
             }
         }

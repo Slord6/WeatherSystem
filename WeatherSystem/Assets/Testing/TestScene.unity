@@ -881,10 +881,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  weatherProperties: {fileID: 0}
-  manualEventsSequence: []
   proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
     type: 2}
+  weatherProperties: {fileID: 0}
+  manualEventsSequence: []
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.1
   proceduralScale: 1
@@ -1059,6 +1059,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
+    type: 2}
   weatherProperties: {fileID: 11400000, guid: eb0712701a576af488b5b66f8223ee92, type: 2}
   manualEventsSequence:
   - weatherEvent: {fileID: 11400000, guid: c619b2d2d93825e41ba96afb1b807778, type: 2}
@@ -1124,8 +1126,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  proceduralWeatherLookup: {fileID: 11400000, guid: e2064ca2548a4f645bac7ec59c1ccd45,
-    type: 2}
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.001
   proceduralScale: 0.1
@@ -2276,6 +2276,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
+  tempHumidityPairs:
+  - temperature: 2
+    humidity: 0
+  activateOnMatch: 0
   particleSystem: {fileID: 94275610}
   manageChildParticleSystems: 0
   precipitationRateCurve:
@@ -2321,6 +2325,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
+  tempHumidityPairs:
+  - temperature: 2
+    humidity: 0
+  activateOnMatch: 1
   particleSystem: {fileID: 1794266935}
   manageChildParticleSystems: 0
   precipitationRateCurve:

@@ -17,18 +17,18 @@ namespace WeatherSystem
         /// then applies that intensity value to all IntensityComponentCurves
         /// </summary>
         /// <param name="intensity">An ignored intensity value, as it is calculated from the parents. Can be anything</param>
-        public override void ApplyIntensity(float intensity)
+        public override void ApplyIntensity(IntensityData intensityData)
         {
-            float totalIntensity = 0.0f;
+            IntensityData totalIntensity = new IntensityData(0.0f, intensityData.temperature, intensityData.humidity);
             for (int i = 0; i < intensityParentWeightings.Length; i++)
             {
-                totalIntensity += intensityParentWeightings[i].weightingCurve.Evaluate(intensity);
+                totalIntensity.intensity += intensityParentWeightings[i].weightingCurve.Evaluate(intensityData.intensity);
             }
 
-            totalIntensity /= intensityParentWeightings.Length;
+            totalIntensity.intensity /= intensityParentWeightings.Length;
 
             //Then apply calculated data
-            base.ApplyIntensity(intensity);
+            base.ApplyIntensity(totalIntensity);
         }
 
         protected Color AverageColor(Color firstColor, Color secondColor)

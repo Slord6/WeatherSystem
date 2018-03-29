@@ -10,30 +10,26 @@ namespace WeatherSystem.IntensityComponents
         [SerializeField]
         private WeatherProperty propertyParent;
 
-        private float intensity;
+        private IntensityData intensityData;
 
-        public float Intensity
+        public IntensityData IntensityData
         {
             get
             {
-                return intensity;
+                return intensityData;
             }
-
             set
             {
-                if (value < 0)
+                intensityData = value;
+                if (value.intensity < 0)
                 {
-                    intensity = 0;
+                    intensityData.intensity = 0;
                 }
-                else if (value > 1)
+                else if (value.intensity > 1)
                 {
-                    intensity = 1;
+                    intensityData.intensity = 1;
                 }
-                else
-                {
-                    intensity = value;
-                }
-                UpdateWithIntensity(intensity);
+                UpdateWithIntensity(intensityData);
             }
         }
 
@@ -45,8 +41,16 @@ namespace WeatherSystem.IntensityComponents
             }
         }
 
+        public float Intensity
+        {
+            get
+            {
+                return intensityData.intensity;
+            }
+        }
+
         //updated by changes to Intensity
-        protected virtual void UpdateWithIntensity(float intensity)
+        protected virtual void UpdateWithIntensity(IntensityData intensityData)
         {
             Debug.LogWarning("This behaviour has no Intensity update code - " + this.name);
         }

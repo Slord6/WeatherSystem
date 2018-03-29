@@ -7,10 +7,14 @@ namespace WeatherSystem.Internal
 {
     interface IIntensityDriven
     {
+        IntensityData IntensityData
+        {
+            set;
+        }
+
         float Intensity
         {
             get;
-            set;
         }
     }
 }
