@@ -72,7 +72,15 @@ namespace WeatherSystem
         private float trackedX = 0.0f;
         private float trackedY = 0.0f;
         #endregion
-        
+
+        #region Delegates
+        public delegate void OnWeatherEventDelegate(WeatherChangeEventArgs args);
+
+        public OnWeatherEventDelegate OnWeatherChangeBeginEvent;
+        public OnWeatherEventDelegate OnWeatherChangeCompleteEvent;
+        public OnWeatherEventDelegate OnWeatherChangeStep;
+        #endregion
+
         private Coroutine transitionCoroutine;
         private WeatherTypes weatherLastFrame = WeatherTypes.None;
         private WeatherSet activeWeatherSet;
@@ -97,6 +105,14 @@ namespace WeatherSystem
             weatherLastFrame = GetWeather();
             WeatherEvent currentWeatherEvent = WeatherEventFromWeatherType(weatherLastFrame);
             currentWeatherEvent.OnActivate();
+
+            OnWeatherChangeBeginEvent += SomeMethod;
+            OnWeatherChangeCompleteEvent += SomeMethod;
+        }
+
+        private void SomeMethod(WeatherChangeEventArgs e)
+        {
+            Debug.Log(e);
         }
 
         /// <summary>
@@ -293,6 +309,11 @@ namespace WeatherSystem
         {
             float startIntensity = currentWeatherEvent.Intensity;
 
+            if(OnWeatherChangeBeginEvent != null)
+            {
+                OnWeatherChangeBeginEvent(new WeatherChangeEventArgs(nextWeatherEvent, currentWeatherEvent));
+            }
+
             nextWeatherEvent.OnActivate();
             float evaluationValue = 0.0f;
             while(evaluationValue <= transitionTime)
@@ -306,6 +327,11 @@ namespace WeatherSystem
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate, currentWeatherEvent.Intensity);
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate + 0.001f, nextWeatherEvent.Intensity);
 
+                if(OnWeatherChangeStep != null)
+                {
+                    OnWeatherChangeStep(new WeatherChangeEventArgs(nextWeatherEvent, currentWeatherEvent));
+                }
+
                 yield return null;
                 evaluationValue += Time.deltaTime;
             }
@@ -314,7 +340,11 @@ namespace WeatherSystem
             //re-call OnActivate for the new weather in case there were crossover WeatherProperties down the chain
             nextWeatherEvent.OnActivate();
 
-            Debug.Log("New weather: " + nextWeatherEvent.WeatherType.ToString());
+            if (OnWeatherChangeCompleteEvent != null)
+            {
+                OnWeatherChangeCompleteEvent(new WeatherChangeEventArgs(nextWeatherEvent, currentWeatherEvent));
+            }
+
             transitionCoroutine = null;
         }
 	}
