@@ -54,13 +54,47 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.998582
+      value: 0.5011902
+      inSlope: 1.7013367
+      outSlope: 1.7013367
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.49639893
+      inSlope: 0.24999201
+      outSlope: 0.24999201
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
       inSlope: 1
-      outSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -0.99811035
+      outSlope: -0.99811035
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99853516
+      value: 0.49639893
+      inSlope: -0.0669761
+      outSlope: -0.0669761
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -78,40 +112,6 @@ MonoBehaviour:
       value: 1
       inSlope: 1
       outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  - serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  - serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -35,23 +35,6 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0.4
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  - serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
       value: 0
       inSlope: 0
       outSlope: 1
@@ -70,14 +53,14 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 1
+      inSlope: 0.52522504
+      outSlope: 0.52522504
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
+      time: 0.998582
+      value: 0.5011902
+      inSlope: 1.7013367
+      outSlope: 1.7013367
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -86,15 +69,15 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
+      value: 0.49760658
+      inSlope: 1.2006646
+      outSlope: 1.2006646
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 0
+      inSlope: 0.08091413
+      outSlope: 0.08091413
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -102,22 +85,33 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: -0.007461548
-      value: 0.033569336
-      inSlope: 2
-      outSlope: 2
+      time: 0
+      value: 1
+      inSlope: -0.99811035
+      outSlope: -0.99811035
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.42044422
-      value: 0.69171536
-      inSlope: -5.6848884
-      outSlope: -5.6848884
+      time: 0.99853516
+      value: 0.49639893
+      inSlope: -0.0669761
+      outSlope: -0.0669761
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -0.99811035
+      outSlope: -0.99811035
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: -1.0808809
+      outSlope: -1.0808809
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
