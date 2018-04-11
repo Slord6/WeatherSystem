@@ -342,8 +342,18 @@ namespace WeatherSystem
             {
                 float stepVal = transitionCurve.Evaluate(evaluationValue/transitionTime);
 
-                currentWeatherEvent.IntensityData = new IntensityData(Mathf.Lerp(startIntensity, 0.0f, stepVal), temperatureLastFrame, humidityLastFrame);
-                nextWeatherEvent.IntensityData = new IntensityData(1.0f - currentWeatherEvent.Intensity, temperatureLastFrame, humidityLastFrame);
+                float newIntensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
+
+                if (evaluationValue < 0.5f) //first half of transition
+                {
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame);
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
+                }
+                else //second half of transition
+                {
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame);
+                }
 
                 //Debugging
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate, currentWeatherEvent.Intensity);

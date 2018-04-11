@@ -13,9 +13,11 @@ namespace WeatherSystem.IntensityComponents
         protected override void UpdateWithIntensity(IntensityData intensityData)
         {
             light.SkyboxExtinctionCoef = intensityData.intensity;
-            light.ScatteringCoef = Scale(0.02f, 0.08f, intensityData.intensity);
-            //light.ExtinctionCoef = Scale(0.003f, 0.05f, intensity); //this looks good for storms, not so much for rain
-            light.ExtinctionCoef = Scale(0.003f, 0.01f, intensityData.intensity);
+
+            //light.ScatteringCoef = Scale(0.02f, 0.08f, intensityData.intensity);
+
+            //light.ExtinctionCoef = Scale(0.003f, 0.05f, intensityData.intensity); //this looks good for storms, not so much for rain
+            //light.ExtinctionCoef = Scale(0.003f, 0.01f, intensityData.intensity);
         }
 
         public override void OnActivate()
