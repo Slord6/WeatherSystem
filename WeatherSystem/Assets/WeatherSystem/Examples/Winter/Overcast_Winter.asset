@@ -40,10 +40,10 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 1.0000689
-      value: 0.10310609
-      inSlope: 0.34876963
-      outSlope: 0.34876963
+      time: 1.0000468
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
