@@ -12,13 +12,12 @@ namespace WeatherSystem.IntensityComponents
         [SerializeField]
         private float fogLength = 40.0f;
 
-        private FogInfo fogInfo;
+        private FogInfo initialFogInfo;
 
-        public override void OnActivate()
+        protected override void ActivationBehaviour()
         {
-            fogInfo = new FogInfo();
+            initialFogInfo = new FogInfo();
             RenderSettings.fog = true;
-            base.OnActivate();
         }
 
         protected override void UpdateWithIntensity(IntensityData intensityData)
@@ -29,10 +28,10 @@ namespace WeatherSystem.IntensityComponents
             RenderSettings.fogEndDistance = RenderSettings.fogStartDistance + fogLength;
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
-            fogInfo.AssignValuesToRenderSettings();
-            base.OnDeactivate();
+            //This will be called multiple times and could be optimised
+            initialFogInfo.AssignValuesToRenderSettings();
         }
 
         /// <summary>

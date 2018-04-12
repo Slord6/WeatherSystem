@@ -20,12 +20,12 @@ namespace WeatherSystem.IntensityComponents
             //light.ExtinctionCoef = Scale(0.003f, 0.01f, intensityData.intensity);
         }
 
-        public override void OnActivate()
+        protected override void ActivationBehaviour()
         {
             light.enabled = true;
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
             light.enabled = false;
         }

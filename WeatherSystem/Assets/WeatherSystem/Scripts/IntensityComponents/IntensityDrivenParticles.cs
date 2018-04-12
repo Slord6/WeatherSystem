@@ -23,29 +23,25 @@ namespace WeatherSystem.IntensityComponents
             mainModule = particleSystem.main;
         }
 
-        public override void OnActivate()
+        protected override void ActivationBehaviour()
         {
             emmisionModule.enabled = true;
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
+            base.FadeDelegate(t);
             emmisionModule.enabled = false;
         }
 
-        protected override void UpdateWithIntensity(IntensityData intensityData)
+        protected override void ConditionalUpdateWithIntensity(IntensityData intensityData)
         {
-            if (ShouldUpdate(new TemperatureHumidityPair(intensityData.temperature, intensityData.humidity)))
-            {
-                float value = precipitationRateCurve.Evaluate(intensityData.intensity);
+            float value = precipitationRateCurve.Evaluate(intensityData.intensity);
 
-                emmisionModule.rateOverTime = value * 100;
-                mainModule.gravityModifier = intensityData.intensity * 10.0f;
-            }
-            else
-            {
-                OnDeactivate();
-            }
+           // emmisionModule.enabled = true;
+
+            emmisionModule.rateOverTime = value * 100;
+            mainModule.gravityModifier = intensityData.intensity * 10.0f;
         }
     }
 }

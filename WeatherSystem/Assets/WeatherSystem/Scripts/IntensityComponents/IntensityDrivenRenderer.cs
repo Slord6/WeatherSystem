@@ -14,12 +14,12 @@ namespace WeatherSystem.IntensityComponents
 
         private float initialValue;
 
-        public override void OnActivate()
+        protected override void ActivationBehaviour()
         {
             initialValue = renderer.material.GetFloat(materialValueName);
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
             renderer.material.SetFloat(materialValueName, initialValue);
         }

@@ -367,7 +367,7 @@ namespace WeatherSystem
                 yield return null;
                 evaluationValue += Time.deltaTime;
             }
-            currentWeatherEvent.OnDeactivate();
+            //currentWeatherEvent.OnDeactivate();
 
             //re-call OnActivate for the new weather in case there were crossover WeatherProperties down the chain
             nextWeatherEvent.OnActivate();

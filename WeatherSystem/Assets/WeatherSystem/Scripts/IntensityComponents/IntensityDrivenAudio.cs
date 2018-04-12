@@ -7,14 +7,15 @@ namespace WeatherSystem.IntensityComponents
     {
         [SerializeField]
         private AudioSource controlledAudioSource;
-
-        public override void OnActivate()
+        
+        protected override void ActivationBehaviour()
         {
+            base.ActivationBehaviour();
             controlledAudioSource.enabled = true;
             controlledAudioSource.Play();
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
             controlledAudioSource.Stop();
             controlledAudioSource.enabled = false;

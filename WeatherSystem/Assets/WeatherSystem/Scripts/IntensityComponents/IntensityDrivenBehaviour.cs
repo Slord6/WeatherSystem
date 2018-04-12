@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using WeatherSystem.Internal;
 using System;
+using System.Reflection;
 
 namespace WeatherSystem.IntensityComponents
 {
@@ -9,8 +10,13 @@ namespace WeatherSystem.IntensityComponents
     {
         [SerializeField]
         private WeatherProperty propertyParent;
+        [SerializeField]
+        private float fadeOutTime = 10.0f;
 
         private IntensityData intensityData;
+
+        protected Coroutine fadeOutCoroutine;
+        private bool active = false;
 
         public IntensityData IntensityData
         {
@@ -55,14 +61,55 @@ namespace WeatherSystem.IntensityComponents
             Debug.LogWarning("This behaviour has no Intensity update code - " + this.name);
         }
 
-        public virtual void OnActivate()
+        public void OnActivate()
         {
-            Debug.LogWarning("This behaviour has no OnActivate update code - " + this.name);
+            if (active)
+            {
+                return;
+            }
+
+            if(fadeOutCoroutine != null)
+            {
+                StopCoroutine(fadeOutCoroutine);
+                fadeOutCoroutine = null;
+            }
+            active = true;
+            ActivationBehaviour();
         }
 
-        public virtual void OnDeactivate()
+        public void OnDeactivate()
         {
-            Debug.LogWarning("This behaviour has no OnDeactivate update code - " + this.name);
+            if (!active)
+            {
+                return;
+            }
+            active = false;
+            fadeOutCoroutine = StartCoroutine(FadeOut(fadeOutTime, FadeDelegate));
+        }
+
+        protected IEnumerator FadeOut(float time, Action<float> fadeCallback)
+        {
+            float cumulativeTime = 0.0f;
+
+            while(cumulativeTime < time)
+            {
+                fadeCallback.Invoke(cumulativeTime / time);
+                yield return null;
+                cumulativeTime += Time.deltaTime;
+            }
+            fadeCallback.Invoke(1.0f);
+        }
+
+        protected virtual void ActivationBehaviour()
+        {
+        }
+
+        /// <summary>
+        /// A delegate that is called multiple times in order to gradually deactivate the behaviour
+        /// </summary>
+        /// <param name="t">An interpolation value between 0 and 1 where 0 is fully active and 1 is inactive</param>
+        protected virtual void FadeDelegate(float t)
+        {
         }
     }
 }

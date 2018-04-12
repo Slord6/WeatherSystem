@@ -11,14 +11,17 @@ namespace WeatherSystem.IntensityComponents
         [Range(0.0f, 1.0f)]
         private float instanceChance;
 
-        public override void OnActivate()
+        protected override void ActivationBehaviour()
         {
             audioSource.enabled = true;
         }
 
-        public override void OnDeactivate()
+        protected override void FadeDelegate(float t)
         {
-            audioSource.enabled = false;
+            if (audioSource.volume != 0.0f)
+            {
+                audioSource.volume = 1.0f - t;
+            }
         }
 
         protected override void UpdateWithIntensity(IntensityData intensityData)
