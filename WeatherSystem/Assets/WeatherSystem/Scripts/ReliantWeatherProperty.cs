@@ -25,7 +25,7 @@ namespace WeatherSystem
                 totalIntensity.intensity += intensityParentWeightings[i].weightingCurve.Evaluate(intensityData.intensity);
             }
 
-            totalIntensity.intensity /= intensityParentWeightings.Length;
+            totalIntensity.intensity /= (float)intensityParentWeightings.Length;
 
             //Then apply calculated data
             base.ApplyIntensity(totalIntensity);

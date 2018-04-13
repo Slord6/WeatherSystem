@@ -1606,6 +1606,10 @@ Prefab:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1267353327534594, guid: 4ac2e8f7a85bf9843b99b146d1a9c59d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ac2e8f7a85bf9843b99b146d1a9c59d, type: 2}
   m_IsPrefabParent: 0
@@ -1655,7 +1659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1350612859
 Transform:
   m_ObjectHideFlags: 0
@@ -1683,6 +1687,7 @@ MonoBehaviour:
   propertyParent: {fileID: 11400000, guid: 01164b365c15cc94381da2de690ee85b, type: 2}
   fadeOutTime: 10
   light: {fileID: 148854637}
+  maxMovement: 0.015
 --- !u!1 &1355255569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,6 +1854,10 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.gravityModifier.scalar
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613185328202760, guid: f501e7018998d3a4baa28ec3ce50ff4b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f501e7018998d3a4baa28ec3ce50ff4b, type: 2}

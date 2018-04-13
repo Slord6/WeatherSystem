@@ -86,15 +86,15 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
-      inSlope: -0.679764
-      outSlope: -0.679764
+      value: 0.49850464
+      inSlope: 0.51806873
+      outSlope: 0.51806873
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0.49639893
-      inSlope: -0.6558562
-      outSlope: -0.6558562
+      value: 1
+      inSlope: 0.52686656
+      outSlope: 0.52686656
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

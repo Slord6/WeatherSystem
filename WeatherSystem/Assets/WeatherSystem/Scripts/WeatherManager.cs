@@ -282,8 +282,15 @@ namespace WeatherSystem
         {
             if (transitionCoroutine == null)
             {
-                timeSinceSequenceChange += Time.deltaTime;
-                if (timeSinceSequenceChange > manualEventsSequence[eventSequenceIndex].time)
+                //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
+                float timeCompleteProportion = timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].time;
+                float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(timeCompleteProportion);
+                manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
+                //Debugging
+                intensityPlot.AddKey(Time.timeSinceLevelLoad, newIntensity);
+
+
+                if (timeSinceSequenceChange > manualEventsSequence[eventSequenceIndex].time) //Time to transition
                 {
                     int nextSequenceIndex = eventSequenceIndex + 1;
                     if (nextSequenceIndex >= manualEventsSequence.Count)
@@ -300,11 +307,7 @@ namespace WeatherSystem
                 }
                 else
                 {
-                    //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
-                    float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(((float)timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].transitionTime));
-                    manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame); 
-                    //Debugging
-                    intensityPlot.AddKey(Time.timeSinceLevelLoad, manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData.intensity);
+                    timeSinceSequenceChange += Time.deltaTime;
                 }
             }
         }
