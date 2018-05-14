@@ -19,7 +19,7 @@ namespace WeatherSystem
         /// <param name="intensity">An ignored intensity value, as it is calculated from the parents. Can be anything</param>
         public override void ApplyIntensity(IntensityData intensityData)
         {
-            IntensityData totalIntensity = new IntensityData(0.0f, intensityData.temperature, intensityData.humidity);
+            IntensityData totalIntensity = new IntensityData(0.0f, intensityData.temperature, intensityData.humidity, intensityData.wind);
             for (int i = 0; i < intensityParentWeightings.Length; i++)
             {
                 totalIntensity.intensity += intensityParentWeightings[i].weightingCurve.Evaluate(intensityData.intensity);

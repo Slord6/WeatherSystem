@@ -18,6 +18,7 @@ namespace WeatherSystem
         public WeatherMode procedural = WeatherMode.Procedural; //name needs changing to be more descriptive, editor may need updating also
 
         [SerializeField]
+        [Tooltip("The position at which data is generated for weather updates (usually the player)")]
         private Transform weatherQueryLocation;
         
         [SerializeField]
@@ -175,17 +176,13 @@ namespace WeatherSystem
             TemperatureVariables temperature = GetTemperatureValueAt(weatherQueryLocation).ToTemperatureValue();
             HumidityVariables humidity = GetHumidityValueAt(weatherQueryLocation).ToHumidityValue();
 
+            Vector2 wind = GetWindValueAt(weatherQueryLocation);
 
             if (updateTrackedValues)
             {
                 temperatureLastFrame = temperature;
                 humidityLastFrame = humidity;
-
-
-                float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
-
-                Vector2 wind = Generators.GetDirectionalNoise(weatherQueryLocation.x, weatherQueryLocation.y, worldSize.x, worldSize.y, proceduralScale, time * timeScale);
-                wind *= windStrength;
+                
                 trackedX += wind.x;
                 trackedY += wind.y;
             }
@@ -200,6 +197,37 @@ namespace WeatherSystem
                 Debug.LogError("Procedural lookup table does not contain info for " + humidity + " and " + temperature);
                 return WeatherTypes.None;
             }
+        }
+
+        /// <summary>
+        /// Get the wind direction at this instance for the given position
+        /// </summary>
+        /// <param name="position">The position to query the wind at</param>
+        /// <returns>the wind at this specific time at the given position</returns>
+        public Vector2 GetWindValueAt(Vector2 position)
+        {
+            Vector2 wind = new Vector2();
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    float timeScale = 0.1f; //To stop weather changes happening too quickly, we scale the time
+                    wind = Generators.GetDirectionalNoise(position.x, position.y, worldSize.x, worldSize.y, proceduralScale, timeExtension.CheckedTimeSinceLevelLoadNoUpdate * timeScale);
+                    wind *= windStrength;
+                    break;
+                case WeatherMode.Manual:
+                    wind = Vector2.zero; //Fixed value for now, could be more intelligent
+                    break;
+            }
+            return wind;
+        }
+
+        /// <summary>
+        /// Get the tracked, cumulative wind for the duration
+        /// </summary>
+        /// <returns>The cumulative wind at the weatherQueryLocation</returns>
+        public Vector2 GetCumulativeWind()
+        {
+            return new Vector2(trackedX, trackedY);
         }
 
         public float GetTemperatureValueAt(Vector2 position)
@@ -272,7 +300,8 @@ namespace WeatherSystem
                 else //No weather changed, update intensity
                 {
                     float intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
-                    currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame);
+                    Vector2 wind = GetWindValueAt(weatherQueryLocation.position);
+                    currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame, wind);
                     intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.IntensityData.intensity));
                 }
             }
@@ -285,7 +314,7 @@ namespace WeatherSystem
                 //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
                 float timeCompleteProportion = timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].time;
                 float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(timeCompleteProportion);
-                manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
+                manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, Vector2.zero); //wind fixed
                 //Debugging
                 intensityPlot.AddKey(Time.timeSinceLevelLoad, newIntensity);
 
@@ -333,6 +362,7 @@ namespace WeatherSystem
         private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime)
         {
             float startIntensity = currentWeatherEvent.IntensityData.intensity;
+            Vector2 startWind = currentWeatherEvent.IntensityData.wind;
 
             if(OnWeatherChangeBeginEvent != null)
             {
@@ -346,16 +376,17 @@ namespace WeatherSystem
                 float stepVal = transitionCurve.Evaluate(evaluationValue/transitionTime);
 
                 float newIntensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
+                Vector2 newWind = Vector2.Lerp(startWind, Vector2.zero, stepVal);
 
                 if (evaluationValue < 0.5f) //first half of transition
                 {
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame);
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
                 }
                 else //second half of transition
                 {
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame);
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame);
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
                 }
 
                 //Debugging

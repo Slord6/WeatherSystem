@@ -9,12 +9,14 @@ namespace WeatherSystem
         public float intensity;
         public TemperatureVariables temperature;
         public HumidityVariables humidity;
+        public Vector2 wind;
 
-        public IntensityData(float intensity, TemperatureVariables temperature, HumidityVariables humidity)
+        public IntensityData(float intensity, TemperatureVariables temperature, HumidityVariables humidity, Vector2 wind)
         {
             this.intensity = intensity;
             this.temperature = temperature;
             this.humidity = humidity;
+            this.wind = wind;
         }
     }
 }
