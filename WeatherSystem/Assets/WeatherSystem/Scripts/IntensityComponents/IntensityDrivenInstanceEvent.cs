@@ -1,13 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using WeatherSystem.Internal;
+using WeatherSystem.InstanceEvents;
 
 namespace WeatherSystem.IntensityComponents
 {
-	public class IntensityDrivenInstanceAudio : IntensityDrivenAudio
+	public class IntensityDrivenInstanceEvent : IntensityDrivenBehaviour
     {
         [SerializeField]
         [Range(0.0f, 0.1f)] //between 0% and 10%
         private float instanceChance = 0.0005f; //default of 1/500th %
+        [SerializeField]
+        private InstanceEvent instanceEvent;
 
         protected override void ActivationBehaviour()
         {
@@ -16,10 +20,7 @@ namespace WeatherSystem.IntensityComponents
 
         protected override void FadeDelegate(float t)
         {
-            if (controlledAudioSource.volume != 0.0f)
-            {
-                controlledAudioSource.volume = 1.0f - t;
-            }
+            instanceEvent.FadeDelegate(t);
         }
 
         protected override void UpdateWithIntensity(IntensityData intensityData)
@@ -29,11 +30,7 @@ namespace WeatherSystem.IntensityComponents
 
             if (randomNumber < instanceChance)
             {
-                if (!controlledAudioSource.isPlaying) //only play if not already playing sound
-                {
-                    controlledAudioSource.volume = intensityData.intensity;
-                    controlledAudioSource.Play();
-                }
+                instanceEvent.Activate(intensityData);
             }
         }
     }

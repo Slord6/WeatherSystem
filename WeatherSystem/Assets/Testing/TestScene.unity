@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9332383}
   - component: {fileID: 9332384}
+  - component: {fileID: 9332385}
   m_Layer: 0
   m_Name: Thunder Controller
   m_TagString: Untagged
@@ -153,10 +154,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c20bc803c8ed064bbd3a76a061d548f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlledAudioSource: {fileID: 900650554}
+--- !u!114 &9332385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 9332382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f71b6e4453aa041b7f1d9399e339ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
   fadeOutTime: 10
-  controlledAudioSource: {fileID: 900650554}
-  instanceChance: 0
+  instanceChance: 0.0005
+  instanceEvent: {fileID: 9332384}
 --- !u!198 &94275610 stripped
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198329664442704152, guid: 4ac2e8f7a85bf9843b99b146d1a9c59d,
