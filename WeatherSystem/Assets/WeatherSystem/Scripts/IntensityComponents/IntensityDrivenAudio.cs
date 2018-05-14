@@ -6,7 +6,7 @@ namespace WeatherSystem.IntensityComponents
 	public class IntensityDrivenAudio : IntensityDrivenBehaviour
     {
         [SerializeField]
-        private AudioSource controlledAudioSource;
+        protected AudioSource controlledAudioSource;
         
         protected override void ActivationBehaviour()
         {

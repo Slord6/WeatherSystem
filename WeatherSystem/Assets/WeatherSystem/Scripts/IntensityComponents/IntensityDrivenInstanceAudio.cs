@@ -6,32 +6,34 @@ namespace WeatherSystem.IntensityComponents
 	public class IntensityDrivenInstanceAudio : IntensityDrivenAudio
     {
         [SerializeField]
-        private AudioSource audioSource;
-        [SerializeField]
-        [Range(0.0f, 1.0f)]
-        private float instanceChance;
+        [Range(0.0f, 0.1f)] //between 0% and 10%
+        private float instanceChance = 0.0005f; //default of 1/500th %
 
         protected override void ActivationBehaviour()
         {
-            audioSource.enabled = true;
+            base.ActivationBehaviour();
         }
 
         protected override void FadeDelegate(float t)
         {
-            if (audioSource.volume != 0.0f)
+            if (controlledAudioSource.volume != 0.0f)
             {
-                audioSource.volume = 1.0f - t;
+                controlledAudioSource.volume = 1.0f - t;
             }
         }
 
         protected override void UpdateWithIntensity(IntensityData intensityData)
         {
-            float randomNumber = Random.Range(0.0f, instanceChance);
+            //as intensity increases, chance of occurence also increases
+            float randomNumber = Random.Range(0.0f, 1.0f - intensityData.intensity);
 
             if (randomNumber < instanceChance)
             {
-                audioSource.volume = intensityData.intensity;
-                audioSource.Play();
+                if (!controlledAudioSource.isPlaying) //only play if not already playing sound
+                {
+                    controlledAudioSource.volume = intensityData.intensity;
+                    controlledAudioSource.Play();
+                }
             }
         }
     }
