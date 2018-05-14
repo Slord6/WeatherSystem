@@ -258,6 +258,20 @@ namespace WeatherSystem
             }
         }
 
+        public float GetIntensityValueAt(Vector2 position)
+        {
+            switch (procedural)
+            {
+                case WeatherMode.Procedural:
+                    return Generators.GetIntensityNoise(position.x + trackedX, position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                case WeatherMode.Manual:
+                    float timeCompleteProportion = timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].time;
+                    float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(timeCompleteProportion);
+                    return newIntensity;
+            }
+            throw new System.Exception("No handler for intensity in " + procedural + " mode");
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -299,7 +313,7 @@ namespace WeatherSystem
                 }
                 else //No weather changed, update intensity
                 {
-                    float intensity = Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
+                    float intensity = GetIntensityValueAt(weatherQueryLocation.position); //Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
                     Vector2 wind = GetWindValueAt(weatherQueryLocation.position);
                     currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame, wind);
                     intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.IntensityData.intensity));
@@ -311,9 +325,7 @@ namespace WeatherSystem
         {
             if (transitionCoroutine == null)
             {
-                //Set the intensity, moving along the curve proportionally with the time we spend in this weather event
-                float timeCompleteProportion = timeSinceSequenceChange / manualEventsSequence[eventSequenceIndex].time;
-                float newIntensity = manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(timeCompleteProportion);
+                float newIntensity = GetIntensityValueAt(Vector2.zero); //position irrelevant in manual mode
                 manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, Vector2.zero); //wind fixed
                 //Debugging
                 intensityPlot.AddKey(Time.timeSinceLevelLoad, newIntensity);

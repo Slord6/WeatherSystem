@@ -38,7 +38,6 @@ namespace WeatherSystem.IntensityComponents
             lastKnownWind = new Vector3(trackedWind.x, 0, trackedWind.y);
 
             windZone.transform.LookAt(windZone.transform.position + lastKnownWind);
-            Debug.Log(lastKnownWind);
                 
             windZone.windMain = intensityData.intensity * 2f * fixedMultiplier;
             windZone.windTurbulence = intensityData.intensity * fixedMultiplier;
