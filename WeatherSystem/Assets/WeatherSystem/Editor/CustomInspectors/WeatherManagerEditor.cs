@@ -47,6 +47,7 @@ namespace WeatherSystem.Inspectors
             objectFields = null;
             
             //First, draw all the non-specific fields
+            //Do we need this? The returns in the .ForEach loop above must mean we don't?
             List<string> nonDefaultFields = new List<string>();
             nonDefaultFields.AddRange(manualFields.Select(field =>
             {
