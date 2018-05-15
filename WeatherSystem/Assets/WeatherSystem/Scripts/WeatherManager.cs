@@ -53,6 +53,11 @@ namespace WeatherSystem
 
         [SerializeField]
         [Procedural]
+        [Tooltip("If not zero, used as the procedural seed, otherwise one is generated")]
+        private float seed = 0;
+
+        [SerializeField]
+        [Procedural]
         private Vector2 worldSize = new Vector2(1000.0f,1000.0f);
 
         [SerializeField]
@@ -93,6 +98,20 @@ namespace WeatherSystem
 
         [SerializeField]
         private AnimationCurve intensityPlot = new AnimationCurve();
+
+        void Awake()
+        {
+            if(seed == 0)
+            {
+                Generators.Seed = Random.value * 1000000.0f + Random.value;
+                seed = Generators.Seed;
+            }
+            else
+            {
+                Generators.Seed = seed;
+            }
+            Debug.Log("Seed = " + Generators.Seed);
+        }
 
         // Use this for initialization
         protected virtual void Start ()
