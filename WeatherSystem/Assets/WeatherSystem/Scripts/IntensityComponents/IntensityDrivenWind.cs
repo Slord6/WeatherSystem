@@ -15,6 +15,8 @@ namespace WeatherSystem.IntensityComponents
         private float fixedMultiplier = 2.0f;
         [SerializeField]
         private WeatherManager weatherManager;
+        [SerializeField]
+        private float maxDegreesPerSeconds = 1f;
 
         private Vector3 lastKnownWind;
 
@@ -37,7 +39,10 @@ namespace WeatherSystem.IntensityComponents
             Vector2 trackedWind = weatherManager.GetCumulativeWind();
             lastKnownWind = new Vector3(trackedWind.x, 0, trackedWind.y);
 
+            Quaternion startRotation = windZone.transform.rotation;
             windZone.transform.LookAt(windZone.transform.position + lastKnownWind);
+            float step = maxDegreesPerSeconds * Time.deltaTime;
+            windZone.transform.rotation = Quaternion.RotateTowards(startRotation, windZone.transform.rotation, step);
                 
             windZone.windMain = intensityData.intensity * 2f * fixedMultiplier;
             windZone.windTurbulence = intensityData.intensity * fixedMultiplier;
