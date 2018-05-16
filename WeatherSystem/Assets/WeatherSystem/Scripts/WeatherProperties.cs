@@ -60,7 +60,28 @@ namespace WeatherSystem
             }
         }
 
-        //late apply intensity
+        /// <summary>
+        /// Calculates the intensity that would be passed to a weather property (NOT a reliant weather property) and returns the result
+        /// </summary>
+        /// <param name="evaluationProperty">The property to evaluate the intensity against</param>
+        /// <param name="intensityCurves">The curves used for evaluation</param>
+        /// <param name="intensity">The intensity data to evaluate</param>
+        /// <returns>The evaluated intensity if the weather property is in this set, null otherwise</returns>
+        public virtual float? EvaluateIntensityData(WeatherProperty evaluationProperty, AnimationCurve[] intensityCurves, float intensity)
+        {
+            if(evaluationProperty.GetType() == typeof(ReliantWeatherProperty))
+            {
+                throw new ArgumentException("Cannot evaluate ReliantWeatherProperty intensity data");
+            }
+            for (int i = 0; i < weatherProperties.Length; i++)
+            {
+                if(weatherProperties[i] == evaluationProperty)
+                {
+                    return intensityCurves[i].Evaluate(intensity);
+                }
+            }
+            return null;
+        }
 
         public void OnActivate()
         {

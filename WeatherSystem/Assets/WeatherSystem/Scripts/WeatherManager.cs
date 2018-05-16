@@ -291,6 +291,11 @@ namespace WeatherSystem
             throw new System.Exception("No handler for intensity in " + procedural + " mode");
         }
 
+        public WeatherEvent GetWeatherEventAt(Vector2 queryLocation)
+        {
+            return WeatherEventFromWeatherType(GetWeather(queryLocation));
+        }
+
         // Update is called once per frame
         void Update()
         {

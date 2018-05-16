@@ -30,6 +30,22 @@ namespace WeatherSystem
             }
         }
 
+        public WeatherProperties Properties
+        {
+            get
+            {
+                return customProperties;
+            }
+        }
+
+        public AnimationCurve[] WeatherPropertiesIntensityCurves
+        {
+            get
+            {
+                return curves;
+            }
+        }
+
         public override IntensityData IntensityData
         {
             get
