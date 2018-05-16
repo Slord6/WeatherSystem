@@ -332,7 +332,7 @@ namespace WeatherSystem
                         Debug.LogError("No weather event set for " + currentWeather);
                         return;
                     }
-                    transitionCoroutine = StartCoroutine(Transition(currentWeatherEvent, newWeatherEvent, weatherEventTransitionTime));
+                    transitionCoroutine = StartCoroutine(Transition(currentWeatherEvent, newWeatherEvent, weatherEventTransitionTime, currentWeatherEvent.Intensity));
                     weatherLastFrame = currentWeather;
                 }
                 else //No weather changed, update intensity
@@ -367,7 +367,9 @@ namespace WeatherSystem
                     eventSequenceIndex = nextSequenceIndex;
                     GetWeatherManual(); //Calling this updates the lastFrame values for temp and humidity based off the current weather event
 
-                    transitionCoroutine = StartCoroutine(Transition(manualEventsSequence[oldIndex].weatherEvent, manualEventsSequence[eventSequenceIndex].weatherEvent, manualEventsSequence[oldIndex].transitionTime));
+                    transitionCoroutine = StartCoroutine(Transition(manualEventsSequence[oldIndex].weatherEvent, manualEventsSequence[eventSequenceIndex].weatherEvent,
+                        manualEventsSequence[oldIndex].transitionTime, manualEventsSequence[eventSequenceIndex].intensityOverTime.Evaluate(0f))); //target for new weather event is intensity at timestep 0
+
                     timeSinceSequenceChange = 0.0f;
                 }
                 else
@@ -395,9 +397,11 @@ namespace WeatherSystem
         /// <param name="currentWeatherEvent">The current weather event to transition from</param>
         /// <param name="nextWeatherEvent">The weather event to transition to</param>
         /// <param name="time">The time the transition should take</param>
-        private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime)
+        private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime, float nextWeatherTarget)
         {
-            float startIntensity = currentWeatherEvent.IntensityData.intensity;
+            float currentWeatherStartIntensity = currentWeatherEvent.IntensityData.intensity;
+            float currentWeatherTarget = 0f;
+            float nextWeatherStartIntensity = 0f;
             Vector2 startWind = currentWeatherEvent.IntensityData.wind;
 
             if(OnWeatherChangeBeginEvent != null)
@@ -411,18 +415,19 @@ namespace WeatherSystem
             {
                 float stepVal = transitionCurve.Evaluate(evaluationValue/transitionTime);
 
-                float newIntensity = Mathf.Lerp(startIntensity, 0.0f, stepVal);
+                float currentWeatherNewIntensity = Mathf.Lerp(currentWeatherStartIntensity, currentWeatherTarget, stepVal);
+                float nextWeatherNewIntensity = Mathf.Lerp(nextWeatherStartIntensity, nextWeatherTarget, stepVal);
                 Vector2 newWind = Vector2.Lerp(startWind, Vector2.zero, stepVal);
 
-                if (evaluationValue < 0.5f) //first half of transition
+                if (stepVal < 0.5f) //first half of transition
                 {
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - currentWeatherNewIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
+                    currentWeatherEvent.IntensityData = new IntensityData(currentWeatherNewIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
                 }
                 else //second half of transition
                 {
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
+                    currentWeatherEvent.IntensityData = new IntensityData(currentWeatherNewIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - currentWeatherNewIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
                 }
 
                 //Debugging

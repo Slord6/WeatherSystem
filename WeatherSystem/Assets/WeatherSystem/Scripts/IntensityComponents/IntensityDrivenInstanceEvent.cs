@@ -5,7 +5,7 @@ using WeatherSystem.InstanceEvents;
 
 namespace WeatherSystem.IntensityComponents
 {
-	public class IntensityDrivenInstanceEvent : IntensityDrivenBehaviour
+	public class IntensityDrivenInstanceEvent : WeatherTypeSpecificIntensityDrivenBehaviour
     {
         [SerializeField]
         [Range(0.0f, 0.1f)] //between 0% and 10%

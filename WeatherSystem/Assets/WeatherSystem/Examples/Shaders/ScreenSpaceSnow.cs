@@ -20,7 +20,7 @@ public class ScreenSpaceSnow : MonoBehaviour
     [SerializeField]
     [Range(0, 1)]
     private float topThreshold = 1f;
-    
+
     private Material _material;
     private new Camera camera;
     [SerializeField]
@@ -62,6 +62,14 @@ public class ScreenSpaceSnow : MonoBehaviour
             {
                 bottomThreshold = 0;
             }
+        }
+    }
+
+    public bool IsEnabled
+    {
+        get
+        {
+            return isEnabled;
         }
     }
 

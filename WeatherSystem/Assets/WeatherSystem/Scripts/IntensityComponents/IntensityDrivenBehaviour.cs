@@ -67,14 +67,14 @@ namespace WeatherSystem.IntensityComponents
             {
                 return;
             }
-
-            if(fadeOutCoroutine != null)
+            if (fadeOutCoroutine != null)
             {
                 StopCoroutine(fadeOutCoroutine);
                 fadeOutCoroutine = null;
             }
-            active = true;
             ActivationBehaviour();
+            
+            active = true;
         }
 
         public void OnDeactivate()
@@ -83,15 +83,17 @@ namespace WeatherSystem.IntensityComponents
             {
                 return;
             }
+
             active = false;
             fadeOutCoroutine = StartCoroutine(FadeOut(fadeOutTime, FadeDelegate));
         }
 
         protected IEnumerator FadeOut(float time, Action<float> fadeCallback)
         {
+            yield return null;
             float cumulativeTime = 0.0f;
 
-            while(cumulativeTime < time)
+            while (cumulativeTime < time)
             {
                 fadeCallback.Invoke(cumulativeTime / time);
                 yield return null;

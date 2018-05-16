@@ -7,6 +7,11 @@ namespace WeatherSystem.IntensityComponents
 {
     public class ConditionalIntensityDrivenComponent : IntensityDrivenBehaviour
     {
+        protected override void ActivationBehaviour()
+        {
+            base.ActivationBehaviour();
+        }
+
         /// <summary>
         /// Checks to see if this component should update
         /// </summary>
@@ -25,6 +30,7 @@ namespace WeatherSystem.IntensityComponents
         {
             if (ShouldUpdate(intensityData))
             {
+                OnActivate(); //will only apply if not already active
                 ConditionalUpdateWithIntensity(intensityData);
             }
             else
@@ -39,6 +45,7 @@ namespace WeatherSystem.IntensityComponents
         /// <param name="intensityData">The intensity data</param>
         protected virtual void ConditionalUpdateWithIntensity(IntensityData intensityData)
         {
+            Debug.Log("Conditional update ran for " + this.name);
             base.UpdateWithIntensity(intensityData);
         }
     }

@@ -9,22 +9,25 @@ namespace WeatherSystem.IntensityComponents
         [SerializeField]
         private ScreenSpaceSnow snowController;
         [SerializeField]
-        [Range(0.0f,1.0f)]
+        [Range(0.0f, 1.0f)]
         private float snowCumulationMultiplier = 0.1f;
         private float trackedIntensity = 0.0f;
 
         private int updateCount = 0;
         private float timeActivated = 0.0f;
-        
+
         private float initialFadeBottom;
         private float initialFadeTop;
 
         protected override void ActivationBehaviour()
         {
-            trackedIntensity = 0.0f;
-            updateCount = 1;
-            timeActivated = Time.timeSinceLevelLoad;
-            snowController.Enable();
+            if (!snowController.IsEnabled)
+            {
+                trackedIntensity = 0.0f;
+                updateCount = 1;
+                timeActivated = Time.timeSinceLevelLoad;
+                snowController.Enable();
+            }
         }
 
         protected override void FadeDelegate(float t)
@@ -33,6 +36,7 @@ namespace WeatherSystem.IntensityComponents
             {
                 initialFadeBottom = snowController.BottomThreshold;
                 initialFadeTop = snowController.TopThreshold;
+                return;
             }
 
             if (snowController.BottomThreshold != 1.0f)
@@ -44,7 +48,7 @@ namespace WeatherSystem.IntensityComponents
                 snowController.TopThreshold = 1.0f - (t + initialFadeTop);
             }
 
-            if(t == 1.0f)
+            if (t == 1.0f)
             {
                 snowController.Disable();
             }

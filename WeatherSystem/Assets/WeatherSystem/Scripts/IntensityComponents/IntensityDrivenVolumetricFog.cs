@@ -54,7 +54,14 @@ namespace WeatherSystem.IntensityComponents
 
         protected override void FadeDelegate(float t)
         {
-            light.enabled = false;
+            light.SkyboxExtinctionCoef = Mathf.MoveTowards(light.SkyboxExtinctionCoef, 0f, maxMovementSkyboxExtinction);
+            light.ScatteringCoef = Mathf.MoveTowards(light.ScatteringCoef, 0f, maxMovemenScatteringCoef);
+            light.ExtinctionCoef = Mathf.MoveTowards(light.ExtinctionCoef, 0f, maxMovementExtinctionCoef);
+            light.NoiseIntensity = Mathf.MoveTowards(light.NoiseIntensity, 0f, maxMovementNoiseIntensity);
+            if (t == 1f)
+            {
+                light.enabled = false;
+            }
         }
 
         private float Scale(float min, float max, float scale)
