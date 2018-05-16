@@ -1046,7 +1046,7 @@ MonoBehaviour:
     type: 2}
   weatherProperties: {fileID: 0}
   manualEventsSequence: []
-  seed: 123.45
+  seed: 451534.6
   worldSize: {x: 1000, y: 1000}
   windStrength: 0.1
   proceduralScale: 1
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 625853952}
   - component: {fileID: 625853953}
   m_Layer: 0
-  m_Name: Thunder Audio
+  m_Name: Thunder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1119,7 +1119,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1018b83a56a79ca40a59665b7256abf8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1648,6 +1648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910373481}
   - component: {fileID: 910373482}
+  - component: {fileID: 910373483}
   m_Layer: 0
   m_Name: WindController
   m_TagString: Untagged
@@ -1684,6 +1685,20 @@ MonoBehaviour:
   windZone: {fileID: 1861574410}
   fixedMultiplier: 2
   weatherManager: {fileID: 568159565}
+--- !u!114 &910373483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910373480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ce5f84a99030646bc8936775b386d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propertyParent: {fileID: 11400000, guid: 319da1dfe7043d54ab77bafa046912d4, type: 2}
+  fadeOutTime: 10
+  controlledAudioSource: {fileID: 2129434481}
 --- !u!1 &948398145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,10 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
   fadeOutTime: 30
-  tempHumidityPairs:
-  - temperature: 2
-    humidity: 0
-  activateOnMatch: 1
+  validWeatherTypes: 03000000
   snowController: {fileID: 536641483}
   snowCumulationMultiplier: 0.01
 --- !u!1001 &1194741403
@@ -2728,6 +2740,115 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1749481848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1749481849}
+  - component: {fileID: 1749481850}
+  m_Layer: 0
+  m_Name: Rain Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1749481849
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1749481848}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106363424}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1749481850
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1749481848}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e852a4127de21f4438129bfb65fb44ac, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1778821303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3112,6 +3233,7 @@ GameObject:
   - component: {fileID: 2009952726}
   - component: {fileID: 2009952725}
   - component: {fileID: 2009952727}
+  - component: {fileID: 2009952728}
   m_Layer: 0
   m_Name: PrecipitationController
   m_TagString: Untagged
@@ -3132,10 +3254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
   fadeOutTime: 10
-  tempHumidityPairs:
-  - temperature: 2
-    humidity: 0
-  activateOnMatch: 0
+  validWeatherTypes: 02000000
   particleSystem: {fileID: 94275610}
   manageChildParticleSystems: 0
   precipitationRateCurve:
@@ -3182,10 +3301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
   fadeOutTime: 10
-  tempHumidityPairs:
-  - temperature: 2
-    humidity: 0
-  activateOnMatch: 1
+  validWeatherTypes: 03000000
   particleSystem: {fileID: 1794266935}
   manageChildParticleSystems: 0
   precipitationRateCurve:
@@ -3206,6 +3322,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2009952728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2009952724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ce5f84a99030646bc8936775b386d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propertyParent: {fileID: 11400000, guid: 7e703491674f0014497a5677a34ea971, type: 2}
+  fadeOutTime: 10
+  controlledAudioSource: {fileID: 1749481850}
 --- !u!1 &2106363423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,6 +3364,117 @@ Transform:
   - {fileID: 653087783}
   - {fileID: 1360916207}
   - {fileID: 625853952}
+  - {fileID: 2129434480}
+  - {fileID: 1749481849}
   m_Father: {fileID: 1191345115}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2129434479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2129434480}
+  - component: {fileID: 2129434481}
+  m_Layer: 0
+  m_Name: Wind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2129434480
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129434479}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2106363424}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2129434481
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129434479}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 089e45498266a614a96ee9c30666f70d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

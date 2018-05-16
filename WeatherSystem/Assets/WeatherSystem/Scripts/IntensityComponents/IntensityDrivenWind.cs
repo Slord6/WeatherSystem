@@ -48,7 +48,7 @@ namespace WeatherSystem.IntensityComponents
 
         protected override void FadeDelegate(float t)
         {
-            UpdateWithIntensity(new IntensityData(1f - t, TemperatureVariables.TemperatureMid, HumidityVariables.HumidityMid, lastKnownWind));
+            UpdateWithIntensity(new IntensityData(1f - t, TemperatureVariables.TemperatureMid, HumidityVariables.HumidityMid, lastKnownWind, WeatherTypes.None));
             if(t == 1.0f)
             {
                 windZone.gameObject.SetActive(false);

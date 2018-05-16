@@ -47,14 +47,14 @@ namespace WeatherSystem
 
                 for (int i = 0; i < weatherProperties.Length; i++)
                 {
-                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[i].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity, intensityData.wind);
+                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[i].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity, intensityData.wind, intensityData.weatherType);
                     weatherProperties[i].ApplyIntensity(evaluatedIntensity);
                 }
 
                 for (int i = 0; i < reliantWeatherProperties.Length; i++)
                 {
                     int index = i + weatherProperties.Length;
-                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[index].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity, intensityData.wind);
+                    IntensityData evaluatedIntensity = new IntensityData(intensityCurves[index].Evaluate(intensityData.intensity), intensityData.temperature, intensityData.humidity, intensityData.wind, intensityData.weatherType);
                     reliantWeatherProperties[i].ApplyIntensity(evaluatedIntensity);
                 }
             }

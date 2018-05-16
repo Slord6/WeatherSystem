@@ -334,7 +334,7 @@ namespace WeatherSystem
                 {
                     float intensity = GetIntensityValueAt(weatherQueryLocation.position); //Generators.GetIntensityNoise(weatherQueryLocation.position.x + trackedX, weatherQueryLocation.position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
                     Vector2 wind = GetWindValueAt(weatherQueryLocation.position);
-                    currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame, wind);
+                    currentWeatherEvent.IntensityData = new IntensityData(intensity, temperatureLastFrame, humidityLastFrame, wind, currentWeather);
                     intensityPlot.AddKey(new Keyframe(timeExtension.CheckedTimeSinceLevelLoad, currentWeatherEvent.IntensityData.intensity));
                 }
             }
@@ -345,7 +345,7 @@ namespace WeatherSystem
             if (transitionCoroutine == null)
             {
                 float newIntensity = GetIntensityValueAt(Vector2.zero); //position irrelevant in manual mode
-                manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, Vector2.zero); //wind fixed
+                manualEventsSequence[eventSequenceIndex].weatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, Vector2.zero, manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType); //wind fixed
                 //Debugging
                 intensityPlot.AddKey(Time.timeSinceLevelLoad, newIntensity);
 
@@ -411,13 +411,13 @@ namespace WeatherSystem
 
                 if (evaluationValue < 0.5f) //first half of transition
                 {
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
                 }
                 else //second half of transition
                 {
-                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
-                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind);
+                    currentWeatherEvent.IntensityData = new IntensityData(newIntensity, temperatureLastFrame, humidityLastFrame, newWind, currentWeatherEvent.WeatherType);
+                    nextWeatherEvent.IntensityData = new IntensityData(1.0f - newIntensity, temperatureLastFrame, humidityLastFrame, newWind, nextWeatherEvent.WeatherType);
                 }
 
                 //Debugging

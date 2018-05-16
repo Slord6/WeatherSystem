@@ -4,7 +4,7 @@ using System;
 
 namespace WeatherSystem.IntensityComponents
 {
-	public class IntensityDrivenParticles : TempHumidityIntensityDrivenComponent
+	public class IntensityDrivenParticles : WeatherTypeSpecificIntensityDrivenBehaviour
 	{
         [SerializeField]
         private new ParticleSystem particleSystem;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WeatherSystem.IntensityComponents
 {
-    public class IntensityDrivenSnowShader : TempHumidityIntensityDrivenComponent
+    public class IntensityDrivenSnowShader : WeatherTypeSpecificIntensityDrivenBehaviour
     {
         [SerializeField]
         private ScreenSpaceSnow snowController;
