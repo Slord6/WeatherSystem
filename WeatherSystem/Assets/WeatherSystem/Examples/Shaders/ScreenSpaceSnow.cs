@@ -1,9 +1,12 @@
 //heavily based on code from:
-//http://blog.theknightsofunity.com/make-it-snow-fast-screen-space-snow-shader/
+//http://blog.theknightsofunity.com/make-it-snow-fast-screen-space-snow-shader/ - "Feel free to download the shader [...] and use it in your project!"
 
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Shader controller for blanket snow based on the normals of meshes in the scene
+/// </summary>
 [ExecuteInEditMode]
 public class ScreenSpaceSnow : MonoBehaviour
 {

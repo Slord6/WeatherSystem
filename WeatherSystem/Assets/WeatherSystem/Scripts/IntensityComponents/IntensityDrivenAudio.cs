@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// An audio controller that uses intensity to set audio source values
+    /// </summary>
 	public class IntensityDrivenAudio : IntensityDrivenBehaviour
     {
         [SerializeField]

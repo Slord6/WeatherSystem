@@ -51,7 +51,7 @@ namespace WeatherSystem.Internal
         }
 
         /// <summary>
-        /// Create a new key,key,value instance with given values
+        /// Create a new key,key,value instance with given value
         /// </summary>
         /// <param name="primaryKey">The primary key of this instance</param>
         /// <param name="secondaryKey">The secondary key of this instance</param>
@@ -64,7 +64,7 @@ namespace WeatherSystem.Internal
         }
 
         /// <summary>
-        /// The string representation of this KeyKeyValueValue pair
+        /// The string representation of this KeyKeyValue pair
         /// </summary>
         /// <returns>The string representation</returns>
         public override string ToString()

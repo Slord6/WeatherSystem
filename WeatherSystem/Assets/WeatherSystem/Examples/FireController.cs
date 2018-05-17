@@ -5,6 +5,9 @@ using WeatherSystem;
 using WeatherSystem.IntensityComponents;
 using System.Linq;
 
+/// <summary>
+/// Monobehaviour-derived component which controlls a fire's particle effect based on the weather at the fire's position
+/// </summary>
 public class FireController : IntensityDrivenBehaviour
 {
     [SerializeField]
@@ -22,7 +25,10 @@ public class FireController : IntensityDrivenBehaviour
 
     protected void Update()
     {
+        //Convert position to 2D for the queries to the weather system
         Vector2 position = new Vector2(transform.position.x, transform.position.z);
+
+        //Get the current weather event and its associated properties
         WeatherEvent weatherEvent = weatherManager.GetWeatherEventAt(position);
         WeatherProperties properties = weatherEvent.Properties;
 
@@ -33,8 +39,10 @@ public class FireController : IntensityDrivenBehaviour
             return;
         }
 
+        //This is driven by precipitation, so we want the inverse intensity of that
         float fireIntensity = 1f - (float)intensity;
 
+        //Change look of fire based on the intensity
         ParticleSystem.EmissionModule emission = fireParticleEffect.emission;
         emission.rateOverTime = fireIntensity * 10;
 

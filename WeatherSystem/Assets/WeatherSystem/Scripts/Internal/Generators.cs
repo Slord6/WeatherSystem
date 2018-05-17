@@ -106,6 +106,16 @@ namespace WeatherSystem.Internal
             return direction.normalized;
         }
 
+        /// <summary>
+        /// Get a normalised intensity driven by perlin noise
+        /// </summary>
+        /// <param name="x">The x position</param>
+        /// <param name="y">The y position</param>
+        /// <param name="maxX">The maximum possible value of x</param>
+        /// <param name="maxY">The maximum possible value of y</param>
+        /// <param name="scale">A scale for the output, applied before the offset value</param>
+        /// <param name="offset">An offset value</param>
+        /// <returns>The resultant intensity value between 0 and 1</returns>
         public static float GetIntensityNoise(float x, float y, float maxX, float maxY, float scale, float offset)
         {
             return GetPerlinNoise(x, y, maxX, maxY, scale, offset + intensityOffset);

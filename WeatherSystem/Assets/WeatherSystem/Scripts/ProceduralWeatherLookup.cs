@@ -6,14 +6,14 @@ namespace WeatherSystem
 {
     /// <summary>
     /// A 'table' of lookup values describing the weather given a humidty and temperature variable
-    /// Acts as a wrapper to a double dictionary of type WeatherVariables,WeatherVariables,WeatherTypes
+    /// Acts as a wrapper to a DoubleDictionary of type WeatherVariables,WeatherVariables,WeatherTypes
     /// This lets us have a nice inspector and a scriptable object, so we can have multiple setups stored as assets
     /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Procedural Weather Lookup")]
     [SerializeField]
 	public class ProceduralWeatherLookup : ScriptableObject, ISerializationCallbackReceiver
     {
-        //Not serialized
+        //Not serialized as unity's serializer doesn't get along with generic collections
         [System.NonSerialized]
         private DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes> internalLookup = 
             new DoubleDictionary<HumidityVariables, TemperatureVariables, WeatherTypes>()
@@ -40,14 +40,17 @@ namespace WeatherSystem
             }
         }
 
-        //Serialized
+        //Serialized - this is used to allow unity's serialization system to handle the object
+        //See below seialization callback methods
         [SerializeField]
         private List<HumidityVariables> primaryKeys = new List<HumidityVariables>();
         [SerializeField]
         private List<TemperatureVariables> secondaryKeys = new List<TemperatureVariables>();
         [SerializeField]
         private List<WeatherTypes> values = new List<WeatherTypes>();
-        
+
+        //Serialization reference - https://blogs.unity3d.com/2014/06/24/serialization-in-unity/
+
         /// <summary>
         /// Callback called prior to serialization to allow the object to transfer the internal dictionary values to lists as Unity's serialization doesn't support generic (double)dictionary objects
         /// </summary>

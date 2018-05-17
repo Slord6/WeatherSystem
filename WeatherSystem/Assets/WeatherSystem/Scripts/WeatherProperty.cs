@@ -5,12 +5,21 @@ using WeatherSystem.Internal;
 
 namespace WeatherSystem
 {
+    /// <summary>
+    /// A single property of the weather, driven by a WeatherProperties object
+    /// Drives the in-scene IntensityDrivenBehaviours with intesnity data
+    /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Properties/Weather Property")]
     public class WeatherProperty : ScriptableObject, IActivatable
 	{
         [Header("Assign a weather property to an IntensityDrivenBehaviour to have the behaviour updated at runtime")]
         private List<IntensityDrivenBehaviour> drivenComponents;
         
+        /// <summary>
+        /// The activation behaviour of the object
+        /// Finds all intensity driven behaviours in the scene if it doesn't have them already and stores them in drivenComponents
+        /// Finally, activates each found IntensityDrivenBehaviour
+        /// </summary>
         public virtual void OnActivate()
         {
             if (drivenComponents == null || drivenComponents.Contains(null) || drivenComponents.Count == 0)
@@ -30,6 +39,9 @@ namespace WeatherSystem
             drivenComponents.ForEach(element => element.OnActivate());
         }
 
+        /// <summary>
+        /// Deactivates all stored drivenComponents and then clears drivenComponents
+        /// </summary>
         public virtual void OnDeactivate()
         {
             drivenComponents.ForEach(element => element.OnDeactivate());

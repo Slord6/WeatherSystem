@@ -4,6 +4,9 @@ using WeatherSystem.Internal;
 
 namespace WeatherSystem
 {
+    /// <summary>
+    /// A managed collection of WeatherProperty objects
+    /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Properties/Weather Properties")]
     public class WeatherProperties : ScriptableObject, IActivatable
 	{
@@ -83,6 +86,9 @@ namespace WeatherSystem
             return null;
         }
 
+        /// <summary>
+        /// Activates all held WeatherPropertys and ReliantWeatherProperties
+        /// </summary>
         public void OnActivate()
         {
             foreach (WeatherProperty property in weatherProperties)
@@ -95,12 +101,17 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Deactivates all held WeatherPropertys
+        /// </summary>
         public void OnDeactivate()
         {
             foreach (WeatherProperty property in weatherProperties)
             {
                 property.OnDeactivate();
             }
+
+            //TODO: Check if reliants should also be disabled?
         }
     }
 }

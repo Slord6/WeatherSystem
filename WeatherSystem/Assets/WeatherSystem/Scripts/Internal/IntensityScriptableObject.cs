@@ -4,6 +4,9 @@ using WeatherSystem.Internal;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// A scriptable object that has associated intensity data
+    /// </summary>
 	public class IntensityScriptableObject : ScriptableObject, IIntensityDriven
 	{
         [SerializeField]
@@ -11,7 +14,7 @@ namespace WeatherSystem.Internal
         private IntensityData intensityData;
 
         /// <summary>
-        /// The intensity of this weather event at this instance
+        /// The intensity data of this weather event at this instance
         /// </summary>
         public virtual IntensityData IntensityData
         {
@@ -33,6 +36,9 @@ namespace WeatherSystem.Internal
             }
         }
 
+        /// <summary>
+        /// Shortcut for IntensityData.intensity
+        /// </summary>
         public float Intensity
         {
             get

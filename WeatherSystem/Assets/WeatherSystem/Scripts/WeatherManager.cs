@@ -164,11 +164,17 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Get the current weather type for manual mode
+        /// </summary>
+        /// <param name="updateTrackedValues">Should any tracked values be updated (ie. the humidtyLastFrame and temperatureLastFrame values?</param>
+        /// <returns>The current weather type</returns>
         private WeatherTypes GetWeatherManual(bool updateTrackedValues = true)
         {
             if (updateTrackedValues)
             {
                 KeyValuePair<HumidityVariables, TemperatureVariables> humityTemperaturePair;
+                //Using the type of the current weather event, reverse lookup what temperature and humidity would cause that weather in procedural mode
                 proceduralWeatherLookup.LookupTable.TryReverseLookup(manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType, out humityTemperaturePair);
                 if (humityTemperaturePair.Equals(default(KeyValuePair<HumidityVariables, TemperatureVariables>)))
                 {
@@ -249,6 +255,11 @@ namespace WeatherSystem
             return new Vector2(trackedX, trackedY);
         }
 
+        /// <summary>
+        /// Gets the current raw temperature value at the given position at the present time
+        /// </summary>
+        /// <param name="position">The position to get the temperature for</param>
+        /// <returns>A normalised temperature value</returns>
         public float GetTemperatureValueAt(Vector2 position)
         {
             switch (procedural)
@@ -263,6 +274,11 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Gets the current raw humidity value at the given position at the present time
+        /// </summary>
+        /// <param name="position">The position to get the humidity for</param>
+        /// <returns>A normalised humidity value</returns>
         public float GetHumidityValueAt(Vector2 position)
         {
             switch (procedural)
@@ -277,6 +293,11 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Gets the current raw intensity value at the given position at the present time
+        /// </summary>
+        /// <param name="position">The position to get the intensoty for</param>
+        /// <returns>A normalised intensity value</returns>
         public float GetIntensityValueAt(Vector2 position)
         {
             switch (procedural)
@@ -291,6 +312,12 @@ namespace WeatherSystem
             throw new System.Exception("No handler for intensity in " + procedural + " mode");
         }
 
+        /// <summary>
+        /// Get the WeatherEvent at a given location
+        /// Shortcut for WeatherEventFromWeatherType(GetWeather(queryLocation))
+        /// </summary>
+        /// <param name="queryLocation">The location for which to get the WeatherEvent</param>
+        /// <returns>The weather event</returns>
         public WeatherEvent GetWeatherEventAt(Vector2 queryLocation)
         {
             return WeatherEventFromWeatherType(GetWeather(queryLocation));
@@ -313,6 +340,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Do an update frame for Procedural mode
+        /// </summary>
         private void ProceduralUpdate()
         {
             if (transitionCoroutine == null) //when no weather transition occuring
@@ -345,6 +375,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Do an update frame for Manual mode
+        /// </summary>
         private void ManualUpdate()
         {
             if (transitionCoroutine == null)
@@ -379,6 +412,11 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Lookup a weather event from its weathertype
+        /// </summary>
+        /// <param name="weather">The weathertype to look up</param>
+        /// <returns>The found WeatherEvent or null if none was found</returns>
         private WeatherEvent WeatherEventFromWeatherType(WeatherTypes weather)
         {
             for (int i = 0; i < activeWeatherSet.WeatherEvents.Length; i++)
@@ -396,6 +434,8 @@ namespace WeatherSystem
         /// </summary>
         /// <param name="currentWeatherEvent">The current weather event to transition from</param>
         /// <param name="nextWeatherEvent">The weather event to transition to</param>
+        /// <param name="transitionTime">The amount of time the transition should take</param>
+        /// <param name="nextWeatherTarget">The intensity of the nextWeatherEvent at the completion of the transition</param>
         /// <param name="time">The time the transition should take</param>
         private IEnumerator Transition(WeatherEvent currentWeatherEvent, WeatherEvent nextWeatherEvent, float transitionTime, float nextWeatherTarget)
         {
@@ -417,7 +457,7 @@ namespace WeatherSystem
 
                 float currentWeatherNewIntensity = Mathf.Lerp(currentWeatherStartIntensity, currentWeatherTarget, stepVal);
                 float nextWeatherNewIntensity = Mathf.Lerp(nextWeatherStartIntensity, nextWeatherTarget, stepVal);
-                Vector2 newWind = Vector2.Lerp(startWind, Vector2.zero, stepVal);
+                Vector2 newWind = Vector2.Lerp(startWind, Vector2.one * 0.01f, stepVal); // no wind at all looks unnatural, so we aim for just a very low value
 
                 if (stepVal < 0.5f) //first half of transition
                 {
@@ -434,6 +474,7 @@ namespace WeatherSystem
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate, currentWeatherEvent.Intensity);
                 intensityPlot.AddKey(timeExtension.CheckedTimeSinceLevelLoadNoUpdate + 0.001f, nextWeatherEvent.Intensity);
 
+                //Fire off the WeatherChangedStep delegate
                 if(OnWeatherChangeStep != null)
                 {
                     OnWeatherChangeStep(new WeatherChangeEventArgs(nextWeatherEvent, currentWeatherEvent));
@@ -442,11 +483,11 @@ namespace WeatherSystem
                 yield return null;
                 evaluationValue += Time.deltaTime;
             }
-            //currentWeatherEvent.OnDeactivate();
 
             //re-call OnActivate for the new weather in case there were crossover WeatherProperties down the chain
             nextWeatherEvent.OnActivate();
 
+            //Fire off the OnWeatherChangeCompleteEvent delegate
             if (OnWeatherChangeCompleteEvent != null)
             {
                 OnWeatherChangeCompleteEvent(new WeatherChangeEventArgs(nextWeatherEvent, currentWeatherEvent));

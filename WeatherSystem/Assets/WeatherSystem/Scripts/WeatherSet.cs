@@ -17,6 +17,9 @@ namespace WeatherSystem
         [SerializeField]
         private WeatherEvent[] weatherEvents;
         
+        /// <summary>
+        /// The weather events in this WeatherSet
+        /// </summary>
         public WeatherEvent[] WeatherEvents
         {
             get
@@ -25,6 +28,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// The weather events in this WeatherSet arranged into a list
+        /// </summary>
         public List<WeatherEvent> WeatherEventsList
         {
             get

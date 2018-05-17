@@ -22,6 +22,9 @@ namespace WeatherSystem
         [HideInInspector]
         private AnimationCurve[] curves;
 
+        /// <summary>
+        /// The type of wether this WeatherEvent deals with
+        /// </summary>
         public WeatherTypes WeatherType
         {
             get
@@ -30,6 +33,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// The weather properties managed by this weather event
+        /// </summary>
         public WeatherProperties Properties
         {
             get
@@ -38,6 +44,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// The intensity modification curves for weather properties
+        /// </summary>
         public AnimationCurve[] WeatherPropertiesIntensityCurves
         {
             get
@@ -46,6 +55,10 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// The current Intensity data for this WeatherEvent
+        /// Setting this value will ApplyIntensity() on the WeatherProperties object managed by this WeatherEvent
+        /// </summary>
         public override IntensityData IntensityData
         {
             get
@@ -66,11 +79,19 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// Activation behaviour
+        /// Activates the WeatherProperties object
+        /// </summary>
         public void OnActivate()
         {
             customProperties.OnActivate();
         }
 
+        /// <summary>
+        /// Deactivation behaviour
+        /// Deactivates the WeatherProperties object
+        /// </summary>
         public void OnDeactivate()
         {
             customProperties.OnDeactivate();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace WeatherSystem
 {
+    /// <summary>
+    /// Data container for a collection containing one TemperatureVariables and one HumidityVariables enum
+    /// </summary>
     [System.Serializable]
     public class TemperatureHumidityPair
     {
@@ -12,6 +15,9 @@ namespace WeatherSystem
         [SerializeField]
         private HumidityVariables humidity;
 
+        /// <summary>
+        /// The stored temperature value
+        /// </summary>
         public TemperatureVariables Temperature
         {
             get
@@ -20,6 +26,9 @@ namespace WeatherSystem
             }
         }
 
+        /// <summary>
+        /// The stored humidity value
+        /// </summary>
         public HumidityVariables Humidity
         {
             get
@@ -39,6 +48,11 @@ namespace WeatherSystem
             return temperature.GetHashCode() + humidity.GetHashCode();
         }
 
+        /// <summary>
+        /// Confirm the given obect is equivalent to this object
+        /// </summary>
+        /// <param name="obj">The object to compare</param>
+        /// <returns>True if equivalent, false otherwise</returns>
         public override bool Equals(object obj)
         {
             if(obj.GetType() == typeof(TemperatureHumidityPair))

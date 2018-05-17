@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// A monobehaviour which uses intensity data to drive its behaviour
+    /// </summary>
     public abstract class IntensityDrivenBehaviour : MonoBehaviour, IIntensityDriven, IActivatable
     {
         [SerializeField]
@@ -18,6 +21,10 @@ namespace WeatherSystem.IntensityComponents
         protected Coroutine fadeOutCoroutine;
         private bool active = false;
 
+        /// <summary>
+        /// The most recent intensity data assigned to this object.
+        /// If set, will result in the behaviour being driven by the IntensityData to be updated
+        /// </summary>
         public IntensityData IntensityData
         {
             get
@@ -39,6 +46,10 @@ namespace WeatherSystem.IntensityComponents
             }
         }
 
+        /// <summary>
+        /// The weather property whose intesnity is used by this object.
+        /// This is used for the WeatherProperty to find the object when necessary.
+        /// </summary>
         public WeatherProperty PropertyParent
         {
             get
@@ -47,6 +58,9 @@ namespace WeatherSystem.IntensityComponents
             }
         }
 
+        /// <summary>
+        /// Shortcut for IntensityData.intensity
+        /// </summary>
         public float Intensity
         {
             get
@@ -55,12 +69,15 @@ namespace WeatherSystem.IntensityComponents
             }
         }
 
-        //updated by changes to Intensity
+        //updated by changes to IntensityData
         protected virtual void UpdateWithIntensity(IntensityData intensityData)
         {
             Debug.LogWarning("This behaviour has no Intensity update code - " + this.name);
         }
 
+        /// <summary>
+        /// Activates the object, if not already active. If a FadeOut coroutine is running, it is stopped. ActivationBehaviour is called.
+        /// </summary>
         public void OnActivate()
         {
             if (active)
@@ -77,6 +94,9 @@ namespace WeatherSystem.IntensityComponents
             active = true;
         }
 
+        /// <summary>
+        /// Deactivates the object, if not already inactive. Starts the FadeOut corouinte with FadeDelegate as the callback argument
+        /// </summary>
         public void OnDeactivate()
         {
             if (!active)
@@ -88,6 +108,12 @@ namespace WeatherSystem.IntensityComponents
             fadeOutCoroutine = StartCoroutine(FadeOut(fadeOutTime, FadeDelegate));
         }
 
+        /// <summary>
+        /// Gradually reduces the object to the off state
+        /// </summary>
+        /// <param name="time">The time that should be taken to reach fully 'off'</param>
+        /// <param name="fadeCallback">The callback which to pass the extent which to turn off, over multiple frames, which will do the actual deactivation</param>
+        /// <returns>IEnumerator for coroutine</returns>
         protected IEnumerator FadeOut(float time, Action<float> fadeCallback)
         {
             yield return null;
@@ -109,7 +135,7 @@ namespace WeatherSystem.IntensityComponents
         /// <summary>
         /// A delegate that is called multiple times in order to gradually deactivate the behaviour
         /// </summary>
-        /// <param name="t">An interpolation value between 0 and 1 where 0 is fully active and 1 is inactive</param>
+        /// <param name="t">An interpolation value between 0 and 1, where 0 is fully active and 1 is inactive</param>
         protected virtual void FadeDelegate(float t)
         {
         }

@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using System.Linq;
 namespace WeatherSystem
 {
+    /// <summary>
+    /// A simple text-based visualisation of the weather produced by WeatherManager
+    /// </summary>
     public class WeatherDisplay : MonoBehaviour
     {
         [SerializeField]
@@ -35,8 +38,10 @@ namespace WeatherSystem
                 weatherManager = FindObjectOfType<WeatherManager>();
             }
         }
-
-
+        
+        /// <summary>
+        /// Updates the text display
+        /// </summary>
         private void Update()
         {
             Vector2 windInstance, windTracked;
@@ -67,6 +72,12 @@ namespace WeatherSystem
             Output("Weather:", new object[] { weatherType }, weatherTypeOutput);
         }
 
+        /// <summary>
+        /// Sets the text of a textbox with the provided data
+        /// </summary>
+        /// <param name="preamble">The first part of the text</param>
+        /// <param name="values">an array of objects to be converted to strings and inserted as a list into the text</param>
+        /// <param name="display">The text box to use to output the result</param>
         private void Output(string preamble, object[] values, Text display)
         {
             display.text = preamble + " " + values.Aggregate((x,y) => x.ToString() + "," + y.ToString());

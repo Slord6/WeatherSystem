@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// A controller for a snow shader which uses IntensityData to drive changes
+    /// </summary>
     public class IntensityDrivenSnowShader : WeatherTypeSpecificIntensityDrivenBehaviour
     {
         [SerializeField]

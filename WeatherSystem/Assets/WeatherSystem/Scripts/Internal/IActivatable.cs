@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// Interface for an object that can be activated or deactivated
+    /// </summary>
 	public interface IActivatable
 	{
         /// <summary>

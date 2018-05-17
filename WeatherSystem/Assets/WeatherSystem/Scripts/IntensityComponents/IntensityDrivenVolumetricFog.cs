@@ -5,6 +5,9 @@ using System;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// Drives volumetric fog using intensity data
+    /// </summary>
     public class IntensityDrivenVolumetricFog : IntensityDrivenBehaviour
     {
         [SerializeField]
@@ -64,6 +67,13 @@ namespace WeatherSystem.IntensityComponents
             }
         }
 
+        /// <summary>
+        /// Scale the difference between two values such that it remains between the given minimum and maximum
+        /// </summary>
+        /// <param name="min">The minimum value for the resultant value</param>
+        /// <param name="max">The maximum value for the resultant value</param>
+        /// <param name="scale">The scale</param>
+        /// <returns>The resultant scaled value</returns>
         private float Scale(float min, float max, float scale)
         {
             float diff = max - min;

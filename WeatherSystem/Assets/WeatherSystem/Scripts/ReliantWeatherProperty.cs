@@ -30,10 +30,5 @@ namespace WeatherSystem
             //Then apply calculated data
             base.ApplyIntensity(totalIntensity);
         }
-
-        protected Color AverageColor(Color firstColor, Color secondColor)
-        {
-            return new Color((firstColor.r + secondColor.r) / 2.0f, (firstColor.g + secondColor.g) / 2.0f, (firstColor.b + secondColor.b) / 2.0f, (firstColor.a + secondColor.a) / 2.0f);
-        }
     }
 }

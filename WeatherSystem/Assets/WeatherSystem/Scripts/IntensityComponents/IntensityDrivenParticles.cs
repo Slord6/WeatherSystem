@@ -4,6 +4,9 @@ using System;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// A particle controller driven by intensity data
+    /// </summary>
 	public class IntensityDrivenParticles : WeatherTypeSpecificIntensityDrivenBehaviour
 	{
         [SerializeField]
@@ -34,6 +37,10 @@ namespace WeatherSystem.IntensityComponents
             emmisionModule.enabled = false;
         }
 
+        /// <summary>
+        /// Updates emmission rates and the gravity modifier based on the given intensity data
+        /// </summary>
+        /// <param name="intensityData">Intensity data</param>
         protected override void ConditionalUpdateWithIntensity(IntensityData intensityData)
         {
             float value = precipitationRateCurve.Evaluate(intensityData.intensity);

@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// A controller to modify fog renderer setting based on the current weather intensity data
+    /// </summary>
 	public class IntensityDrivenFog : IntensityDrivenBehaviour
 	{
         [SerializeField]

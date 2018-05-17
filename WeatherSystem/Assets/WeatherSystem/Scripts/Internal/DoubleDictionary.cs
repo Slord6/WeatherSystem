@@ -130,6 +130,12 @@ namespace WeatherSystem.Internal
             return false;
         }
 
+        /// <summary>
+        /// Attempt to find a Key,Key pair for a given value
+        /// </summary>
+        /// <param name="value">The value to find the keys for</param>
+        /// <param name="lookupValues">The found keys, where the primary key is the "Key" in the KeyValue pair and the secondary key is the "Value"</param>
+        /// <returns>True if valid keys were found for the value, false otherwise</returns>
         public bool TryReverseLookup(TValue value, out KeyValuePair<TKey, TKeySecondary> lookupValues)
         {
             foreach (KeyValuePair<TKey, Dictionary<TKeySecondary, TValue>> outerKeyValuePair in primaryDictionary)
@@ -193,6 +199,11 @@ namespace WeatherSystem.Internal
             return got;
         }
 
+        /// <summary>
+        /// Remove an element from the DoubleDictionary
+        /// </summary>
+        /// <param name="key">The primary key for the item to be removed</param>
+        /// <param name="secondaryKey">The secondary key for the item to be removed</param>
         public void Remove(TKey key, TKeySecondary secondaryKey)
         {
             TValue value;

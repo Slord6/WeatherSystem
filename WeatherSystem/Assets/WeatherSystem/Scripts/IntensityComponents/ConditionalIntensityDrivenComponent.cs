@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace WeatherSystem.IntensityComponents
 {
+    /// <summary>
+    /// An intensity driven behaviour that only applies the intensity change if some condition is met. If the condition is not met the behaviour is deactivated
+    /// </summary>
     public class ConditionalIntensityDrivenComponent : IntensityDrivenBehaviour
     {
         protected override void ActivationBehaviour()
