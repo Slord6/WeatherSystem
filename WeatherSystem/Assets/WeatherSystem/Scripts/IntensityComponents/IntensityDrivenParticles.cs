@@ -15,6 +15,10 @@ namespace WeatherSystem.IntensityComponents
         private bool manageChildParticleSystems;
         [SerializeField]
         private AnimationCurve precipitationRateCurve;
+        [SerializeField]
+        private float emissionRateMultiplier = 100f;
+        [SerializeField]
+        private float gravityMultiplier = 10f;
 
         private ParticleSystem.EmissionModule emmisionModule;
         private ParticleSystem.MainModule mainModule;
@@ -44,11 +48,9 @@ namespace WeatherSystem.IntensityComponents
         protected override void ConditionalUpdateWithIntensity(IntensityData intensityData)
         {
             float value = precipitationRateCurve.Evaluate(intensityData.intensity);
-
-           // emmisionModule.enabled = true;
-
-            emmisionModule.rateOverTime = value * 100;
-            mainModule.gravityModifier = intensityData.intensity * 10.0f;
+            
+            emmisionModule.rateOverTime = value * emissionRateMultiplier;
+            mainModule.gravityModifier = intensityData.intensity * gravityMultiplier;
         }
     }
 }

@@ -20,7 +20,14 @@ namespace WeatherSystem.IntensityComponents
         /// <returns>True if validWeatherTypes contains the WeatherType set in the intensityData object</returns>
         protected override bool ShouldUpdate(IntensityData intensityData)
         {
-            return validWeatherTypes.Contains(intensityData.weatherType);
+            try
+            {
+                return validWeatherTypes.Contains(intensityData.weatherType);
+            }catch(System.Exception ex)
+            {
+                Debug.LogException(ex);
+                return false;
+            }
         }
     }
 }

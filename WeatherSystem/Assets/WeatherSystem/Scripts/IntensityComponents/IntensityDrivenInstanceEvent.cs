@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using WeatherSystem.Internal;
 using WeatherSystem.InstanceEvents;
 
 namespace WeatherSystem.IntensityComponents
@@ -11,8 +9,8 @@ namespace WeatherSystem.IntensityComponents
 	public class IntensityDrivenInstanceEvent : WeatherTypeSpecificIntensityDrivenBehaviour
     {
         [SerializeField]
-        [Range(0.0f, 0.1f)] //between 0% and 10%
-        private float instanceChance = 0.0005f; //default of 1/500th %
+        [Range(0.0f, 0.25f)] //between 0% and 25%
+        private float instanceChance = 0.1f; //default of 10%
         [SerializeField]
         private InstanceEvent instanceEvent;
 
@@ -33,7 +31,9 @@ namespace WeatherSystem.IntensityComponents
         protected override void UpdateWithIntensity(IntensityData intensityData)
         {
             //as intensity increases, chance of occurence also increases
-            float randomNumber = Random.Range(0.0f, 1.0f - intensityData.intensity);
+            float x = transform.position.x * intensityData.wind.x + Time.timeSinceLevelLoad * 100f;
+            float y = transform.position.z * intensityData.wind.y + Time.timeSinceLevelLoad * 100f;
+            float randomNumber = WeatherSystem.Internal.Generators.GetPerlinNoise(x, y, 500, 500, 1, 0);
 
             if (randomNumber < instanceChance)
             {
