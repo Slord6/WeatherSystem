@@ -28,7 +28,7 @@ namespace WeatherSystem.IntensityComponents
         /// Utilises the intensity element of the IntensityData to caluclate a chance for the event to occur, if a threshold is met, the event is activated
         /// </summary>
         /// <param name="intensityData">The intensity data</param>
-        protected override void UpdateWithIntensity(IntensityData intensityData)
+        protected override void ConditionalUpdateWithIntensity(IntensityData intensityData)
         {
             //as intensity increases, chance of occurence also increases
             float x = transform.position.x * intensityData.wind.x + Time.timeSinceLevelLoad * 100f;
