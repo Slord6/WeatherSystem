@@ -111,12 +111,12 @@ namespace WeatherSystem
                 Generators.Seed = seed;
             }
             Debug.Log("Seed = " + Generators.Seed);
+            timeExtension = GetComponent<TimeExtension>();
         }
 
         // Use this for initialization
         protected virtual void Start ()
         {
-            timeExtension = GetComponent<TimeExtension>();
 
             //Temporary - DEBUGGING
             activeWeatherSet = weatherSets[0];

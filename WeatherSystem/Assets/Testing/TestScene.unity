@@ -4497,7 +4497,7 @@ MonoBehaviour:
   range: 5000
   distributionObject: {fileID: 1847816244569954, guid: b20f8de1fb884464e948b62101a238c4,
     type: 2}
-  objectCount: 5
+  objectCount: 20
   lockX: 0
   lockY: 1
   lockZ: 0
@@ -7058,7 +7058,17 @@ Prefab:
     - target: {fileID: 114230000840077028, guid: a1ec410375654aa4db605ac75b4154f4,
         type: 2}
       propertyPath: seed
-      value: 967618.6
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114230000840077028, guid: a1ec410375654aa4db605ac75b4154f4,
+        type: 2}
+      propertyPath: windStrength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114230000840077028, guid: a1ec410375654aa4db605ac75b4154f4,
+        type: 2}
+      propertyPath: proceduralScale
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1ec410375654aa4db605ac75b4154f4, type: 2}
@@ -8992,6 +9002,50 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1649247838}
   m_GameObject: {fileID: 2057135514}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2087157936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2087157938}
+  - component: {fileID: 2087157937}
+  m_Layer: 0
+  m_Name: WeatherLogging
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2087157937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087157936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa69e7957e651d489b3adba0686028a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedTransform: {fileID: 1191345115}
+  weatherManager: {fileID: 0}
+  loggingFolder: D:\samlo\Documents\Repos\WeatherSystem
+  logTime: 5
+--- !u!4 &2087157938
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087157936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 401.67923, y: 172.0962, z: -55.105625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099297437
 GameObject:
   m_ObjectHideFlags: 0
