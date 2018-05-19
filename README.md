@@ -19,17 +19,8 @@ An open source and free-to-use weather system package for Unity produced as an u
 
 * Unity 2017.3 Project (Although use with other versions has been successful so worth testing irrelevant of Unity version)
 
-### System Structure ###
-The system is a tree based structure in which an IntensityData object is propagated from the `WeatherManager` to weather-property-specific (eg. precipitation) components.
-![Intensity data flow throughout the weather system](https://i.imgur.com/ZUIVe17.png)
-
-##### IntensityData #####
-`IntensityData` is an object that is passed down the hierarchy and is modified at various levels by `AnimationCurves`. It includes the intensity of the current weather (0->1), the current Temperature (as an enum) and the current Humidity (as an enum). Further data can be queried from the WeatherManager or an inherited WeatherManager and IntensityData could be produced quite easily to include more data as required.
-
-#### Customisation ####
-The system provides all the logic for procedural (or manual) weather sequences. All you have to provide are the visual elements, whatever they may be, to be controlled by some derived `IntensityDrivenBehaviour`. Several example custom control components are provided for shaders and particle effects. The shader components are unlikely to work with an alternative shader (although the example component should go a good ways to providing how you could go about creating your own), however the particle effect controller is likely to be reusable in alternate circumstances.
-
-Weather events, properties and the lookup table for temperature/humidity->weather type are all `ScriptableObjects`. Therefore, to create a new weather event, just add the new weather type from the "WeatherSystem->Weather Types" menu item and then create a new `WeatherEvent` by right-clicking in a project folder and clicking "Create->WeatherSystem->WeatherEvent". Other weather system items are also available under this menu - Weather sets, Weather lookup tables, and various weather properties.
+### User Guide ###
+Coming soon
 
 
 ### Bugs/Features/Pull Requests? ###
