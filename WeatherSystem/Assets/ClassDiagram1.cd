@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WeatherSystem.ManualAttribute" Collapsed="true">
+    <Position X="32.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Attributes\ManualAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ProceduralAttribute" Collapsed="true">
+    <Position X="34.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Attributes\ProceduralAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.HumidityExtensions" Collapsed="true">
+    <Position X="36" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\HumidityVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityData" Collapsed="true">
+    <Position X="37.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAgAAAAAAACAAAAAQAAAAABAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ProceduralWeatherLookup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAEAAAAAAAAAAAAQAAABAACAAAAAAEAAAAIA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\ProceduralWeatherLookup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.RelianceWeighting" Collapsed="true">
+    <Position X="37.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\RelianceWeighting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.ReliantWeatherProperty" Collapsed="true">
+    <Position X="24.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\ReliantWeatherProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.TemperatureHumidityPair" Collapsed="true">
+    <Position X="32.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAgAACAAAAAAAAAIAAAAQAAAAEAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\TemperatureHumidityPair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.TemperatureExtensions" Collapsed="true">
+    <Position X="30.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\TemperatureVariables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherChangeEventArgs" Collapsed="true">
+    <Position X="36" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAACAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherDisplay" Collapsed="true">
+    <Position X="37.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAABAAAIAAAhAIAAAIAAAAAAgAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherEvent" Collapsed="true">
+    <Position X="22" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAQAAAAAAgAAgAICAAAEAAAAAAAACIAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherManager" Collapsed="true">
+    <Position X="30.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEQQQAECQCQE0gAkAAMEASAAAhBCwEAAAAqMAACAiEA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.WeatherProperties" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAABAAgAAEAAAEAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherProperties.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherProperty" Collapsed="true">
+    <Position X="24.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAEAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherProperty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.WeatherSet" Collapsed="true">
+    <Position X="19.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.InstanceEvents.InstanceAudioEvent" Collapsed="true">
+    <Position X="19.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\InstanceEvents\InstanceAudioEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.InstanceEvents.InstanceEvent" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\InstanceEvents\InstanceEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.ConditionalIntensityDrivenComponent" Collapsed="true">
+    <Position X="24" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAACAAAAAAAAIAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\ConditionalIntensityDrivenComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenAudio" Collapsed="true">
+    <Position X="31.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAAAAAAAgAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenAudio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenBehaviour" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAAAAAIABAACAACAAAAAoIAAAgAEAAAAAIAAAIAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenBehaviour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenCloudColour" Collapsed="true">
+    <Position X="25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenCloudColour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenFog" Collapsed="true">
+    <Position X="38.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAACAgAAgAAAAAAACAAAAIA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenFog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenInstanceEvent" Collapsed="true">
+    <Position X="27.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAAAAAKAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenInstanceEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenParticles" Collapsed="true">
+    <Position X="20.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAEABAAAAACAIAAACAAICAAAAAAAAAIAAAkA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenParticles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenRenderer" Collapsed="true">
+    <Position X="29.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAJAAAAACAAAAAAAAAAgAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenSnowShader" Collapsed="true">
+    <Position X="22.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACQAMAABAAAAACAAAACAAAMAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenSnowShader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenVolumetricFog" Collapsed="true">
+    <Position X="34" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAgEAABAAAAACIAAAAAAAKAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenVolumetricFog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenWind" Collapsed="true">
+    <Position X="36.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAABAIAAgAgAAAAAAAAEgEA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenWind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.WeatherTypeSpecificIntensityDrivenBehaviour" Collapsed="true">
+    <Position X="24" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\WeatherTypeSpecificIntensityDrivenBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.DoubleDictionary&lt;TKey, TKeySecondary, TValue&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAAAEABAADAAABAwAAAACAAAEAAAAAQAAEBA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\DoubleDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeatherSystem.Internal.EventSequenceItem" Collapsed="true">
+    <Position X="32.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\EventSequenceItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.Generators" Collapsed="true">
+    <Position X="34.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAQAAAAAgAQAIAAEAAAAAAAAAAAACCAAAAAABAAQA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\Generators.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.IntensityScriptableObject" Collapsed="true">
+    <Position X="21" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIIAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IntensityScriptableObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.Internal.KeyKeyValuePair&lt;TPrimaryKey, TSecondayKey, TValue&gt;" Collapsed="true">
+    <Position X="30.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAACAAAACgAAAAgQA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\KeyKeyValuePair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.Internal.TimeExtension" Collapsed="true">
+    <Position X="34.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAIAAACAAAAAIAAAAAIAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\TimeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="WeatherSystem.Internal.IActivatable" Collapsed="true">
+    <Position X="30.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IActivatable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WeatherSystem.Internal.IInstanceEvent" Collapsed="true">
+    <Position X="32.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IInstanceEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WeatherSystem.Internal.IIntensityDriven" Collapsed="true">
+    <Position X="34.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\Internal\IIntensityDriven.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="WeatherSystem.HumidityVariables" Collapsed="true">
+    <Position X="30.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAACAAAAAAAAIAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\HumidityVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherSystem.TemperatureVariables" Collapsed="true">
+    <Position X="32.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAQ=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\TemperatureVariables.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherSystem.WeatherMode" Collapsed="true">
+    <Position X="34.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\WeatherMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WeatherTypes" Collapsed="true">
+    <Position X="36" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABIAAAAACAAAAAAAAAAAAAAAEAAAAAAAFAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\DynamicEnums\WeatherTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

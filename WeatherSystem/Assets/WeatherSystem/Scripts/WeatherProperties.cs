@@ -110,8 +110,7 @@ namespace WeatherSystem
             {
                 property.OnDeactivate();
             }
-
-            //TODO: Check if reliants should also be disabled?
+            
         }
     }
 }

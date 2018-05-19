@@ -267,7 +267,7 @@ namespace WeatherSystem
                 case WeatherMode.Procedural:
                     return Generators.GetTemperatureValue(position.x + trackedX, position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
                 case WeatherMode.Manual:
-                    return 0.0f; //TODO: - calculate from temperatureLastFrame
+                    return 0.0f; //fixed in manual mode
                 default:
                     Debug.LogError("Unknown mode - " + procedural);
                     throw new System.NotImplementedException("Unknown mode - " + procedural);
@@ -286,7 +286,7 @@ namespace WeatherSystem
                 case WeatherMode.Procedural:
                     return Generators.GetHumidityValue(position.x + trackedX, position.y + trackedY, worldSize.x, worldSize.y, proceduralScale, 0.00f);
                 case WeatherMode.Manual:
-                    return 0.0f; //TODO: - calculate from humidityLastFrame
+                    return 0.0f; //fixed in manual mode
                 default:
                     Debug.LogError("Unknown mode - " + procedural);
                     throw new System.NotImplementedException("Unknown mode - " + procedural);

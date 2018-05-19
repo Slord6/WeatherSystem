@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WeatherSystem.IntensityComponents.ConditionalIntensityDrivenComponent">
+    <Position X="16.25" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAACAAAAAAAAIAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\ConditionalIntensityDrivenComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenAudio">
+    <Position X="21.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAAAAAAAgAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenAudio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenBehaviour">
+    <Position X="19.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgCAAAAAAIABAACAACAAAAAoIAAAgAEAAAAAIAAAIAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenBehaviour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenFog">
+    <Position X="30.5" Y="5.5" Width="1.75" />
+    <NestedTypes>
+      <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenFog.FogInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenFog.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAACAgAAgAAAAAAACAAAAIA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenFog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenVolumetricFog">
+    <Position X="24.5" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAgEAABAAAAACIAAAAAAAKAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenVolumetricFog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenWind">
+    <Position X="27.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAABAIAAgAgAAAAAAAAEgEA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenWind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.WeatherTypeSpecificIntensityDrivenBehaviour">
+    <Position X="16" Y="8" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\WeatherTypeSpecificIntensityDrivenBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenSnowShader">
+    <Position X="19.75" Y="10.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIACQAMAABAAAAACAAAACAAAMAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenSnowShader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenParticles">
+    <Position X="16.25" Y="10.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAEABAAAAACAIAAACAAICAAAAAAAAAIAAAkA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenParticles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenInstanceEvent">
+    <Position X="12.75" Y="10.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAACAAAAAAAAKAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenInstanceEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="instanceEvent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FireController">
+    <Position X="10.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAABAAAAAAACAAAAAAAAAAgAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Examples\FireController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenRenderer">
+    <Position X="13.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAJAAAAACAAAAAAAAAAgAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeatherSystem.InstanceEvents.InstanceEvent">
+    <Position X="9.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\InstanceEvents\InstanceEvent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WeatherSystem.InstanceEvents.InstanceAudioEvent">
+    <Position X="9" Y="13.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\WeatherSystem\Scripts\InstanceEvents\InstanceAudioEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
