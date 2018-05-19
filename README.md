@@ -6,8 +6,7 @@
 
 An open source and free-to-use weather system package for Unity produced as an undergraduate dissertation piece. 
 
-**Version:** 0.95
-(*v1.0 release coming on 21/05/18*)
+**Version:** [v1.0](https://github.com/Slord6/WeatherSystem/releases/tag/1.0)
 
 **Features:**
 * Provides procedural and manually curated weather events. In procedural mode the weather is changable across the game world at any given instance.
