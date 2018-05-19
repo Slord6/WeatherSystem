@@ -13,6 +13,9 @@ namespace WeatherSystem
         HumidityLow
     }
 
+    /// <summary>
+    /// Extension methods for HumidtyVariables
+    /// </summary>
     public static class HumidityExtensions
     {
         /// <summary>

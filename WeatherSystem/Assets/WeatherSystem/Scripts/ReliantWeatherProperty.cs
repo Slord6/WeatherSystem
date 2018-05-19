@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace WeatherSystem
 {
+    /// <summary>
+    /// A weather property which calculates intenisty updates using the combined weighting of one or more WeatherPropertys
+    /// </summary>
     [CreateAssetMenu(menuName = "Weather System/Weather Properties/Reliant Weather Property")]
     public class ReliantWeatherProperty : WeatherProperty
 	{

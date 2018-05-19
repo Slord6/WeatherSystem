@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace WeatherSystem.Internal
 {
+    /// <summary>
+    /// A wrapper for Unity's Time class offering additional functionality
+    /// </summary>
     public class TimeExtension : MonoBehaviour
     {
         /// <summary>

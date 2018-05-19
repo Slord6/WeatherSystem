@@ -8,8 +8,8 @@ namespace WeatherSystem
     /// <summary>
     /// The central manager for weather.
     /// Operates in two modes; procedural and manual.
-    /// Procedural mode uses perlin noise values to transition between WeatherSets and WeatherEvents with gradual changes over time driven by procedural 'wind'. [Partial implementation].
-    /// Manual mode gradually transitions between WeatherSets, and WeatherEvents as described by a provided WeatherCycle [Not implemented].
+    /// Procedural mode uses perlin noise values to transition between WeatherSets and WeatherEvents with gradual changes over time driven by procedural 'wind'.
+    /// Manual mode gradually transitions between WeatherSets, and WeatherEvents as described by a provided WeatherCycle.
     /// </summary>
     [RequireComponent(typeof(TimeExtension))]
 	public class WeatherManager : MonoBehaviour

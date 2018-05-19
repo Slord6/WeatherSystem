@@ -13,6 +13,9 @@ namespace WeatherSystem
         TemperatureLow
     }
 
+    /// <summary>
+    /// Extension methods for TemperatureVariables
+    /// </summary>
     public static class TemperatureExtensions
     {
         /// <summary>
