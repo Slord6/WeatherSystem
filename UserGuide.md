@@ -43,7 +43,7 @@ Or, if you're a UML diagram kind of person then:
 ![ScriptableObjects and intensity flow structure](https://i.imgur.com/gkfKvow.png "ScriptableObjects and intensity flow structure")
 
 As you can see, the `WeatherManager` `MonoBehaviour` needs a `WeatherSet`.
-`WeatherSet`s are just a collection of `WeatherEvent` objects which in turn hold a `WeatherProperties` object; a collection of `WeatherProperty`s. And then finally there's `ReliantWeatherProperty`s which inherits from `WeatherProperty` in order to allow for weather properties which rely on a number of `WeatherProperty`s to calculate intensity values, for example a Visibility may rely on a 
+`WeatherSet`s are just a collection of `WeatherEvent` objects which in turn hold a `WeatherProperties` object; a collection of `WeatherProperty`s. And then finally there's `ReliantWeatherProperty`s which inherits from `WeatherProperty` in order to allow for weather properties which rely on a number of `WeatherProperty`s to calculate intensity values. For an example see the "Visibility" property in the examples provided.
 
 #### IntensityData ####
 [Documentation](https://www.peloozoid.co.uk/WeatherSystem/Documentation/html/T_WeatherSystem_IntensityData.htm)
