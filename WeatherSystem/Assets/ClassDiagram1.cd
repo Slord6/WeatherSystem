@@ -153,13 +153,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenCloudColour" Collapsed="true">
-    <Position X="25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\WeatherSystem\Scripts\IntensityComponents\IntensityDrivenCloudColour.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WeatherSystem.IntensityComponents.IntensityDrivenFog" Collapsed="true">
     <Position X="38.5" Y="2" Width="1.5" />
     <TypeIdentifier>
