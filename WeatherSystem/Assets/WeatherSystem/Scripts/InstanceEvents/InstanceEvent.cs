@@ -8,7 +8,7 @@ namespace WeatherSystem.InstanceEvents
     /// <summary>
     /// A base implementation of IInstance interface as a Monobehaviour
     /// </summary>
-    public class InstanceEvent : MonoBehaviour, IInstanceEvent
+    public abstract class InstanceEvent : MonoBehaviour, IInstanceEvent
     {
         public virtual void Activate(IntensityData data)
         {

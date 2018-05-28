@@ -175,8 +175,7 @@ namespace WeatherSystem
             {
                 KeyValuePair<HumidityVariables, TemperatureVariables> humityTemperaturePair;
                 //Using the type of the current weather event, reverse lookup what temperature and humidity would cause that weather in procedural mode
-                proceduralWeatherLookup.LookupTable.TryReverseLookup(manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType, out humityTemperaturePair);
-                if (humityTemperaturePair.Equals(default(KeyValuePair<HumidityVariables, TemperatureVariables>)))
+                if (proceduralWeatherLookup.LookupTable.TryReverseLookup(manualEventsSequence[eventSequenceIndex].weatherEvent.WeatherType, out humityTemperaturePair) == false)
                 {
                     Debug.LogError("Cannot reverse lookup weather event (" + manualEventsSequence[eventSequenceIndex].weatherEvent.name + "). Ensure weather lookup property is assigned correctly. temperature and humidity values will be incorrect.");
                 }
