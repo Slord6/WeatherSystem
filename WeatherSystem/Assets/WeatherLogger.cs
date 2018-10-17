@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using WeatherSystem;
 
@@ -28,8 +29,8 @@ public class WeatherLogger : MonoBehaviour {
             weatherManager = FindObjectOfType<WeatherManager>();
         }
 
-        string[] headings = new string[] { "time", "weatherType", "humEnum", "hum", "tempEnum", "temp", "intensity", "windInstance", "windTracked" };
-        AddToLog(ToCSV(headings));
+        string[] headings = { "time", "weatherType", "humEnum", "hum", "tempEnum", "temp", "intensity", "windInstance", "windTracked" };
+        AddToLog(string.Format("{0}{1}", string.Join(",", headings), System.Environment.NewLine));
     }
 
     private void Start()
@@ -44,12 +45,10 @@ public class WeatherLogger : MonoBehaviour {
     {
         timeSinceLog += Time.deltaTime;
 
-        if (timeSinceLog >= logTime)
-        {
-            LogWeatherData();
-
-            timeSinceLog = timeSinceLog - logTime; //carry over the remainder time (min = 0f)
-        }
+        if (timeSinceLog < logTime) return;
+        
+        LogWeatherData();
+        timeSinceLog = timeSinceLog - logTime; //carry over the remainder time (min = 0f)
     }
 
     private void LogWeatherData()
@@ -76,28 +75,13 @@ public class WeatherLogger : MonoBehaviour {
         HumidityVariables humEnum = hum.ToHumidityValue();
 
         float time = Time.timeSinceLevelLoad;
-        AddToLog(ToCSV(new object[] { time, weatherType, humEnum, hum, tempEnum, temp, intensity, windInstance, windTracked }));
-    }
-
-    private string ToCSV(object[] data)
-    {
-        string text = "";
-
-        for(int i = 0; i < data.Length; i++)
-        {
-            text += data[i].ToString();
-
-            if(i != data.Length - 1)
-            {
-                text += ",";
-            }
-        }
-
-        return text + System.Environment.NewLine;
+        var data = new object[] {time, weatherType, humEnum, hum, tempEnum, temp, intensity, windInstance, windTracked};
+        AddToLog(string.Format("{0}{1}", string.Join(",", (from value in data select value.ToString()).ToArray()),
+            System.Environment.NewLine));
     }
         
     private void AddToLog(string text)
     {
-        File.AppendAllText(loggingFolder + "/log.txt", text);
+        File.AppendAllText(string.Format("{0}/log.txt", loggingFolder), text);
     }
 }
